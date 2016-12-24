@@ -2,65 +2,188 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Fluid CSS3 Slideshow with Parallax Effect</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fluid CSS3 Slideshow with Parallax Effect" />
-    <meta name="keywords" content="fluid, css3, css-only, slideshow, responsive, parallax, sibling, pseudo-class, transitions" />
-    <meta name="author" content="Codrops" />
-    <link rel="shortcut icon" href="../favicon.ico">
-    <link rel="stylesheet" type="text/css" href="css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script type="text/javascript" src="js/modernizr.custom.04022.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>Happy Holidays</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
 
 <body>
-    <div class="container">
-        <!-- Codrops top bar -->
-        <div class="codrops-top">
-        </div>
-        <!--/ Codrops top bar -->
-        <header>
-            <h1>Happy Holidays</h1>
-        </header>
-        <div class="sp-slideshow">
-            <input id="button-1" onclick='updateDesc(1);' type="radio" name="radio-set" class="sp-selector-1" checked="checked" />
-            <label for="button-1" class="button-label-1"></label>
-            <input id="button-2" onclick='updateDesc(2);' type="radio" name="radio-set" class="sp-selector-2" />
-            <label for="button-2" class="button-label-2"></label>
-            <input id="button-3" onclick='updateDesc(3);' type="radio" name="radio-set" class="sp-selector-3" />
-            <label for="button-3" class="button-label-3"></label>
-            <input id="button-4" onclick='updateDesc(4);' type="radio" name="radio-set" class="sp-selector-4" />
-            <label for="button-4" class="button-label-4"></label>
-            <input id="button-5" onclick='updateDesc(5);' type="radio" name="radio-set" class="sp-selector-5" />
-            <label for="button-5" class="button-label-5"></label>
-            <label for="button-1" class="sp-arrow sp-a1"></label>
-            <label for="button-2" class="sp-arrow sp-a2"></label>
-            <label for="button-3" class="sp-arrow sp-a3"></label>
-            <label for="button-4" class="sp-arrow sp-a4"></label>
-            <label for="button-5" class="sp-arrow sp-a5"></label>
-            <div class="sp-content">
-                <div class="sp-parallax-bg"></div>
-                <ul class="sp-slider clearfix">
-                    <li><img src="https://myanimelist.cdn-dena.com/images/anime/5/82388l.jpg" alt="image01" /></li>
-                    <li><img src="http://img1.ak.crunchyroll.com/i/spire3/2ee05df6e44530437069955b71f09daf1317839234_full.jpg" alt="image02" /></li>
-                    <li><img src="http://vignette3.wikia.nocookie.net/psychopass/images/4/42/603580.jpg/revision/latest?cb=20141009115626" alt="image03" /></li>
-                    <li><img src="http://img1.ak.crunchyroll.com/i/spire4/4e653adda1d5c4622bd496dc10cacf211451958742_full.jpg" alt="image04" /></li>
-                    <li><img src="http://img1.ak.crunchyroll.com/i/spire2/7facd20f5216202349ad2fc3119e2e5b1329936788_full.jpg" alt="image05" /></li>
-                </ul>
-            </div>
-            <!-- sp-content -->
-            <div class="description">
-                <h1 id="animetitle">Shelter</h1>
-                <p>A 6 minute music video that was made as a collaboration between American artist Porter Robinson and Animation studio A1 pictures. Available on Youtube and crunchyroll. Just watch it. A worthy 6 minutes.</p>
-            </div>
-        </div>
-        <!-- sp-slideshow -->
+    <!--
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="script.js"></script>
+  </nav>
+  -->
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <br>
+                <br>
+                <h1 class="header center teal-text text-lighten-2">Happy Holidays</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">This is a mission on my part to throw my money into the anime industry. So accept the Crunchyroll membership, get ready, set, go watch. I've even compiled some recommendations for you</h5>
+                </div>
+                <div class="row center">
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="parallax"><img src="5cm.jpg" alt="Unsplashed background img 1"></div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!-- <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>-->
+                        <h5 class="center">Fate/Zero</h5>
+                        <p class="light">Are you a fan of mythology of any sort? Of shows where no character is left unscathed by the end of a show? Of existential crises and stunning animation (3D and 2D)? Watched Fate/Zero. Even if you're not a fan of any of the above, watch it anyway</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!--<h2 class="center brown-text"><i class="material-icons">group</i></h2>-->
+                        <h5 class="center">Psychopass</h5>
+                        <p class="light">A dystopian show in which the "Sibyl System" can arrest criminals before they commit the crime. If you watch, only watch the first season. The second is something of an abomination</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!--h2 class="center brown-text"><i class="material-icons">settings</i></h2>-->
+                        <h5 class="center">Parasyte: the Maxim</h5>
+                        <p class="light">A parasite/alien like creature crawls into the main character's ears and ends up sharing a body with him. Originally a fight for control over the body, their relationship becomes a fascinating codependence. The animation can be a bit unnerving, but once you get over that, it's a really deep show about what defines humanity (and the lack thereof).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h5 class="header col s12 light">May your holiday be full of relaxation, food, and anime.</h5>
+                </div>
+            </div>
+        </div>
+        <div class="parallax"><img src="fate.jpg" alt="Unsplashed background img 2"></div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!-- <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>-->
+                        <h5 class="center">Shelter</h5>
+                        <p class="light"><b>Only a 6 minute music video.</b> So watch this (if you haven't already)! That's all I'm saying so just take my word for it. It's on <a href="https://www.youtube.com/watch?v=fzQ6gRAEoy0">youtube</a> too.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!--<h2 class="center brown-text"><i class="material-icons">group</i></h2>-->
+                        <h5 class="center">Puella Magi Madoka Magica</h5>
+                        <p class="light">This show is a mind f*** if I ever saw one. Again, I don't want to say too much as I'm a firm believer in spoiler-free experiences. Keep an open mind and watch a minimum of 4 episodes before you decide to drop or continue watching.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!--h2 class="center brown-text"><i class="material-icons">settings</i></h2>-->
+                        <h5 class="center">Durarara!!</h5>
+                        <p class="light">An extremely entertaining, funny, and dynamic show that consists of gang wars, sociopathic informants, inhumanely strong bartenders, and Russian sushi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h5 class="header col s12 light">Some honorable mentions</h5>
+                    <h6>(You many be wondering what the point of these images were, to which I respond: nothing. Merely random anime images from the respective series: 5 Centimeters per Second, Fate/Zero, Kara no Kyoukai)</h6>
+                </div>
+            </div>
+        </div>
+        <div class="parallax"><img src="knk.jpg" alt="Unsplashed background img 3"></div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!-- <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>-->
+                        <h5 class="center">Attack on Titan</h5>
+                        <p class="light">This anime has made it into mainstream media, so there has to be something going for it. People live behind walls, unable to leave in fear of giant humanoid beasts (the titans) that eat humans. The show follows a few characters in the corps that fights these titans.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!--<h2 class="center brown-text"><i class="material-icons">group</i></h2>-->
+                        <h5 class="center">Boku Dake Ga Inai Machi (Erased)</h5>
+                        <p class="light">A murder mystery with a bit of supernatural.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <!--h2 class="center brown-text"><i class="material-icons">settings</i></h2>-->
+                        <h5 class="center">Noragami</h5>
+                        <p class="light">Based on Japanese mythology but takes place in a modern Japan setting, the show follows a god trying to make a living.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Settings</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+        </div>
+    </footer>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
 </body>
 
 </html>
