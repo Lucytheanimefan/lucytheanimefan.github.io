@@ -2,7 +2,13 @@
 var width = document.body.clientWidth;
 var height = document.body.clientHeight;
 
-var textWidth = width / 2;
+var textWidth = width / 3;
+
+const strength = randomNumber(0.01, 0.1);
+console.debug("strength: " + strength);
+function randomNumber(min, max) {  
+    return Math.random() * (max - min) + min; 
+}  
 
 var margin = {
     top: 50,
@@ -27,9 +33,9 @@ var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) {
             return d.id;
         })
-        .strength(0.025))
+        .strength(strength))
     // push nodes apart to space them out
-    .force("charge", d3.forceManyBody().strength(-200))
+    .force("charge", d3.forceManyBody().strength(-300))
     // add some collision detection so they don't overlap
     .force("collide", d3.forceCollide().radius(12))
     // and draw them around the centre of the space
