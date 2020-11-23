@@ -2,7 +2,7 @@
 var width = document.body.clientWidth;
 var height = document.body.clientHeight;
 
-var textWidth = width / 3;
+var textWidth = width / 3.5;
 
 const strength = randomNumber(0.01, 0.1);
 console.debug("strength: " + strength);
@@ -90,7 +90,7 @@ d3.json("data.json", function(error, graph) {
             return d.name;
         })
         .style("stroke", "black")
-        .style("stroke-width", 0.5)
+        .style("stroke-width", 0.25)
         .style("fill", function(d) {
             return d.colour;
         })
@@ -189,7 +189,7 @@ d3.json("data.json", function(error, graph) {
             });
 
             link.style("fill-opacity", function(o) {
-                let thisOpacity = (o.source === d || o.target === d || isConnected(d, o)) ? 0.5 : opacity;
+                let thisOpacity = (o.source === d || o.target === d || isConnected(d, o)) ? 0.25 : opacity;
                 return thisOpacity;
             });
         };
@@ -199,7 +199,7 @@ d3.json("data.json", function(error, graph) {
         node.style("stroke-opacity", 1);
         node.style("fill-opacity", 1);
         link.style("stroke-opacity", 1);
-        link.style("fill-opacity", 0.5);
+        link.style("fill-opacity", 0.25);
         link.style("stroke", "#ddd");
     }
 
