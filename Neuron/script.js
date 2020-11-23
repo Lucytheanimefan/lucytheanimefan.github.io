@@ -6,9 +6,10 @@ var textWidth = width / 3.5;
 
 const strength = randomNumber(0.01, 0.1);
 console.debug("strength: " + strength);
-function randomNumber(min, max) {  
-    return Math.random() * (max - min) + min; 
-}  
+
+function randomNumber(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 var margin = {
     top: 50,
@@ -74,7 +75,10 @@ d3.json("data.json", function(error, graph) {
             return d.colour;
         })
         .on("mouseover", mouseOver(0))
-        .on("mouseout", mouseOut);
+        .on("mouseout", mouseOut)
+        .call(d3.drag()
+            .on("drag", dragged1)
+            .on("end", dragended1));
 
     // hover text for the node
     // node.append("title")
@@ -201,6 +205,20 @@ d3.json("data.json", function(error, graph) {
         link.style("stroke-opacity", 1);
         link.style("fill-opacity", 0.25);
         link.style("stroke", "#ddd");
+    }
+
+    function dragged1(d) {
+        console.debug("dragged1");
+        console.debug(d.fx + "," + d.fy);
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+    }
+
+    function dragended1(d) {
+        console.debug("Drag ended 1");
+        d.fx = null;
+        d.fy = null;
+        simulation.alpha(0.8).restart(); 
     }
 
     function wrap(text, width) {
