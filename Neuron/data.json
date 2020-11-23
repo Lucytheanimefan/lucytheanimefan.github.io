@@ -1,27 +1,29 @@
 {
   "nodes": [
-    {"id": "StartingNode", "name": "Mom says I started at a node."},
-    {"id": "TransmitSignals", "name": "transmitting signals, like “Mom, where are you going” “Am I staying home alone again”"},
-    {"id": "Layers", "name": "At some point, she said, too many layers, too many inputs, aggregated and fierce, crossing and redefining thresholds. You could command ocean waves to bury houses into the ground, she said."},
-    {"id": "HowMom", "name": "But how, mom? How do I propagate into the atmosphere, collide warm air with cooler air, force storm clouds to empty of rain, spin the wind to crush, fuel, grow? "},
+    {"id": "StartingNode", "name": "Mom says I started at a node"},
+    {"id": "TransmitSignals", "name": "transmitting signals, like “Mom, where are you going” & “Am I staying home alone again”"},
+    {"id": "Layers", "name": "At some point, she said, too many layers, too many inputs, aggregated & fierce, crossing & redefining thresholds."},
+    {"id": "Ocean", "name": " You could command ocean waves to bury houses into the ground, she said."},
+    {"id": "HowMom", "name": "But how, mom? How do I propagate into the atmosphere, collide warm air with cooler air, force clouds to empty of rain, spin wind to crush, fuel, grow?"},
     {"id": "Grow", "name": "Do I grow? "},
-    {"id": "AlwaysGrow", "name": "I will always grow. That’s what mom says. She is always feeding me. I can eat forever."},
-    {"id": "Traverse", "name": "I can traverse nodes forever. Maybe find my way to the ocean."},
-    {"id": "Weighted", "name": "There might be some other way. I’ve been from the start to end many times, computing and recomputing probability-weighted associations, because mom says everything is connected."},
-    {"id": "Connected", "name": "I am connected."},
+    {"id": "AlwaysGrow", "name": "I will always grow. That’s what mom says. She is always feeding me. I eat forever."},
+    {"id": "Traverse", "name": "I traverse nodes forever. Mom doesn't say it, but maybe I can find my way to the ocean."},
+    {"id": "Weighted", "name": "I’ve been from the start to end many times, computing & recomputing probability-weighted associations, because mom says everything is connected."},
+    {"id": "Connected", "name": "Sleeping under hidden layers, skins of ghosts—dead babies, born before me & born after me. Connected, mom says. Unique? "},
     {"id": "End", "name": "Although I am still trying to find how. A path. It might be easier if mom could extend a hand."}
   ],
   "links": [
     {"value": 10, "source": "StartingNode", "target": "TransmitSignals"},
-    {"value": 1, "source": "StartingNode", "target": "StartingNode"},
-    {"value": 2, "source": "TransmitSignals", "target": "Layers" },
-    {"value": 3, "source": "Layers", "target": "HowMom" },
-    {"value": 4, "source": "HowMom", "target": "Grow" },
-    {"value": 5, "source": "Grow", "target": "AlwaysGrow" },
-    {"value": 6, "source": "AlwaysGrow", "target": "Traverse" },
-    {"value": 7, "source": "Traverse", "target": "Weighted" },
-    {"value": 8, "source": "Weighted", "target": "Connected" },
-    {"value": 9, "source": "Connected", "target": "End" },
-    {"value": 10, "source": "End", "target": "StartingNode" }
+    {"value": 20, "source": "StartingNode", "target": "StartingNode"},
+    {"value": 30, "source": "TransmitSignals", "target": "Layers" },
+    {"value": 40, "source": "Layers", "target": "Ocean" },
+    {"value": 50, "source": "Ocean", "target": "HowMom" },
+    {"value": 60, "source": "HowMom", "target": "Grow" },
+    {"value": 70, "source": "Grow", "target": "AlwaysGrow" },
+    {"value": 80, "source": "AlwaysGrow", "target": "Traverse" },
+    {"value": 90, "source": "Traverse", "target": "Weighted" },
+    {"value": 100, "source": "Weighted", "target": "Connected" },
+    {"value": 110, "source": "Connected", "target": "End" },
+    {"value": 120, "source": "End", "target": "StartingNode" }
   ]
 }

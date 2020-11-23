@@ -35,7 +35,7 @@ var simulation = d3.forceSimulation()
         })
         .strength(strength))
     // push nodes apart to space them out
-    .force("charge", d3.forceManyBody().strength(-300))
+    .force("charge", d3.forceManyBody().strength(-400))
     // add some collision detection so they don't overlap
     .force("collide", d3.forceCollide().radius(12))
     // and draw them around the centre of the space
