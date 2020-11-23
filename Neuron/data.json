@@ -3,7 +3,7 @@
     {"id": "StartingNode", "name": "Mom says I started at a node"},
     {"id": "TransmitSignals", "name": "transmitting signals, like “Mom, where are you going” & “Am I staying home alone again”"},
     {"id": "Layers", "name": "At some point, she said, too many layers, too many inputs, aggregated & fierce, crossing & redefining thresholds."},
-    {"id": "Ocean", "name": " You could command ocean waves to bury houses into the ground, she said."},
+    {"id": "Ocean", "name": "You could command ocean waves to bury houses into the ground, she said."},
     {"id": "HowMom", "name": "But how, mom? How do I propagate into the atmosphere, collide warm air with cooler air, force clouds to empty of rain, spin wind to crush, fuel, grow?"},
     {"id": "Grow", "name": "Do I grow? "},
     {"id": "AlwaysGrow", "name": "I will always grow. That’s what mom says. She is always feeding me. I eat forever."},
@@ -14,7 +14,6 @@
   ],
   "links": [
     {"value": 10, "source": "StartingNode", "target": "TransmitSignals"},
-    {"value": 20, "source": "StartingNode", "target": "StartingNode"},
     {"value": 30, "source": "TransmitSignals", "target": "Layers" },
     {"value": 40, "source": "Layers", "target": "Ocean" },
     {"value": 50, "source": "Ocean", "target": "HowMom" },
