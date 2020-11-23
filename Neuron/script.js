@@ -2,7 +2,7 @@
 var width = document.body.clientWidth;
 var height = window.innerHeight;
 
-var textWidth = width / 3;
+var textWidth = width / 5;
 
 const strength = randomNumber(0.01, 0.1);
 console.debug("strength: " + strength);
@@ -239,7 +239,7 @@ d3.json("data.json", function(error, graph) {
                     line.pop();
                     tspan.text(line.join(" "));
                     line = [word];
-                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + dy + "em").text(word);
                 }
             }
         });
