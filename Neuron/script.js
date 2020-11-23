@@ -2,6 +2,8 @@
 var width = document.body.clientWidth;
 var height = document.body.clientHeight;
 
+var textWidth = width / 2;
+
 var margin = {
     top: 50,
     bottom: 50,
@@ -23,9 +25,9 @@ height = height - margin.top - margin.bottom;
 var simulation = d3.forceSimulation()
     // pull nodes together based on the links between them
     .force("link", d3.forceLink().id(function(d) {
-        return d.id;
-    })
-    .strength(0.025))
+            return d.id;
+        })
+        .strength(0.025))
     // push nodes apart to space them out
     .force("charge", d3.forceManyBody().strength(-200))
     // add some collision detection so they don't overlap
@@ -42,14 +44,14 @@ d3.json("data.json", function(error, graph) {
     var links = graph.links;
 
     console.debug(svg);
-    
+
     // add the curved links to our graphic
     var link = svg.selectAll(".link")
         .data(links)
         .enter()
         .append("path")
         .attr("class", "link")
-        .attr('stroke', function(d){
+        .attr('stroke', function(d) {
             return "#ddd";
         });
 
@@ -69,23 +71,24 @@ d3.json("data.json", function(error, graph) {
         .on("mouseout", mouseOut);
 
     // hover text for the node
-    node.append("title")
-        .text(function(d) {
-            return d.name;
-        });
+    // node.append("title")
+    //     .text(function(d) {
+    //         return d.name;
+    //     });
 
     // add a label to each node
     node.append("text")
         .attr("dx", 12)
         .attr("dy", ".35em")
-        .html(function(d) {
+        .text(function(d) {
             return d.name;
         })
         .style("stroke", "black")
         .style("stroke-width", 0.5)
         .style("fill", function(d) {
             return d.colour;
-        });
+        })
+        .call(wrap, textWidth);
 
     // add the nodes to the simulation and
     // tell it what to do on each tick
@@ -117,8 +120,8 @@ d3.json("data.json", function(error, graph) {
 
         var normalise = Math.sqrt((dx * dx) + (dy * dy));
 
-        var offSetX = midpoint_x + offset*(dy/normalise);
-        var offSetY = midpoint_y - offset*(dx/normalise);
+        var offSetX = midpoint_x + offset * (dy / normalise);
+        var offSetY = midpoint_y - offset * (dx / normalise);
 
         return "M" + d.source.x + "," + d.source.y +
             "S" + offSetX + "," + offSetY +
@@ -154,8 +157,7 @@ d3.json("data.json", function(error, graph) {
         return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
     }
 
-    function isNode(a,b)
-    {
+    function isNode(a, b) {
         return a.index == b.index;
     }
 
@@ -176,12 +178,12 @@ d3.json("data.json", function(error, graph) {
             link.style("stroke-opacity", function(o) {
                 return isConnected(d, o) ? 1 : opacity;
             });
-            link.style("stroke", function(o){
-                return isConnected(d, o) ?  o.source.colour : "#ddd";
+            link.style("stroke", function(o) {
+                return isConnected(d, o) ? o.source.colour : "#ddd";
             });
 
-            link.style("fill-opacity", function(o){
-                let thisOpacity = (o.source === d || o.target === d) ? 0.5 : opacity;
+            link.style("fill-opacity", function(o) {
+                let thisOpacity = (o.source === d || o.target === d || isConnected(d, o)) ? 0.5 : opacity;
                 return thisOpacity;
             });
         };
@@ -193,6 +195,30 @@ d3.json("data.json", function(error, graph) {
         link.style("stroke-opacity", 1);
         link.style("fill-opacity", 0.5);
         link.style("stroke", "#ddd");
+    }
+
+    function wrap(text, width) {
+        text.each(function() {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                y = text.attr("y"),
+                dy = parseFloat(text.attr("dy")),
+                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                }
+            }
+        });
     }
 
 });

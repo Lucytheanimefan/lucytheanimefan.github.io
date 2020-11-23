@@ -1,7 +1,7 @@
 {
   "nodes": [
     {"id": "StartingNode", "name": "Mom says I started at a node."},
-    {"id": "TransmitSignals", "name": "transmitting signals, like “Mom, where are you going”<br> “Am I staying home alone again”"},
+    {"id": "TransmitSignals", "name": "transmitting signals, like “Mom, where are you going” “Am I staying home alone again”"},
     {"id": "Layers", "name": "At some point, she said, too many layers, too many inputs, aggregated and fierce, crossing and redefining thresholds. You could command ocean waves to bury houses into the ground, she said."},
     {"id": "HowMom", "name": "But how, mom? How do I propagate into the atmosphere, collide warm air with cooler air, force storm clouds to empty of rain, spin the wind to crush, fuel, grow? "},
     {"id": "Grow", "name": "Do I grow? "},
