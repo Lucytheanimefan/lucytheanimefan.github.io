@@ -1,249 +1,198 @@
-// adapted from https://www.contextfreeart.org/gallery2/index.html#design/299
-// Colourful neurons by krajzega, May 30th, 2006
-"use strict";
-const cfa = {
-    canvas: document.querySelector("canvas"),
-    queue: [],
-    identity: [1, 0, 0, 1, 0, 0, 0, 1, 1, 1],
-    init(background) {
-        this.ctx = this.canvas.getContext("2d");
-        this.width = this.canvas.width = this.canvas.offsetWidth * 2;
-        this.height = this.canvas.height = this.canvas.offsetHeight * 2;
-        this.ctx.fillStyle = background;
-        this.ctx.fillRect(0, 0, this.width, this.height);
-        this.rect = [0, 0, 0, 0];
-        this.queue.length = 0;
-        this.scale = 500;
-        this.minSize = 20;
-        this.iter = this.run();
-    },
-    ajustments: {
-        x(m, v) {
-            m[4] += v * m[0];
-            m[5] += v * m[1];
-        },
-        y(m, v) {
-            m[4] += v * m[2];
-            m[5] += v * m[3];
-        },
-        rotate(m, v) {
-            const cos = Math.cos(Math.PI * v / 180);
-            const sin = Math.sin(Math.PI * v / 180);
-            const r00 = cos * m[0] + sin * m[2];
-            const r01 = cos * m[1] + sin * m[3];
-            m[2] = cos * m[2] - sin * m[0];
-            m[3] = cos * m[3] - sin * m[1];
-            m[0] = r00;
-            m[1] = r01;
-        },
-        scale(m, v) {
-            let x, y;
-            if (Array.isArray(v)) {
-                x = v[0];
-                y = v[1];
-            } else {
-                x = v;
-                y = x;
-            }
-            m[0] *= x;
-            m[1] *= x;
-            m[2] *= y;
-            m[3] *= y;
-        },
-        hue(m, v) {
-            m[6] += v;
-            m[6] %= 360;
-        },
-        sat(m, v) {
-            this.adjustColor(m, v, 7);
-        },
-        bri(m, v) {
-            this.adjustColor(m, v, 8);
-        },
-        alpha(m, v) {
-            this.adjustColor(m, v, 9);
-        },
-        adjustColor(m, v, p) {
-            let c = m[p] + Math.abs(v) * ((v < 0 ? 0 : 1) - m[p]);
-            if (c < 0) c = 0;
-            else if (c > 1) c = 1;
-            m[p] = c;
-        }
-    },
-    adjust(s, p) {
-        const m = s.slice();
-        for (const c in p) {
-            this.ajustments[c](m, p[c]);
-        }
-        return m;
-    },
-    setTransform(s) {
-        this.ctx.setTransform(
-            -this.scale * s[0],
-            this.scale * s[1],
-            this.scale * s[2],
-            -this.scale * s[3],
-            this.scale * s[4] + this.offsetX,
-            -this.scale * s[5] + this.offsetY
-        );
-    },
-    CIRCLE(s, p) {
-        s = this.adjust(s, p);
-        cfa.queue.push([s, "circle"]);
-        cfa.boundingRect(s);
-    },
-    SQUARE(s, p) {
-        s = this.adjust(s, p);
-        cfa.queue.push([s, "square"]);
-        cfa.boundingRect(s);
-    },
-    circle(s) {
-        this.setTransform(s);
-        this.fillStyle(s);
-        this.ctx.beginPath();
-        this.ctx.arc(0, 0, 0.5, 0, 2 * Math.PI);
-        this.ctx.fill();
-    },
-    square(s) {
-        this.setTransform(s);
-        this.fillStyle(s);
-        this.ctx.fillRect(-0.5, -0.5, 1, 1);
-    },
-    fillStyle(s) {
-        const light = (2 - s[7]) * (s[8] * 0.5);
-        const sat = light <= 1 ? s[7] * s[8] / light : s[7] * s[8] / (2 - light);
-        this.ctx.fillStyle = `hsla(${s[6]},${sat * 100}%,${light * 100}%,${s[9]})`;
-    },
-    boundingRect(s) {
-        const x = s[4] * this.scale;
-        const y = s[5] * this.scale;
-        if (x < this.rect[0]) this.rect[0] = x;
-        else if (x > this.rect[1]) this.rect[1] = x;
-        if (y < this.rect[2]) this.rect[2] = y;
-        else if (y > this.rect[3]) this.rect[3] = y;
-    },
-    center(s) {
-        const br = this.rect;
-        const scale =
-            Math.min(this.width / (br[1] - br[0]), this.height / (br[3] - br[2])) * s;
-        this.scale *= scale;
-        this.offsetX = this.width * 0.5 - (br[0] + br[1]) * 0.5 * scale;
-        this.offsetY = this.height * 0.5 + (br[3] + br[2]) * 0.5 * scale;
-    },
-    execRule(s, p, rules) {
-        s = this.adjust(s, p);
-        if (
-            Math.abs(s[1]) * this.scale < this.minSize &&
-            Math.abs(s[3]) * this.scale < this.minSize
-        )
-            return;
-        let totalWeight = 0;
-        for (const rule of rules) totalWeight += rule.weight || 1.0;
-        let weight = 0,
-            rnd = Math.random() * totalWeight;
-        for (const rule of rules) {
-            weight += rule.weight || 1.0;
-            if (rnd <= weight) {
-                rule.exec(s);
-                break;
-            }
-        }
-    },
-    * run() {
-        let s = 0;
-        for (const draw of this.queue) {
-            this[draw[1]](draw[0]);
-            if (s++ > 10) {
-                s = 0;
-                yield requestAnimationFrame(_ => this.iter.next());
-            }
-        }
-    },
-    render() {
-        this.iter.return();
-        this.iter = this.run();
-        this.iter.next();
+// dimensions
+var width = document.body.clientWidth;
+var height = document.body.clientHeight;
+
+var margin = {
+    top: 50,
+    bottom: 50,
+    left: 50,
+    right: 50,
+}
+
+// create an svg to draw in
+var svg = d3.select("body")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append('g')
+    .attr('transform', 'translate(' + margin.top + ',' + margin.left + ')');
+
+width = width - margin.left - margin.right;
+height = height - margin.top - margin.bottom;
+
+var simulation = d3.forceSimulation()
+    // pull nodes together based on the links between them
+    .force("link", d3.forceLink().id(function(d) {
+        return d.id;
+    })
+    .strength(0.025))
+    // push nodes apart to space them out
+    .force("charge", d3.forceManyBody().strength(-200))
+    // add some collision detection so they don't overlap
+    .force("collide", d3.forceCollide().radius(12))
+    // and draw them around the centre of the space
+    .force("center", d3.forceCenter(width / 2, height / 2));
+
+// load the graph
+d3.json("data.json", function(error, graph) {
+    console.debug(graph);
+    // set the nodes
+    var nodes = graph.nodes;
+    // links between nodes
+    var links = graph.links;
+
+    console.debug(svg);
+    
+    // add the curved links to our graphic
+    var link = svg.selectAll(".link")
+        .data(links)
+        .enter()
+        .append("path")
+        .attr("class", "link")
+        .attr('stroke', function(d){
+            return "#ddd";
+        });
+
+    // add the nodes to the graphic
+    var node = svg.selectAll(".node")
+        .data(nodes)
+        .enter().append("g")
+
+    // a circle to represent the node
+    node.append("circle")
+        .attr("class", "node")
+        .attr("r", 8)
+        .attr("fill", function(d) {
+            return d.colour;
+        })
+        .on("mouseover", mouseOver(0))
+        .on("mouseout", mouseOut);
+
+    // hover text for the node
+    node.append("title")
+        .text(function(d) {
+            return d.name;
+        });
+
+    // add a label to each node
+    node.append("text")
+        .attr("dx", 12)
+        .attr("dy", ".35em")
+        .html(function(d) {
+            return d.name;
+        })
+        .style("stroke", "black")
+        .style("stroke-width", 0.5)
+        .style("fill", function(d) {
+            return d.colour;
+        });
+
+    // add the nodes to the simulation and
+    // tell it what to do on each tick
+    simulation
+        .nodes(nodes)
+        .on("tick", ticked);
+
+    // add the links to the simulation
+    simulation
+        .force("link")
+        .links(links);
+
+    // on each tick, update node and link positions
+    function ticked() {
+        link.attr("d", positionLink);
+        node.attr("transform", positionNode);
     }
-};
-["click", "touchdown"].forEach(event => {
-    document.addEventListener(event, e => start(), false);
+
+    // links are drawn as curved paths between nodes,
+    // through the intermediate nodes
+    function positionLink(d) {
+        var offset = 30;
+
+        var midpoint_x = (d.source.x + d.target.x) / 2;
+        var midpoint_y = (d.source.y + d.target.y) / 2;
+
+        var dx = (d.target.x - d.source.x);
+        var dy = (d.target.y - d.source.y);
+
+        var normalise = Math.sqrt((dx * dx) + (dy * dy));
+
+        var offSetX = midpoint_x + offset*(dy/normalise);
+        var offSetY = midpoint_y - offset*(dx/normalise);
+
+        return "M" + d.source.x + "," + d.source.y +
+            "S" + offSetX + "," + offSetY +
+            " " + d.target.x + "," + d.target.y;
+    }
+
+    // move the node based on forces calculations
+    function positionNode(d) {
+        // keep the node within the boundaries of the svg
+        if (d.x < 0) {
+            d.x = 0
+        };
+        if (d.y < 0) {
+            d.y = 0
+        };
+        if (d.x > width) {
+            d.x = width
+        };
+        if (d.y > height) {
+            d.y = height
+        };
+        return "translate(" + d.x + "," + d.y + ")";
+    }
+
+    // build a dictionary of nodes that are linked
+    var linkedByIndex = {};
+    links.forEach(function(d) {
+        linkedByIndex[d.source.index + "," + d.target.index] = 1;
+    });
+
+    // check the dictionary to see if nodes are linked
+    function isConnected(a, b) {
+        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+    }
+
+    function isNode(a,b)
+    {
+        return a.index == b.index;
+    }
+
+    // fade nodes on hover
+    function mouseOver(opacity) {
+        return function(d) {
+            // check all other nodes to see if they're connected
+            // to this one. if so, keep the opacity at 1
+            node.style("stroke-opacity", function(o) {
+                let thisOpacity = isConnected(d, o) ? 1 : opacity;
+                return thisOpacity;
+            });
+            node.style("fill-opacity", function(o) {
+                let thisOpacity = isConnected(d, o) ? 1 : opacity;
+                return thisOpacity;
+            });
+            // also style link accordingly
+            link.style("stroke-opacity", function(o) {
+                return isConnected(d, o) ? 1 : opacity;
+            });
+            link.style("stroke", function(o){
+                return isConnected(d, o) ?  o.source.colour : "#ddd";
+            });
+
+            link.style("fill-opacity", function(o){
+                let thisOpacity = (o.source === d || o.target === d) ? 0.5 : opacity;
+                return thisOpacity;
+            });
+        };
+    }
+
+    function mouseOut() {
+        node.style("stroke-opacity", 1);
+        node.style("fill-opacity", 1);
+        link.style("stroke-opacity", 1);
+        link.style("fill-opacity", 0.5);
+        link.style("stroke", "#ddd");
+    }
+
 });
-/*
-		o
-		 \_/\o
-		( Oo)                    \|/
-		(_=-)  .===O-  ~~Z~A~P~~ -O-
-		/   \_/U'                /|\
-		||  |_/
-		\\  |
-		{K ||
-		 | PP
-		 | ||
-		 (__\\
-*/
-const neuron = (s, p) => {
-    cfa.execRule(s, p, [{
-        exec(s) {
-            cfa.CIRCLE(s, { scale: 1.02 });
-            cfa.CIRCLE(s, { scale: 0.8, hue: 20, sat: -1, alpha: -0.5 });
-            synapse(s, { rotate: 30, y: 0.54, scale: 0.9, hue: 1 });
-            synapse(s, { rotate: -30, y: 0.54, scale: 0.9, hue: 1 });
-            synapse(s, { rotate: -110, y: 0.54, scale: 0.9, hue: 1 });
-        }
-    }]);
-};
-const synapse = (s, p) => {
-    cfa.execRule(s, p, [{
-            weight: 20,
-            exec(s) {
-                cfa.SQUARE(s, { y: 0.2, scale: [0.06, 0.4] });
-                synapse(s, { y: 0.4, rotate: 10, hue: -10 });
-            }
-        },
-        {
-            weight: 20,
-            exec(s) {
-                cfa.SQUARE(s, { y: 0.2, scale: [0.06, 0.4] });
-                synapse(s, { y: 0.4, rotate: -10, hue: 10 });
-            }
-        },
-        {
-            weight: 6,
-            exec(s) {
-                endsynapse(s);
-            }
-        },
-        {
-            weight: 4,
-            exec(s) {
-                neuron(s, { scale: 0.9, hue: 2 });
-            }
-        }
-    ]);
-};
-const endsynapse = (s, p) => {
-    cfa.execRule(s, p, [{
-            weight: 20,
-            exec(s) {
-                cfa.SQUARE(s, { y: 0.2, scale: [0.06, 0.4] });
-                endsynapse(s, { y: 0.4, rotate: 10, scale: 0.9, alpha: -0.2 });
-            }
-        },
-        {
-            weight: 20,
-            exec(s) {
-                cfa.SQUARE(s, { y: 0.2, scale: [0.06, 0.4] });
-                endsynapse(s, { y: 0.4, rotate: -10, scale: 0.9, alpha: -0.2 });
-            }
-        }
-    ]);
-};
-const start = () => {
-    do {
-        cfa.init("#000");
-        neuron(cfa.identity);
-    } while (cfa.queue.length < 20);
-    cfa.center(1.5);
-    cfa.render();
-};
-start();
