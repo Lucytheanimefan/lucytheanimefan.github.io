@@ -1,8 +1,8 @@
 // dimensions
 var width = document.body.clientWidth;
-var height = document.body.clientHeight;
+var height = window.innerHeight;
 
-var textWidth = width / 3.5;
+var textWidth = width / 3;
 
 const strength = randomNumber(0.01, 0.1);
 console.debug("strength: " + strength);
