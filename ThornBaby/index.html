@@ -20,20 +20,40 @@
 <script type="text/javascript">
 const text = "She gives birth to prickles. Lines stems with hooked daggers. Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness. They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them. Don’t grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly. She births them with noble purposes: you are designed to protect. What she doesn’t mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.";
 
-const textMapping = { 
+const textMapping = {
     "first": "She gives birth to prickles",
-    "birth": "She births them with noble purposes: you are designed to protect.", 
-    "prickles": "Lines stems with hooked daggers.", 
-    "stems": "Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness.", 
-    "daggers": "What she doesn’t mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.", 
+    "birth": "She births them with noble purposes: you are designed to protect.",
+    "prickles": "Lines stems with hooked daggers.",
+    "stems": "Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness.",
+    "daggers": "What she doesn’t mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.",
     "babies": "Don’t grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly.",
-    "surface": "They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them."};
+    "surface": "They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them."
+};
 
+// Split words
+str = textMapping.first.replaceAll("[!?,]", "");
+var words = str.split(/[ ,]+/);
+console.debug(words);
+for (let i = 0; i < words.length; i++) {
+    for (var key in textMapping) {
+        if (words[i] == key)
+        {
+            console.debug("Found match: " + words[i] + ", " + textMapping[key]);
+        }
+
+        // check if the property/key is defined in the object itself, not in parent
+        // if (dictionary.hasOwnProperty(key)) {           
+        //     console.log(key, dictionary[key]);
+        // }
+    }
+
+}
+
+// Canvas stuff
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 canvas.height = document.body.clientHeight;
 canvas.width = document.body.clientWidth;
-
 
 function getLines(ctx, text, maxWidth) {
     var words = text.split(" ");
