@@ -9,7 +9,7 @@
         height: 100%;
         margin: 0px;
         padding: 0px;
-        /*        background-color: black;*/
+        background-color: black;
     }
     </style>
     <title>Sapling</title>
@@ -19,9 +19,10 @@
     <canvas id="canvas"></canvas>
 </body>
 <script type="text/javascript">
-const originalText = ["We were saplings.", "Our roots probed the earth, searching for moisture, wrapping microscopic hairs around grains of soil.", "We tangled with the ground, tied ourselves to silt and clay.", "The roots expanded forever.", "So we thought.", "But they stopped at a wall, a slab of concrete in the middle of a field of milkweed, and we asked, mama, where to go from here?", "Our roots returned to us, reversed course, retraced our steps.", "At some point we knew we'd be here forever, wondering how far we'd traveled, when insects and pathogens would finally eat away at our bark.", "It never occurred to us that maybe our roots could grow over the slab, reach the other end of the field, if such an end existed.", "After all, how would our roots latch onto cement and sand aggregates?", "We'd never been taught to do so.", "We'd never been taught anything by anyone.", "Mama had always been somewhere far away, where the wind could barely graze our branches."];
-var text = ["We were saplings.", "Our roots probed the earth, searching for moisture, wrapping microscopic hairs around grains of soil.", "We tangled with the ground, tied ourselves to silt and clay.", "The roots expanded forever.", "So we thought.", "But they stopped at a wall, a slab of concrete in the middle of a field of milkweed, and we asked, mama, where to go from here?", "Our roots returned to us, reversed course, retraced our steps.", "At some point we knew we'd be here forever, wondering how far we'd traveled, when insects and pathogens would finally eat away at our bark.", "It never occurred to us that maybe our roots could grow over the slab, reach the other end of the field, if such an end existed.", "After all, how would our roots latch onto cement and sand aggregates?", "We'd never been taught to do so.", "We'd never been taught anything by anyone.", "Mama had always been somewhere far away, where the wind could barely graze our branches."];
+const originalText = ["We were saplings.", "Our roots probed the earth, searching for moisture, wrapping microscopic hairs around grains of soil.", "We tangled with the ground, tied ourselves to silt and clay.", "The roots expanded forever.", "So we thought.", "But they stopped at a wall, a slab of concrete in the middle of a field of milkweed,", "and we asked, mama, where to go from here?", "Our roots returned to us, reversed course, retraced our steps.", "At some point we knew we'd be here forever, wondering how far we'd traveled,", "when insects and pathogens would finally eat away at our bark.", "It never occurred to us that maybe our roots could grow over the slab, reach the other end of the field, if such an end existed.", "After all, how would our roots latch onto cement and sand aggregates?", "We'd never been taught to do so.", "We'd never been taught anything by anyone.", "Mama had always been somewhere far away, where the wind could barely graze our branches."];
+var text = ["We were saplings.", "Our roots probed the earth, searching for moisture, wrapping microscopic hairs around grains of soil.", "We tangled with the ground, tied ourselves to silt and clay.", "The roots expanded forever.", "So we thought.", "But they stopped at a wall, a slab of concrete in the middle of a field of milkweed,", "and we asked, mama, where to go from here?", "Our roots returned to us, reversed course, retraced our steps.", "At some point we knew we'd be here forever, wondering how far we'd traveled,", "when insects and pathogens would finally eat away at our bark.", "It never occurred to us that maybe our roots could grow over the slab, reach the other end of the field, if such an end existed.", "After all, how would our roots latch onto cement and sand aggregates?", "We'd never been taught to do so.", "We'd never been taught anything by anyone.", "Mama had always been somewhere far away, where the wind could barely graze our branches."];
 
+const textBuffer = 25;
 var animationRequestID = null;
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -85,7 +86,8 @@ function getMousePosition(canvas, event) {
                 // draw branch
 
                 ctx.lineWidth = this.level - 5;
-                ctx.strokeStyle = "#000";
+                ctx.strokeStyle = "#FFFFFF";
+                ctx.globalAlpha = 0.6;
 
                 if (this.parent) {
 
@@ -153,7 +155,7 @@ function getMousePosition(canvas, event) {
 
     // main animation loop
 
-    var previousCoordinates = { "x": undefined, "y": undefined };
+    var previousCoordinates = { "x": 0, "y": 0 };
 
     function run() {
 
@@ -165,22 +167,31 @@ function getMousePosition(canvas, event) {
 
         if (++frame % 2) {
 
-            ctx.globalCompositeOperation = "lighter";
-            ctx.fillStyle = "rgba(255,255,255,0.01)";
+            ctx.globalCompositeOperation = "darker";
+            ctx.fillStyle = "rgba(0,0,0,0.01)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.globalCompositeOperation = "source-over";
 
             if (frame % 35 == 0) {
-                if ((previousCoordinates.x != current.p1.x && previousCoordinates.y != current.p1.y)) {
-                    console.debug("Coords are diff, proceed");
+                if ((Math.abs(previousCoordinates.x - current.p1.x) > textBuffer) || (Math.abs(previousCoordinates.y - current.p1.y) > textBuffer)) {
+                    ctx.font = "30px serif";
                     // Draw text ?
                     if (text.length == 0) {
                         text = originalText.slice();
-                        //console.debug("Reset text: " + text);
                     }
+                    let maxWidth = canvas.width - current.p1.x;// - 10; // 20 for padding
+                    var lines = getLines(ctx, text.shift(), maxWidth);
+                    var yCoord = current.p1.y;
                     ctx.fillStyle = "#ff0000";
-                    ctx.font = "40px Arial";
-                    ctx.fillText(text.shift(), current.p1.x, current.p1.y);
+                    ctx.globalAlpha = 1;
+                    for (let i = 0; i < lines.length; i++) {
+                        let line = lines[i];
+                        ctx.fillText(line, current.p1.x, yCoord);
+                        let metrics = ctx.measureText(lines[i]);
+                        let fontHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+                        let actualHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+                        yCoord = yCoord + fontHeight;
+                    }
                     previousCoordinates = { "x": current.p1.x, "y": current.p1.y };
                 } else {
                     console.debug("Coords are same, bail");
@@ -307,6 +318,25 @@ function getMousePosition(canvas, event) {
     run();
 
 }();
+
+function getLines(ctx, text, maxWidth) {
+    var words = text.split(" ");
+    var lines = [];
+    var currentLine = words[0];
+
+    for (var i = 1; i < words.length; i++) {
+        var word = words[i];
+        var width = ctx.measureText(currentLine + " " + word).width;
+        if (width < maxWidth) {
+            currentLine += " " + word;
+        } else {
+            lines.push(currentLine);
+            currentLine = word;
+        }
+    }
+    lines.push(currentLine);
+    return lines;
+}
 </script>
 
 </html>
