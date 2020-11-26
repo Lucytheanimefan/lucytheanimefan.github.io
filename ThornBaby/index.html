@@ -9,26 +9,55 @@
         margin: 0px;
         padding: 0px;
     }
+
+    .line:not(#first) {
+        display: none;
+    }
+
+    #canvas {
+        position: absolute;
+        z-index: -1;
+    }
     </style>
     <title>Thorn Baby</title>
 </head>
 
 <body>
-    <div id="instructions">Please move your mouse on the screen.</div>
     <canvas id="canvas"></canvas>
+    <div id="text">
+        <div class="line" id="first">She gives <a href="#" onclick="clicked(this)">birth</a> to <a href="#" onclick="clicked(this)">prickles</a>.</div>
+        <div class="line" id="birth">She births them with noble purposes: you are designed to protect.</div>
+        <div class="line" id="prickles">Lines <a href="#" onclick="clicked(this)">stems</a> with hooked <a href="#" onclick="clicked(this)">daggers</a>.</div>
+        <div class="line" id="stems">Her <a href="#" onclick="clicked(this)">babies</a> protrude from the epidermis, spread across until the <a href="#" onclick="clicked(this)">surface</a> is more prickly outgrowth than sweetness.</div>
+        <div class="line" id="daggers">What she doesn't mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the <a href="#" onclick="clicked(this)">others</a>.</div>
+        <div class="line" id="babies">Don't grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only
+            expel the ugly.</div>
+        <div class="line" id="others"><i>Don't grow up too pretty.</i></div>
+        <div class="line" id="surface">They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them.</div>
+    </div>
 </body>
 <script type="text/javascript">
-const text = "She gives birth to prickles. Lines stems with hooked daggers. Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness. They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them. Don’t grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly. She births them with noble purposes: you are designed to protect. What she doesn’t mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.";
+const text = "She gives birth to prickles. Lines stems with hooked daggers. Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness. They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them. Don't grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly. She births them with noble purposes: you are designed to protect. What she doesn't mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.";
 
 const textMapping = {
     "first": "She gives birth to prickles",
     "birth": "She births them with noble purposes: you are designed to protect.",
     "prickles": "Lines stems with hooked daggers.",
     "stems": "Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness.",
-    "daggers": "What she doesn’t mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.",
-    "babies": "Don’t grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly.",
-    "surface": "They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them."
+    "daggers": "What she doesn't mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.",
+    "babies": "Don't grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly.",
+    "surface": "They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them, never has been.",
+    "others": "Don't grow up too pretty."
 };
+
+function clicked(clickedElement) {
+    let key = clickedElement.textContent;
+    if (textMapping[key]) {
+        //let nextDivElement = textMapping[key];
+        console.debug(key + " clicked");
+        document.getElementById(key).style.display = "inline";
+    }
+}
 
 // Split words
 str = textMapping.first.replaceAll("[!?,]", "");
@@ -36,9 +65,9 @@ var words = str.split(/[ ,]+/);
 console.debug(words);
 for (let i = 0; i < words.length; i++) {
     for (var key in textMapping) {
-        if (words[i] == key)
-        {
+        if (words[i] == key) {
             console.debug("Found match: " + words[i] + ", " + textMapping[key]);
+            let htmlElement = "<div id=" + key + ">" + words
         }
 
         // check if the property/key is defined in the object itself, not in parent
@@ -46,8 +75,9 @@ for (let i = 0; i < words.length; i++) {
         //     console.log(key, dictionary[key]);
         // }
     }
-
 }
+
+
 
 // Canvas stuff
 var canvas = document.getElementById("canvas");
