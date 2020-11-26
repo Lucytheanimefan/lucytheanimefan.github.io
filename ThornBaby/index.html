@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    </style>
+    <title>Thorn Baby</title>
+</head>
+
+<body>
+    <div id="instructions">Please move your mouse on the screen.</div>
+    <canvas id="canvas"></canvas>
+</body>
+<script type="text/javascript">
+const text = "She gives birth to prickles. Lines stems with hooked daggers. Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness. They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them. Don’t grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly. She births them with noble purposes: you are designed to protect. What she doesn’t mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.";
+
+const textMapping = { 
+    "first": "She gives birth to prickles",
+    "birth": "She births them with noble purposes: you are designed to protect.", 
+    "prickles": "Lines stems with hooked daggers.", 
+    "stems": "Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness.", 
+    "daggers": "What she doesn’t mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.", 
+    "babies": "Don’t grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly.",
+    "surface": "They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them."};
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+canvas.height = document.body.clientHeight;
+canvas.width = document.body.clientWidth;
+
+
+function getLines(ctx, text, maxWidth) {
+    var words = text.split(" ");
+    var lines = [];
+    var currentLine = words[0];
+
+    for (var i = 1; i < words.length; i++) {
+        var word = words[i];
+        var width = ctx.measureText(currentLine + " " + word).width;
+        if (width < maxWidth) {
+            currentLine += " " + word;
+        } else {
+            lines.push(currentLine);
+            currentLine = word;
+        }
+    }
+    lines.push(currentLine);
+    return lines;
+}
+</script>
+
+</html>
