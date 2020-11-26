@@ -10,12 +10,21 @@
         margin: 0px;
         padding: 0px;
         background-color: black;
+        font-family: serif;
+    }
+
+    #instructions {
+        position: absolute;
+        color: white;
+        bottom: 0;
+        padding: 20px;
     }
     </style>
     <title>Sapling</title>
 </head>
 
 <body>
+    <div id="instructions">Please move your mouse on the screen.</div>
     <canvas id="canvas"></canvas>
 </body>
 <script type="text/javascript">
@@ -28,17 +37,6 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 canvas.height = document.body.clientHeight;
 canvas.width = document.body.clientWidth;
-canvas.addEventListener("mousedown", function(e) {
-    getMousePosition(canvas, e);
-});
-
-function getMousePosition(canvas, event) {
-    let rect = canvas.getBoundingClientRect();
-    let x = event.clientX - rect.left;
-    let y = event.clientY - rect.top;
-    console.debug("Coordinate x: " + x,
-        "Coordinate y: " + y);
-}
 
 ! function() {
 
@@ -97,16 +95,6 @@ function getMousePosition(canvas, event) {
                 }
 
                 ctx.stroke();
-
-            } else {
-
-                // draw leaf
-
-                // ctx.lineWidth = 3;
-                // ctx.strokeStyle = "#f40"; // TODO: leaf color
-                // ctx.moveTo(this.p0.x, this.p0.y);
-                // ctx.lineTo(this.p1.x, this.p1.y);
-                // ctx.stroke();
 
             }
         }
@@ -179,7 +167,7 @@ function getMousePosition(canvas, event) {
                     if (text.length == 0) {
                         text = originalText.slice();
                     }
-                    let maxWidth = canvas.width - current.p1.x;// - 10; // 20 for padding
+                    let maxWidth = canvas.width - current.p1.x; // - 10; // 20 for padding
                     var lines = getLines(ctx, text.shift(), maxWidth);
                     var yCoord = current.p1.y;
                     ctx.fillStyle = "#ff0000";
