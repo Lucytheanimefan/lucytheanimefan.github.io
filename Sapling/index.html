@@ -231,8 +231,8 @@ function getMousePosition(canvas, event) {
         width: 0,
         height: 0,
         resize: function() {
-            this.width = this.elem.width = this.elem.offsetWidth;
-            this.height = this.elem.height = this.elem.offsetHeight;
+            this.width = this.elem.width = document.body.clientWidth;
+            this.height = this.elem.height = document.body.clientHeight;
         }
     }
 
