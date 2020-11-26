@@ -96,6 +96,18 @@ function clicked(clickedElement) {
         });
         document.getElementById(key).classList.add("red");
         document.getElementById(key).style.display = "block";
+
+        if (key == "birth") {
+            autoSpeedIncrement *= 2;
+            autoAnimate = true;
+            console.debug("Increase speed: " + autoSpeedIncrement);
+        } else if (key == "prickles" || key == "daggers") {
+            autoPhaseIncrement *= 2;
+            autoAnimate = true;
+        }
+        else{
+            autoAnimate = false;
+        }
     }
 }
 
@@ -129,7 +141,9 @@ let percentY = 1;
 
 let phase = 0;
 let autoSpeed = 0;
-let autoAnimate = true;
+let autoAnimate = false;
+var autoSpeedIncrement = 0.005;
+var autoPhaseIncrement = 0.002;
 
 const drawLine = (color, from, to) => {
     ctx.beginPath();
@@ -159,7 +173,6 @@ const drawShape = (hue = '0', rotation = 0, percent = 1) => {
 
     ctx.stroke();
     ctx.closePath();
-
 
     ctx.beginPath();
     ctx.fillStyle = `hsla(${hue}, 100%, 40%, 0.25)`;
@@ -219,52 +232,50 @@ const loop = () => {
 
         percentX = map(x, -1, 1, 0, 1);
         percentY = map(y, -1, 1, 0, 1);
-    }
-    else
-    {
+    } else {
         console.debug("No auto animate");
     }
 
     steps = 2 + Math.ceil((MAX_LINES - 2) * percentY);
-    phase += 0.002;
-    autoSpeed += 0.005;
+    phase += autoPhaseIncrement;
+    autoSpeed += autoSpeedIncrement;
 
     requestAnimationFrame(loop);
 };
 
 loop();
 
-const onPointerMove = (e) => {
-    if (autoAnimate) {
-        return;
-    }
+// const onPointerMove = (e) => {
+//     if (autoAnimate) {
+//         return;
+//     }
 
-    const event = (e.touches && e.touches.length) ? e.touches[0] : e;
-    const { clientX, clientY } = event;
+//     const event = (e.touches && e.touches.length) ? e.touches[0] : e;
+//     const { clientX, clientY } = event;
 
-    const x = clientX;
-    const y = clientY;
+//     const x = clientX;
+//     const y = clientY;
 
-    percentX = x / document.body.offsetWidth;
-    percentY = y / document.body.offsetHeight;
-};
+//     percentX = x / document.body.offsetWidth;
+//     percentY = y / document.body.offsetHeight;
+// };
 
-const onPointerOver = () => {
-    autoAnimate = false;
-};
+// const onPointerOver = () => {
+//     autoAnimate = false;
+// };
 
-const onPointerLeave = () => {
-    autoAnimate = true;
-};
+// const onPointerLeave = () => {
+//     autoAnimate = true;
+// };
 
-document.body.addEventListener('mousemove', onPointerMove);
-document.body.addEventListener('touchmove', onPointerMove);
+// document.body.addEventListener('mousemove', onPointerMove);
+// document.body.addEventListener('touchmove', onPointerMove);
 
-document.addEventListener('mouseenter', onPointerOver);
-document.addEventListener('touchstart', onPointerOver);
+// document.addEventListener('mouseenter', onPointerOver);
+// document.addEventListener('touchstart', onPointerOver);
 
-document.addEventListener('mouseleave', onPointerLeave);
-document.addEventListener('touchend', onPointerLeave);
+// document.addEventListener('mouseleave', onPointerLeave);
+// document.addEventListener('touchend', onPointerLeave);
 </script>
 
 </html>
