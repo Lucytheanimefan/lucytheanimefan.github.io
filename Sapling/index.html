@@ -19,6 +19,9 @@
     <canvas id="canvas"></canvas>
 </body>
 <script type="text/javascript">
+const originalText = ["We were saplings.", "Our roots probed the earth, searching for moisture, wrapping microscopic hairs around grains of soil.", "We tangled with the ground, tied ourselves to silt and clay.", "The roots expanded forever.", "So we thought.", "But they stopped at a wall, a slab of concrete in the middle of a field of milkweed, and we asked, mama, where to go from here?", "Our roots returned to us, reversed course, retraced our steps.", "At some point we knew we’d be here forever, wondering how far we’d traveled, when insects and pathogens would finally eat away at our bark.", "It never occurred to us that maybe our roots could grow over the slab, reach the other end of the field, if such an end existed.", "After all, how would our roots latch onto cement and sand aggregates?", "We’d never been taught to do so.", "We’d never been taught anything by anyone.", "Mama had always been somewhere far away, where the wind could barely graze our branches."];
+var text = ["We were saplings.", "Our roots probed the earth, searching for moisture, wrapping microscopic hairs around grains of soil.", "We tangled with the ground, tied ourselves to silt and clay.", "The roots expanded forever.", "So we thought.", "But they stopped at a wall, a slab of concrete in the middle of a field of milkweed, and we asked, mama, where to go from here?", "Our roots returned to us, reversed course, retraced our steps.", "At some point we knew we’d be here forever, wondering how far we’d traveled, when insects and pathogens would finally eat away at our bark.", "It never occurred to us that maybe our roots could grow over the slab, reach the other end of the field, if such an end existed.", "After all, how would our roots latch onto cement and sand aggregates?", "We’d never been taught to do so.", "We’d never been taught anything by anyone.", "Mama had always been somewhere far away, where the wind could barely graze our branches."];
+var counter = 0;
 var animationRequestID = null;
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -61,10 +64,22 @@ function getMousePosition(canvas, event) {
     Branch.prototype.grow = function() {
 
         // recursively grow children branches
-
+        counter += 1;
         for (var i = 0; i < this.branches.length; i++) {
 
             this.branches[i].grow();
+
+            if ((i == this.branches.length - 1) && (counter % 800 == 0)) {
+                console.debug("At max branch num");
+                // Draw text ?
+                if (text.length == 0) {
+                    text = originalText.slice();
+                    //console.debug("Reset text: " + text);
+                }
+                ctx.fillStyle = "#ff0000";
+                ctx.font = "50px Arial";
+                ctx.fillText(text.shift(), this.p1.x, this.p1.y);
+            }
 
         }
 
@@ -82,7 +97,7 @@ function getMousePosition(canvas, event) {
 
                 // draw branch
 
-                ctx.lineWidth = this.level * 2 - 5;
+                ctx.lineWidth = this.level - 5;
                 ctx.strokeStyle = "#000";
 
                 if (this.parent) {
@@ -98,11 +113,11 @@ function getMousePosition(canvas, event) {
 
                 // draw leaf
 
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = "#f40"; // TODO: leaf color
-                ctx.moveTo(this.p0.x, this.p0.y);
-                ctx.lineTo(this.p1.x, this.p1.y);
-                ctx.stroke();
+                // ctx.lineWidth = 3;
+                // ctx.strokeStyle = "#f40"; // TODO: leaf color
+                // ctx.moveTo(this.p0.x, this.p0.y);
+                // ctx.lineTo(this.p1.x, this.p1.y);
+                // ctx.stroke();
 
             }
         }
@@ -125,10 +140,8 @@ function getMousePosition(canvas, event) {
     // point 2D constructor
 
     function Point(x, y) {
-
         this.x = x;
         this.y = y;
-
     }
 
     // new branch factory
@@ -199,7 +212,6 @@ function getMousePosition(canvas, event) {
 
             root = root.branches[0];
             nBranches--;
-
         }
 
     }
@@ -233,7 +245,6 @@ function getMousePosition(canvas, event) {
         moveDistance: 0,
 
         move: function(e) {
-
             e.preventDefault();
             var pointer = e.targetTouches ? e.targetTouches[0] : e;
 
@@ -258,14 +269,11 @@ function getMousePosition(canvas, event) {
             // cancel autorun
 
             if (autorun) {
-
                 this.x = pointer.clientX;
                 this.y = pointer.clientY;
                 root = new Branch(false, maxLevels, this.x, this.y);
                 current = root;
                 autorun = false;
-                document.getElementById("clic").innerHTML = "";
-
             }
 
             this.px = this.x;
