@@ -14,7 +14,7 @@
     }
 
     #text {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.4);
         backdrop-filter: blur(50px);
     }
 
@@ -54,7 +54,8 @@
     }
 
     .red {
-        color: darkblue;
+        /*        color: #0D4F8B;*/
+        font-weight: bold;
     }
 
     a {
@@ -115,6 +116,14 @@ function clicked(clickedElement) {
 
         if (allElementsVisible()) {
             reset();
+            // Make only the selected element visible
+            [].forEach.call(document.querySelectorAll('.line'), function(el) {
+                if (el.id != key)
+                {
+                    console.debug("Make " + el.id + " disappear");
+                    el.style.display = "none";
+                }
+            });
         }
 
         if (key == "birth") {
