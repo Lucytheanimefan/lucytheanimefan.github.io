@@ -271,7 +271,7 @@ const loop = () => {
     draw();
 
     if (autoAnimate) {
-        console.debug("Auto animate");
+        //console.debug("Auto animate");
         const x = Math.cos(autoSpeed);
         const y = Math.sin(Math.PI + autoSpeed);
 
@@ -279,7 +279,7 @@ const loop = () => {
         percentX = map(x, -1, 1, 0, 1);
         percentY = map(y, -1, 1, 0, 1);
     } else {
-        console.debug("No auto animate");
+        //console.debug("No auto animate");
     }
 
     steps = 2 + Math.ceil((MAX_LINES - 2) * percentY);
