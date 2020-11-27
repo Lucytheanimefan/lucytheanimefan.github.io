@@ -26,6 +26,10 @@
         display: none;
     }
 
+    #canvas {
+        position: absolute;
+    }
+
     .container {
         position: absolute;
         z-index: -1;
@@ -82,10 +86,11 @@
 </head>
 
 <body>
-    <div class="container">
+    <!-- <div class="container">
         <canvas class="canvas canvas--shape js-canvas" width="500" height="500"></canvas>
         <canvas class="canvas js-canvas-2" width="500" height="500"></canvas>
-    </div>
+    </div> -->
+    <canvas id="canvas"></canvas>
     <div id="text">
         <div class="line" id="first">She gives <a href="#" onclick="clicked(this)">birth</a> to <a href="#" onclick="clicked(this)">prickles</a>.</div>
         <div class="line" id="birth">She births them with noble purposes: <i>you are designed to <a href="#" onclick="clicked(this)">protect</a>.</i></div>
@@ -100,12 +105,21 @@
     </div>
 </body>
 <script type="text/javascript">
+window.onload = function() {
+    drawTriangle();
+};
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+canvas.height = document.body.clientHeight;
+canvas.width = document.body.clientWidth;
+
 function clicked(clickedElement) {
     let key = clickedElement.textContent;
     var element = document.getElementById(key);
     if (element) {
         //let nextDivElement = textMapping[key];
-        autoAnimate = !autoAnimate;
+        //autoAnimate = !autoAnimate;
         console.debug(key + " clicked");
         [].forEach.call(document.querySelectorAll('.line'), function(el) {
             el.classList.remove('red');
@@ -136,6 +150,12 @@ function reset() {
     padding = 10;
 }
 
+function drawTriangle() {
+    let coordinates = generateTriangleCoordinates(0, 0, 50,50, 50, 10);
+    console.debug(coordinates)
+    animateLines("triangle", ctx, coordinates);// width = 1, color = "black", opacity = 1, i = 0, callback = null)
+}
+
 function allElementsVisible() {
     let lines = document.querySelectorAll('.line');
     for (const el of lines) {
@@ -148,138 +168,107 @@ function allElementsVisible() {
     return true;
 }
 
-// Canvas stuff
-const map = (value, start1, stop1, start2, stop2) => ((value - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
-const q = sel => document.querySelector(sel);
 
-const canvas = q('.js-canvas');
-const ctx = canvas.getContext('2d');
-
-const canvas2 = q('.js-canvas-2');
-const ctx2 = canvas2.getContext('2d');
-
-const w = document.body.clientWidth;
-const h = document.body.clientHeight;
-const wh = w * 0.5;
-const hh = h * 0.5;
-
-canvas.width = canvas2.width = w;
-canvas.height = canvas2.height = h;
-
-const MAX_LINES = 100;
-const MAX_SHAPES = 20;
-
-let steps = MAX_LINES;
-let shapes = MAX_SHAPES;
-
-let percentX = 1;
-let percentY = 1;
-
-let phase = 0;
-let autoSpeed = 0;
-let autoAnimate = false;
-var autoSpeedIncrement = 0.005;
-var autoPhaseIncrement = 0.002;
-var padding = 10;
-
-const drawLine = (color, from, to) => {
+function drawLine(ctx, startx, starty, endx, endy, color = "black", width = 10) {
+    // Stroked triangle
     ctx.beginPath();
-    ctx.lineWidth = 0.25;
+    ctx.moveTo(startx, starty);
+    ctx.lineTo(endx, endy);
+    ctx.closePath();
     ctx.strokeStyle = color;
-    ctx.moveTo(from.x, from.y);
-    ctx.lineTo(to.x, to.y);
+    ctx.lineWidth = width;
     ctx.stroke();
-    ctx.closePath();
-};
+}
 
-const drawShape = (hue = '0', rotation = 0, percent = 1) => {
-    const lineWidth = wh - padding;
-    const spacing = lineWidth / steps;
+function animateLines(reqID, context, coordinates, width = 1, color = "black", opacity = 1, i = 0, callback = null) {
+    setLine(context, i, coordinates, width, color, opacity);
+    i += 1;
 
-    const scale = 0.1 + (0.9 * (1 - percent));
-    const alpha = 0.1 + (0.5 * (1 - percent));
+    if (i > (coordinates.length - 1)) {
+        //console.log("greater than")
+        if (callback) {
+            //console.log("Callback!")
+            callback();
+        }
+        cancelAnimationFrame(window["requestID" + reqID]);
+        //console.log("Cancel animateLInes")
 
-    ctx.beginPath();
-    ctx.strokeStyle = `hsla(${hue}, 100%, 20%, 0.2)`;
-    ctx.fillStyle = `hsla(${hue}, 100%, 20%, 0.01)`;
-
-    ctx.moveTo(0, padding);
-    ctx.lineTo(wh * 0.3, hh * 0.7);
-    ctx.lineTo(wh - padding, hh);
-
-    ctx.stroke();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.fillStyle = `hsla(${hue}, 100%, 40%, 0.25)`;
-    ctx.arc(lineWidth, wh, 2, 0, Math.PI * 2, false);
-    ctx.fill();
-    ctx.closePath();
-
-    for (let i = 0; i < steps; i++) {
-        const lineColor = `hsla(${hue}, 100%, 25%, ${alpha})`;
-
-        const from = { x: spacing * i, y: hh };
-        const to = { x: 0, y: padding + (spacing * i) };
-
-        drawLine(lineColor, from, to);
-    }
-
-    ctx2.save();
-    ctx2.translate(wh, hh);
-    ctx2.rotate(rotation);
-    ctx2.scale(scale, scale);
-
-    const a = (Math.PI * 2) / 4;
-
-    for (let i = 0; i < 4; i++) {
-        ctx2.rotate(a);
-        ctx2.drawImage(canvas, 0, 0, w, h, 0, -hh, w, h);
-    }
-
-    ctx2.restore();
-};
-
-const clear = (context) => {
-    context.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-};
-
-const draw = () => {
-    for (let i = 0; i < shapes; i++) {
-        const rotation = phase + ((Math.PI * 2) / shapes) * i * percentX;
-        const percent = i / (shapes - 1);
-        const hue = 90 + (300 * percent);
-
-        drawShape(hue, rotation, percent);
-    }
-};
-
-const loop = () => {
-    clear(ctx);
-    clear(ctx2);
-
-    draw();
-
-    if (autoAnimate) {
-        console.debug("Auto animate");
-        const x = Math.cos(autoSpeed);
-        const y = Math.sin(Math.PI + autoSpeed);
-
-
-        percentX = map(x, -1, 1, 0, 1);
-        percentY = map(y, -1, 1, 0, 1);
     } else {
-        console.debug("No auto animate");
+        window["requestID" + reqID] = requestAnimationFrame(function() {
+            animateLines(reqID, context, coordinates, width, color, opacity, i, callback);
+        });
     }
+}
 
-    steps = 2 + Math.ceil((MAX_LINES - 2) * percentY);
-    phase += autoPhaseIncrement;
-    autoSpeed += autoSpeedIncrement;
+function setLine(context, i, coords, width, color, opacity) {
+    context.lineWidth = width;
+    context.strokeStyle = color;
+    context.globalAlpha = opacity;
+    context.beginPath();
+    if (i == 0) {
+        context.moveTo(coords[i][0], coords[i][1]);
+        context.lineTo(coords[i + 1][0], coords[i + 1][1]);
+    } else {
+        context.moveTo(coords[i - 1][0], coords[i - 1][1]);
+        context.lineTo(coords[i][0], coords[i][1]);
+    }
+    context.closePath();
+    context.stroke();
+}
 
-    requestAnimationFrame(loop);
-};
+function generateCoordinates(start, end, step = 1, horizontal, extraCoord) {
+    var coords = []
+    for (var i = start; i < end; i += step) {
+        if (horizontal) {
+            coords.push([i, extraCoord]);
+        } else {
+            coords.push([extraCoord, i]);
+        }
+    }
+    return coords;
+}
 
-loop();
+/**
+ * [generateDiagonalCoordinates description]
+ * @param  {Object} startEnd {"start":[x,y],"end":[x1,y1]}
+ * @return {[type]}          [description]
+ */
+function generateDiagonalCoordinates(startEnd, step = 1, keepXEnd = true, keepYEnd = true) {
+
+    var start = startEnd["start"];
+    var end = startEnd["end"];
+    var newX = start[0];
+    var newY = start[1];
+    var coords = [start];
+    if (end[0] > start[0]) {
+        addX = step;
+    } else {
+        addX = -step;
+    }
+    if (end[1] > start[1]) {
+        addY = step;
+    } else {
+        addY = -step;
+    }
+    while ((newX != end[0] && keepXEnd) && (newY != end[1]) && keepYEnd) {
+        newX = newX + addX;
+        newY = newY + addY;
+        coords.push([newX, newY]);
+
+    }
+    //console.log(coords);
+    return coords;
+}
+
+function generateTriangleCoordinates(point1x, point1y, point2x, point2y, point3x, point3y) {
+    var firstLeg = generateDiagonalCoordinates({ "start": [point1x, point1y], "end": [point2x, point2y] });
+    console.debug(firstLeg);
+    let secondLeg = generateDiagonalCoordinates({ "start": [point2x, point2y], "end": [point3x, point3y] });
+    console.debug(secondLeg);
+    let thirdLeg = generateDiagonalCoordinates({ "start": [point1x, point1y], "end": [point3x, point3y] });
+    console.debug(thirdLeg);
+    return firstLeg.concat(secondLeg).concat(thirdLeg);
+}
 </script>
 
 </html>
