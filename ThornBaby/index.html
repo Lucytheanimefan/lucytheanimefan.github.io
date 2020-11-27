@@ -100,6 +100,8 @@
     </div>
 </body>
 <script type="text/javascript">
+const multiplyFactor = 4;
+
 function clicked(clickedElement) {
     let key = clickedElement.textContent;
     var element = document.getElementById(key);
@@ -110,28 +112,28 @@ function clicked(clickedElement) {
         [].forEach.call(document.querySelectorAll('.line'), function(el) {
             el.classList.remove('red');
         });
-        element.classList.add("red");
-        element.style.display = "block";
 
         if (allElementsVisible()) {
             reset();
             // Make only the selected element visible
             [].forEach.call(document.querySelectorAll('.line'), function(el) {
-                if (el.id != key)
-                {
+                if (el.id != key) {
                     console.debug("Make " + el.id + " disappear");
                     el.style.display = "none";
                 }
             });
         }
 
+        element.classList.add("red");
+        element.style.display = "block";
+
         if (key == "birth") {
-            autoSpeedIncrement *= 5;
+            autoSpeedIncrement *= multiplyFactor;
             console.debug("Increase speed: " + autoSpeedIncrement);
         } else if (key == "prickles" || key == "daggers" || key == "stems") {
-            autoPhaseIncrement *= 5;
+            autoPhaseIncrement *= multiplyFactor;
         } else if (key == "protect" || key == "others" || key == "surface") {
-            padding *= 5;
+            padding *= multiplyFactor;
             console.debug("padding: " + padding);
         } else {}
     }
