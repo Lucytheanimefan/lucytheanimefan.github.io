@@ -2,12 +2,24 @@
 <html>
 
 <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre&display=swap" rel="stylesheet">
     <style type="text/css">
     html,
     body {
         height: 100%;
         margin: 0px;
         padding: 0px;
+        font-family: 'Frank Ruhl Libre', serif;
+    }
+
+    #text {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(50px);
+    }
+
+    .line {
+        margin-bottom: 10px;
     }
 
     .line:not(#first) {
@@ -38,15 +50,32 @@
         top: 50%;
         transform: translateY(-50%);
         text-align: center;
-        padding: 1rem;
+        padding: 10%;
     }
 
     .red {
-        color: red;
+        color: darkblue;
     }
 
     a {
-        color: black;
+        font-weight: bolder;
+    }
+
+    a:link {
+        text-decoration: none;
+        color: blue;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:active {
+        text-decoration: underline;
     }
     </style>
     <title>Thorn Baby</title>
@@ -63,7 +92,7 @@
         <div class="line" id="prickles">Lines <a href="#" onclick="clicked(this)">stems</a> with hooked <a href="#" onclick="clicked(this)">daggers</a>.</div>
         <div class="line" id="stems">Her <a href="#" onclick="clicked(this)">babies</a> protrude from the epidermis, spread across until the <a href="#" onclick="clicked(this)">surface</a> is more prickly outgrowth than sweetness.</div>
         <div class="line" id="daggers">What she doesn't mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the <a href="#" onclick="clicked(this)">others</a>.</div>
-        <div class="line" id="babies">Don't grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only
+        <div class="line" id="babies"><i>Don't grow up too pretty</i>, she tells them, an over-concerned mother who knows her uterus can only
             expel the ugly.</div>
         <div class="line" id="others"><i>Don't grow up too pretty.</i></div>
         <div class="line" id="surface">They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them.</div>
@@ -71,46 +100,53 @@
     </div>
 </body>
 <script type="text/javascript">
-const text = "She gives birth to prickles. Lines stems with hooked daggers. Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness. They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them. Don't grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly. She births them with noble purposes: designed to protect. What she doesn't mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.";
-
-const textMapping = {
-    "first": "She gives birth to prickles",
-    "birth": "She births them with noble purposes: designed to protect.",
-    "prickles": "Lines stems with hooked daggers.",
-    "stems": "Her babies protrude from the epidermis, spread across until the surface is more prickly outgrowth than sweetness.",
-    "daggers": "What she doesn't mention is how her children curve down, hooks waiting to sink into neighboring plants, monopolize sunlight, starve out the others.",
-    "babies": "Don't grow up too pretty, she tells them, an over-concerned mother who knows her uterus can only expel the ugly.",
-    "surface": "They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them, never has been.",
-    "others": "Don't grow up too pretty.",
-    "protect": "They house fungi, sporotrichosis, a last line of defense, because she will not be there to protect them, never has been."
-};
-
 function clicked(clickedElement) {
     let key = clickedElement.textContent;
-    if (textMapping[key]) {
+    var element = document.getElementById(key);
+    if (element) {
         //let nextDivElement = textMapping[key];
+        autoAnimate = !autoAnimate;
         console.debug(key + " clicked");
-        var lines = document.getElementsByClassName("line");
         [].forEach.call(document.querySelectorAll('.line'), function(el) {
             el.classList.remove('red');
         });
-        document.getElementById(key).classList.add("red");
-        document.getElementById(key).style.display = "block";
+        element.classList.add("red");
+        element.style.display = "block";
+
+        if (allElementsVisible()) {
+            reset();
+        }
 
         if (key == "birth") {
-            autoSpeedIncrement *= 2;
-            autoAnimate = true;
+            autoSpeedIncrement *= 5;
             console.debug("Increase speed: " + autoSpeedIncrement);
-        } else if (key == "prickles" || key == "daggers") {
-            autoPhaseIncrement *= 2;
-            autoAnimate = true;
-        }
-        else{
-            autoAnimate = false;
-        }
+        } else if (key == "prickles" || key == "daggers" || key == "stems") {
+            autoPhaseIncrement *= 5;
+        } else if (key == "protect" || key == "others" || key == "surface") {
+            padding *= 5;
+            console.debug("padding: " + padding);
+        } else {}
     }
 }
 
+function reset() {
+    console.debug("Resetting");
+    autoSpeedIncrement = 0.005;
+    autoPhaseIncrement = 0.002;
+    padding = 10;
+}
+
+function allElementsVisible() {
+    let lines = document.querySelectorAll('.line');
+    for (const el of lines) {
+        let style = window.getComputedStyle(el);
+        if (style.display === 'none') {
+            console.debug("Not all visible " + el.id);
+            return false;
+        }
+    }
+    return true;
+}
 
 // Canvas stuff
 const map = (value, start1, stop1, start2, stop2) => ((value - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
@@ -122,8 +158,8 @@ const ctx = canvas.getContext('2d');
 const canvas2 = q('.js-canvas-2');
 const ctx2 = canvas2.getContext('2d');
 
-const w = 500;
-const h = 500;
+const w = document.body.clientWidth;
+const h = document.body.clientHeight;
 const wh = w * 0.5;
 const hh = h * 0.5;
 
@@ -144,6 +180,7 @@ let autoSpeed = 0;
 let autoAnimate = false;
 var autoSpeedIncrement = 0.005;
 var autoPhaseIncrement = 0.002;
+var padding = 10;
 
 const drawLine = (color, from, to) => {
     ctx.beginPath();
@@ -156,7 +193,6 @@ const drawLine = (color, from, to) => {
 };
 
 const drawShape = (hue = '0', rotation = 0, percent = 1) => {
-    const padding = 10;
     const lineWidth = wh - padding;
     const spacing = lineWidth / steps;
 
@@ -244,38 +280,6 @@ const loop = () => {
 };
 
 loop();
-
-// const onPointerMove = (e) => {
-//     if (autoAnimate) {
-//         return;
-//     }
-
-//     const event = (e.touches && e.touches.length) ? e.touches[0] : e;
-//     const { clientX, clientY } = event;
-
-//     const x = clientX;
-//     const y = clientY;
-
-//     percentX = x / document.body.offsetWidth;
-//     percentY = y / document.body.offsetHeight;
-// };
-
-// const onPointerOver = () => {
-//     autoAnimate = false;
-// };
-
-// const onPointerLeave = () => {
-//     autoAnimate = true;
-// };
-
-// document.body.addEventListener('mousemove', onPointerMove);
-// document.body.addEventListener('touchmove', onPointerMove);
-
-// document.addEventListener('mouseenter', onPointerOver);
-// document.addEventListener('touchstart', onPointerOver);
-
-// document.addEventListener('mouseleave', onPointerLeave);
-// document.addEventListener('touchend', onPointerLeave);
 </script>
 
 </html>
