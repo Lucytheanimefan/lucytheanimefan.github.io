@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        font-family: 'Frank Ruhl Libre', serif;
+        font-size: 19px;
+    }
+
+    #atomicExcitation {
+        width: 100%;
+        /*        height: 1600px;*/
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
+        word-wrap: break-word;
+    }
+
+    body {
+        font-family: sans-serif;
+    }
+
+    .show-element {
+        opacity: 1;
+        top: 40px;
+    }
+
+    .show-footer {
+        bottom: 0px;
+    }
+    </style>
+    <title>Atomic Excitation</title>
+</head>
+
+<body>
+    <div id="atomicExcitation"></div>
+</body>
+<script src="../js/three.js"></script>
+<script src="../js/TrackballControls.js"></script>
+<script src="../js/DragControls.js"></script>
+<script type="text/javascript">
+//var text = ["We were copper & boric acid & methanol as gas line antifreeze & eager to die as we were to live.", "Mom lit a match, dropped it in.", "Look at all the people, she said", "drawn in, licking flames, tongues inflammable", "Don’t get eaten.", "But we were young, excited by the smallest of heat, electrons knocked right out of orbit, no sense of self preservation, no sense of averting our gazes when others stared.", "We stared right back.", "We burned fluorescent green.", "As we burned, people grew closer, drawn to the thrill of beginnings & ends, an incineration that also births.", "We wondered who’d outlast the other."];
+
+var text = "We were copper & boric acid & methanol as gas line antifreeze & eager to die as we were to live. Mom lit a match, dropped it in. Look at all the people, she said, drawn in, licking flames, tongues inflammable. Don't get eaten. But we were young, excited by the smallest of heat, electrons knocked right out of orbit, no sense of self preservation, no sense of averting our gazes when others stared. We stared right back. We burned fluorescent green. As we burned, people grew closer, drawn to the thrill of beginnings & ends, an incineration that also births. We wondered who'd outlast the other.";
+
+var textArr = text.split(/[ ,]+/);
+
+window.onload = function() {
+
+}
+
+var mainDiv = document.getElementById("atomicExcitation");
+
+var element = document.querySelector(".element");
+var footer = document.querySelector(".footer");
+var text = document.querySelector(".text");
+
+var textSize = 16;
+var lastScrollTop = 0;
+var scrollText = textArr[0];
+var index = 0;
+var scrollingDown = true;
+
+function Scroll2() {
+    var ypos2 = window.pageYOffset;
+
+    if (index <= textArr.length && scrollingDown) {
+        index += 1;
+    } else {
+        index += -1;
+    }
+    console.debug(index);
+    //text.style.fontSize = textSize + "px";
+    if (scrollingDown) {
+        if (index < textArr.length && index > 0) {
+            let newText = textArr[index];
+            scrollText = scrollText + " " + newText;
+            mainDiv.innerHTML = scrollText;
+            lastScrollTop = ypos2;
+        }
+    } else {
+        // Remove text
+        let lastIndex = scrollText.lastIndexOf(" ");
+        scrollText = scrollText.substring(0, lastIndex);
+        mainDiv.innerHTML = scrollText;
+    }
+}
+
+var scrollableElement = document.body; //document.getElementById('scrollableElement');
+
+scrollableElement.addEventListener('wheel', checkScrollDirection);
+
+function checkScrollDirection(event) {
+    if (checkScrollDirectionIsUp(event)) {
+        scrollingDown = false;
+    } else {
+        scrollingDown = true;
+    }
+}
+
+function checkScrollDirectionIsUp(event) {
+    if (event.wheelDelta) {
+        return event.wheelDelta > 0;
+    }
+    return event.deltaY < 0;
+}
+window.addEventListener("scroll", Scroll2);
+
+//window.onscroll = Scroll2;
+</script>
+
+</html>
