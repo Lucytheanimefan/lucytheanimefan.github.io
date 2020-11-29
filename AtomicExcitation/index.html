@@ -2,20 +2,19 @@
 <html>
 
 <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <style type="text/css">
     html,
     body {
         height: 100%;
         overflow: hidden;
+        font-family: 'Shadows Into Light', cursive;
     }
 
     #atomicExcitation {
         margin-left: 1rem;
         margin-right: 1rem;
-    }
-
-    body {
-        font-family: sans-serif;
     }
 
     canvas {
@@ -71,7 +70,7 @@ var textArr = text.split(/[ ]+/);
 
 var mainDiv = document.getElementById("atomicExcitation");
 
-var textSize = 16;
+var textSize = 14;
 var lastScrollTop = 0;
 var scrollText = textArr[0];
 var index = 0;
@@ -154,8 +153,8 @@ function loop(_f, _p = 0) { //console.log(_f._gsTransform.scaleX)
         }, {
             y: endY(),
             ease: Linear.easeNone,
-            scaleX: index/15 + Math.random(),
-            scaleY: index/6 + 4 * Math.random(),
+            scaleX: index / 15 + Math.random(),
+            scaleY: index / 6 + 4 * Math.random(),
             onComplete: loop,
             onCompleteParams: [_f]
         }, 0)
