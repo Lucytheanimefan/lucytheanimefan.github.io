@@ -44,7 +44,7 @@
         width: 57px;
         height: 80px;
         overflow: hidden;
-        background: url("http://creativeocean.com/dev/_images/flame3.png") no-repeat;
+        background: url("flame3-2.png") no-repeat;
         background-size: 100% 100%;
     }
     </style>
@@ -135,8 +135,8 @@ function startFire() {
         var _f = src.cloneNode(true);
         _f.id = String("flame" + i);
         document.getElementById("fire").appendChild(_f);
-        if (i % 3) _f.style.backgroundImage = "url(http://creativeocean.com/dev/_images/flame2.png)";
-        else if (i % 2) _f.style.backgroundImage = "url(http://creativeocean.com/dev/_images/flame1.png)";
+        if (i % 3) _f.style.backgroundImage = "url(flame2-2.png)";
+        else if (i % 2) _f.style.backgroundImage = "url(flame1-2.png)";
         loop(_f, i / num);
     }
     src.style.display = 'none';
