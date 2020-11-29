@@ -44,7 +44,7 @@ var text = "We were copper & boric acid & methanol as gas line antifreeze & eage
 
 var textArr = text.split(/[ ]+/);
 
-console.debug(textArr);
+//console.debug(textArr);
 
 var mainDiv = document.getElementById("atomicExcitation");
 
@@ -370,7 +370,7 @@ function checkScrollDirectionIsUp(event) {
     }
 
     //**********************************************************************************************/
-    function ECosmicparticles(width, height, canvas) {
+    function ECosmicparticles(width, height, canvas, particleNumber = 1000, flux = 100) {
         this.canvas = canvas;
 
         this.context = canvas.getContext("2d");
@@ -383,8 +383,8 @@ function checkScrollDirectionIsUp(event) {
         this.blueGrid = []; // a gradient for heat
 
         this.compteur = 10;
-        this._particle_number = 1000;
-        this.flux = 100;
+        this._particle_number = particleNumber;
+        this.flux = flux;
 
         this.particles = new Array(this._particle_number);
         this._particlesColor = 0xfdfddd;
@@ -392,7 +392,7 @@ function checkScrollDirectionIsUp(event) {
         this._particleGreenColor = (this._particlesColor & 0x00ff00) >> 8;
         this._particleBlueColor = this._particlesColor & 0x0000ff;
 
-        this._colorTransform = 0xeeb929;
+        this._colorTransform = 0xeeb92;
         this._colorTransformRedColor = ((this._colorTransform & 0xff0000) >> 16) / 255;
         this._colorTransformGreenColor = ((this._colorTransform & 0x00ff00) >> 8) / 255;
         this._colorTransformBlueColor = (this._colorTransform & 0x0000ff) / 255;
