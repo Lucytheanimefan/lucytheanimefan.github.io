@@ -45,6 +45,7 @@
         overflow: hidden;
         background: url("flame3-2.png") no-repeat;
         background-size: 100% 100%;
+        visibility: hidden;
     }
     </style>
     <title>Atomic Excitation</title>
@@ -81,7 +82,7 @@ var scrollableElement = document.body; //document.getElementById('scrollableElem
 scrollableElement.addEventListener('wheel', checkScrollDirection);
 
 function checkScrollDirection(event) {
-    console.debug("Scroll");
+    //console.debug("Scroll");
     var ypos2 = window.pageYOffset;
 
     //console.debug("Particles count: " + _cosmic.particles.length);
@@ -90,6 +91,9 @@ function checkScrollDirection(event) {
         if (scrollText.length == 0) {
             index = -1;
             console.debug("Scroll text is none, bail");
+            console.debug("Stop  fire");
+            $(".flame").css("visibility", "hidden");
+            num = 0;
             return;
         }
         // Remove text
@@ -103,7 +107,13 @@ function checkScrollDirection(event) {
             dur += 0.01;
         }
     } else {
-        console.debug("Scroll down: " + index);
+        if (num == 0) {
+            console.debug("Start fire");
+            num = 30;
+            $(".flame").css("visibility", "visible");
+            startFire();
+        }
+        //console.debug("Scroll down: " + index);
         scrollingDown = true;
         if (index < (textArr.length - 1) && index >= -1) {
             index += 1;
@@ -126,7 +136,7 @@ function checkScrollDirectionIsUp(event) {
 }
 
 var src = document.getElementById("f0");
-var num = 30;
+var num = 0;
 var dur = 2;
 var startX = function() { return $(window).width() / 2 + (-25 + 50 * Math.random()) }
 var endY = function() { return $(window).height() / 1.5 }
@@ -163,9 +173,6 @@ function loop(_f, _p = 0) { //console.log(_f._gsTransform.scaleX)
         .to(_f, dur / 5, { alpha: 0 }, "-=" + String(dur / 3.5))
         .progress(_p)
 }
-
-
-startFire();
 </script>
 
 </html>
