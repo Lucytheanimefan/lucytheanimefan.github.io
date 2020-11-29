@@ -64,21 +64,28 @@ function checkScrollDirection(event) {
     console.debug("Scroll");
     var ypos2 = window.pageYOffset;
 
-    if (index <= textArr.length && scrollingDown) {
-        index += 1;
-    } else {
-        index += -1;
-    }
+    //console.debug("Particles count: " + _cosmic.particles.length);
     if (checkScrollDirectionIsUp(event)) {
         scrollingDown = false;
+        if (scrollText.length == 0)
+        {
+            index = -1;
+            console.debug("Scroll text is none, bail");
+            return;
+        }
         _cosmic._particle_number -= 100;
         // Remove text
-        textSize -= 0.25;
         let lastIndex = scrollText.lastIndexOf(" ");
         scrollText = scrollText.substring(0, lastIndex);
-        mainDiv.innerHTML = scrollText;
-        mainDiv.style.fontSize = textSize + "px";
+        console.debug(lastIndex);
+        if (lastIndex >= -1) {
+            index += -1;
+            mainDiv.innerHTML = scrollText;
+            textSize -= 0.25;
+            mainDiv.style.fontSize = textSize + "px";
+        }
     } else {
+        index += 1;
         scrollingDown = true;
         if (index < textArr.length && index >= 0) {
             let newText = textArr[index];
@@ -429,7 +436,7 @@ function checkScrollDirectionIsUp(event) {
         this.reset();
 
         this.generateGreenSimplex();
-        //this.generateRedSimplex();
+        this.generateRedSimplex();
         this.generateBlueGrid();
 
         TweenLite.delayedCall(1.5, this.simplexLoop, null, this);
@@ -550,7 +557,7 @@ function checkScrollDirectionIsUp(event) {
 
         }
 
-        console.debug("_particle_number: " + this._particle_number);
+        //console.debug("_particle_number: " + this._particle_number);
         // not throwing all particles at once at the begining
         if (this.compteur < this._particle_number) {
             var theflux = ((this.compteur + this.flux) > this._particle_number) ? this._particle_number - this.compteur : this.flux;
