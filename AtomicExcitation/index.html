@@ -94,24 +94,26 @@ function checkScrollDirection(event) {
         }
         // Remove text
         let lastIndex = scrollText.lastIndexOf(" ");
-        scrollText = scrollText.substring(0, lastIndex);
-        console.debug(lastIndex);
         if (lastIndex >= -1) {
+            scrollText = scrollText.substring(0, lastIndex);
             index += -1;
             mainDiv.innerHTML = scrollText;
             textSize -= 0.25;
             mainDiv.style.fontSize = textSize + "px";
+            dur += 0.01;
         }
     } else {
-        index += 1;
+        console.debug("Scroll down: " + index);
         scrollingDown = true;
-        if (index < textArr.length && index >= 0) {
+        if (index < (textArr.length - 1) && index >= -1) {
+            index += 1;
             let newText = textArr[index];
             scrollText = scrollText + " " + newText;
             mainDiv.innerHTML = scrollText;
             mainDiv.style.fontSize = textSize + "px";
             lastScrollTop = ypos2;
             textSize += 0.25;
+            dur -= 0.01;
         }
     }
 }
@@ -125,7 +127,7 @@ function checkScrollDirectionIsUp(event) {
 
 var src = document.getElementById("f0");
 var num = 30;
-var dur = 1.5;
+var dur = 2;
 var startX = function() { return $(window).width() / 2 + (-25 + 50 * Math.random()) }
 var endY = function() { return $(window).height() / 1.5 }
 
