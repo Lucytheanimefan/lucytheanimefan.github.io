@@ -3,6 +3,65 @@
 
 <head>
     <style type="text/css">
+    @import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
+
+    html,
+    body {
+        font-family: 'Roboto Mono', monospace;
+        background: #212121;
+        height: 100%;
+    }
+
+    .container {
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .text,
+    button {
+        font-weight: 100;
+        font-size: 25px;
+        color: #fafafa;
+    }
+
+    #nextButton {
+        background-color: #757575;
+        border: none;
+        cursor: pointer;
+        position: fixed;
+        bottom: 28px;
+    }
+
+    #nextButton span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    #nextButton span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    #nextButton:hover span {
+        padding-right: 25px;
+    }
+
+    #nextButton:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+
+    .dud {
+        color: #757575;
+    }
     </style>
     <title>Audio Segmentation</title>
 </head>
@@ -10,11 +69,9 @@
 <body>
     <div class="container">
         <div class="text"></div>
+        <button id="nextButton"><span>Next</span></button>
     </div>
-    <button id="nextButton">Next</button>
 </body>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
 <script type="text/javascript">
 const paragraphs = ["With audio segmentation, which describes splitting an uninterrupted audio signal into homogeneous segments, segments can be classified separately using a model. Audio segmentation serves to find changing points in the content of an audio stream. For example, audio segmentation is used in speaker diarization where it attempts to determine \"who spoke when\". This process utilizes unsupervised identification of a speaker within an audio stream and the intervals during which each speaker is active. Applications of speaker diarization include speech and speaker indexing, speaker recognition in the context of multiple speakers, and speech-to-text transcription.",
 
@@ -86,30 +143,23 @@ class TextScramble {
     }
 }
 
-
-// ——————————————————————————————————————————————————
-// Example
-// ——————————————————————————————————————————————————
-
-
 const el = document.querySelector('.text');
 const fx = new TextScramble(el);
 
 let counter = 0;
 const next = () => {
     if (counter > 0) {
-        console.debug("Counter: " + counter);
         fx.chars = paragraphs[counter - 1];
-        console.debug("Using chars: " + fx.chars);
     }
-    fx.setText(paragraphs[counter]).then(() => {
-    });
+    fx.setText(paragraphs[counter]).then(() => {});
     counter = (counter + 1) % paragraphs.length;
 };
 
-$("#nextButton").click(function() {
+document.getElementById("nextButton").onclick = function() {
     next();
-});
+};
+
+next();
 </script>
 
 </html>
