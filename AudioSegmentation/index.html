@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+    </style>
+    <title>Audio Segmentation</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text"></div>
+    </div>
+    <button id="nextButton">Next</button>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+<script type="text/javascript">
+const paragraphs = ["With audio segmentation, which describes splitting an uninterrupted audio signal into homogeneous segments, segments can be classified separately using a model. Audio segmentation serves to find changing points in the content of an audio stream. For example, audio segmentation is used in speaker diarization where it attempts to determine \"who spoke when\". This process utilizes unsupervised identification of a speaker within an audio stream and the intervals during which each speaker is active. Applications of speaker diarization include speech and speaker indexing, speaker recognition in the context of multiple speakers, and speech-to-text transcription.",
+
+    "With interior segmentation, which describes hiding an uninterrupted pang of guilt from your memory, memory can be classified separately from emotion. Interior segmentation serves to find changing points in the content of an identity. For example, interior segmentation is used in lover quarrels where it attempts to determine \"who spoke when\". This process utilizes unsupervised identification of doubt within a conversation and the intervals during which each speaker goes silent. Applications of lover quarrels include midnight strolls alone along the road, building cold tolerance while waiting outside the door you forgot to leave unlocked, and speech-to-regret transcription.",
+
+    "With segmentation, which describes dividing your memory into pieces, memory can be classified separately from emotion. Segmentation serves to find the truth irrespective of identity. For example, segmentation is used in quarrels where it attempts to determine \"who was right\". This process utilizes supervised purging of moments within a recollection and the intervals during which it's too painful to make eye contact. Applications of quarrels include rotting chunks of memory meant to be excised, examined on a tray, thrown out for good once determined to be benign.",
+
+    "With segmentation, which describes dividing your memory into pieces, memory can be classified separately from emotion. Segmentation serves to keep your sinoatrial node generating regular electrical impulses. For example, segmentation is used in homes where only one person now resides. This process utilizes supervised purging of moments within a recollection and the gentle lullaby of time to convince you that you are forgiven. Applications of being a single dweller include swaying back and forth in a spinning chair, speaking to the walls, imagining where the other might've been had they not stormed out after an argument, forgot an inhaler, walked through the cold, smoky, forest-fire plagued air until oxygen stopped reaching their lungs.",
+
+    "Segmentation, your memory in pieces, classified into chunks to discard or keep. Segmentation serves to carve out graves without you knowing. For example, you walk down to the soccer field thinking you're stepping on dirt when instead, layers below your feet, there's a hole where lost things suffocate. This process utilizes burial and autolysis so that the lost becomes nothing and nothing is lost. Applications of autolysis include the healing of wounds through liquefaction of dead tissue, flavor enhancement via self-digested yeast, mourning by self-destruction.",
+
+    "Segments can be classified into nostalgia and regret. Serves to sow doubt. For example, was it worth screaming about too much time together or too much time apart, clinginess or neglect, sex or don't-touch-me-I-finally-fell-asleep? This process quietly festers in the brain. This process has no speakers, no audio stream, no <i>who spoke when</i>, only <i>no one replied</i>."
+];
+// ——————————————————————————————————————————————————
+// TextScramble
+// ——————————————————————————————————————————————————
+
+class TextScramble {
+    constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
+    }
+    setText(newText) {
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise(resolve => this.resolve = resolve);
+        this.queue = [];
+        for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
+        }
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+    }
+    update() {
+        let output = '';
+        let complete = 0;
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            if (this.frame >= end) {
+                complete++;
+                output += to;
+            } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                    char = this.randomChar();
+                    this.queue[i].char = char;
+                }
+                output += `<span class="dud">${char}</span>`;
+            } else {
+                output += from;
+            }
+        }
+        this.el.innerHTML = output;
+        if (complete === this.queue.length) {
+            this.resolve();
+        } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+        }
+    }
+    randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+}
+
+
+// ——————————————————————————————————————————————————
+// Example
+// ——————————————————————————————————————————————————
+
+
+const el = document.querySelector('.text');
+const fx = new TextScramble(el);
+
+let counter = 0;
+const next = () => {
+    if (counter > 0) {
+        console.debug("Counter: " + counter);
+        fx.chars = paragraphs[counter - 1];
+        console.debug("Using chars: " + fx.chars);
+    }
+    fx.setText(paragraphs[counter]).then(() => {
+    });
+    counter = (counter + 1) % paragraphs.length;
+};
+
+$("#nextButton").click(function() {
+    next();
+});
+</script>
+
+</html>
