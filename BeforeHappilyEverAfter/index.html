@@ -217,7 +217,11 @@
 
         // Normalize for fixed-depth.
         nodes.forEach(function(d) {
-            d.y = d.depth * (width / 4);
+            if (d.depth == 3) {
+                d.y = d.depth * (width / 4) + 50;
+            } else {
+                d.y = d.depth * (width / 4);
+            }
         });
 
         // Update the nodes…
@@ -246,7 +250,6 @@
             .style("fill-opacity", 1e-6);
 
         nodeEnter.call(wrap);
-
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
