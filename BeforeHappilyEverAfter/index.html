@@ -206,11 +206,11 @@
     root.x0 = height / 2;
     root.y0 = 0;
 
-    update(root);
+    update(root, true);
 
     d3.select(self.frameElement).style("height", HEIGHT + "px");
 
-    function update(source) {
+    function update(source, firstLoad = false) {
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
@@ -219,16 +219,6 @@
         // Normalize for fixed-depth.
         nodes.forEach(function(d) {
             d.y = d.depth * (width / 4);
-            // console.debug(d);
-            // let text = d.name;
-            // console.debug("depth: " + d.depth + ", " + text.length);
-            // if (text.length < 50) {
-            //     d.y = d.depth * 100;
-            // } else if (text.length > 50) {
-            //     d.y = d.depth * 200;
-            // } else {
-            //     d.y = (d.depth * 200 + d.depth * 50);
-            // }
         });
 
         // Update the nodes…
@@ -315,14 +305,20 @@
             d.x0 = d.x;
             d.y0 = d.y;
         });
+
+        if (firstLoad) {
+            nodes.forEach(function(d) {
+                console.debug("This is the first load");
+                if (d.name != "Consider the beginning" && d.parent.name != "Consider the beginning" && d.name != root.name) {
+                    console.debug("Click " + d.name);
+                    click(d);
+                }
+            });
+        }
     }
 
     // Toggle children on click.
     function click(d) {
-        console.debug(d.children);
-        if (d.children == undefined) {
-            d["selected"] = true;
-        }
         if (d.children) {
             d._children = d.children;
             d.children = null;
@@ -330,7 +326,7 @@
             d.children = d._children;
             d._children = null;
         }
-        update(d);
+        update(d, false);
     }
 
     function wrap(text, width) {
