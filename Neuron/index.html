@@ -198,9 +198,8 @@ node.append("text")
     .style("stroke-width", 0.25)
     .style("fill", function(d) {
         return d.colour;
-    });
-
-node.call(wrap, textWidth);
+    })
+    .call(wrap, textWidth);
 
 // add the nodes to the simulation and
 // tell it what to do on each tick
@@ -323,9 +322,7 @@ function dragended1(d) {
     simulation.alpha(0.8).restart();
 }
 
-function wrap(d, width) {
-    let text = d.text();
-    console.debug(text);
+function wrap(text, width) {
     text.each(function() {
         var text = d3.select(this),
             words = text.text().split(/\s+/).reverse(),
