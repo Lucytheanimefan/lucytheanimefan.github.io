@@ -12,7 +12,7 @@
     .node circle {
         fill: #fff;
         stroke: steelblue;
-        stroke-width: 3px;
+        stroke-width: 0px;
     }
 
     .node text {
@@ -113,19 +113,19 @@
                         "parent": "Consider the monster"
                     },
                     {
-                        "name": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands and unparalleled beauty.",
+                        "name": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands.",
                         "parent": "Consider the monster",
                         "children": [{
                                 "name": "They marry in a field of nameless flowers, except to the gardener whose brain is full of nothing but flowers and whose face is nothing but pockets.",
-                                "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands and unparalleled beauty.",
+                                "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands.",
                             },
                             {
                                 "name": "When the princess who has become a queen gives birth, out comes a wrinkly bundle of skin and orifices.",
-                                "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands and unparalleled beauty.",
+                                "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands.",
                             },
                             {
                                 "name": "How ugly, she thinks before placing the bundle in a box and the box on the street, hoping it’ll disappear by tomorrow.",
-                                "parent": "When the princess who has become a queen gives birth, out comes a wrinkly bundle of skin and orifices."
+                                "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands."
                             }
                         ],
                     }
@@ -147,7 +147,7 @@
                         "parent": "Consider the gardener"
                     },
                     {
-                        "name": "Consider the truth never told",
+                        "name": "Consider a truth never told",
                         "parent": "Consider the gardener"
                     },
                 ]
@@ -178,7 +178,6 @@
 
     const WIDTH = document.body.clientWidth;
     const HEIGHT = window.innerHeight;
-    const textWidth = WIDTH / 4;
 
     // ************** Generate the tree diagram  *****************
     var margin = { top: 20, right: 120, bottom: 20, left: 150 },
@@ -217,10 +216,12 @@
 
         // Normalize for fixed-depth.
         nodes.forEach(function(d) {
-            if (d.depth == 3) {
-                d.y = d.depth * (width / 4) + 50;
+            if (d.parent && d.parent.parent && d.children) {
+                console.debug("Use 200");
+                d.y = d.depth * 180 + 70;
             } else {
-                d.y = d.depth * (width / 4);
+                console.debug("Use 180");
+                d.y = d.depth * 180;
             }
         });
 
@@ -239,17 +240,13 @@
             .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
         nodeEnter.append("text")
-            .attr("x", function(d) {
-                return 0;
-            })
             .attr("dy", ".35em")
             .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
             .text(function(d) {
                 return d.name;
             })
-            .style("fill-opacity", 1e-6);
-
-        nodeEnter.call(wrap);
+            .style("fill-opacity", 1e-6)
+            .call(wrap);
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
@@ -258,7 +255,7 @@
 
         nodeUpdate.select("circle")
             .attr("r", 10)
-            .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+            .style("fill", function(d) { return d._children ? "#555" : "#999"; });
 
         nodeUpdate.select("text")
             .style("fill-opacity", 1);
@@ -328,17 +325,18 @@
         update(d, false);
     }
 
-    function wrap(d) {
-        console.debug(d);
-        let text = d.select("text");
-        let width;
-        if (d._children) {
-            width = 100
-        } else {
-            width = 270;
-        }
-        console.debug("Width: " + width);
-        text.each(function() {
+    function wrap(text) {
+        let x = 10;
+        text.each(function(d) {
+            console.debug(d);
+            let textWidth;
+            if (d.name.length > 50 && !d.children && !d._children) {
+                textWidth = width - d.depth * (width / 4);
+            } else {
+                textWidth = 270;
+            }
+            console.debug("Width: " + textWidth);
+            let x = (d.children || d._children) ? -13 : 13;
             var text = d3.select(this),
                 words = text.text().split(/\s+/).reverse(),
                 word,
@@ -347,15 +345,15 @@
                 lineHeight = 1.1, // ems
                 y = text.attr("y"),
                 dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+                tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
             while (word = words.pop()) {
                 line.push(word);
                 tspan.text(line.join(" "));
-                if (tspan.node().getComputedTextLength() > width) {
+                if (tspan.node().getComputedTextLength() > textWidth) {
                     line.pop();
                     tspan.text(line.join(" "));
                     line = [word];
-                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + dy + "em").text(word);
+                    tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", lineHeight + dy + "em").text(word);
                 }
             }
         });
