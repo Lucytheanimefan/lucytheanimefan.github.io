@@ -59,11 +59,11 @@
                         "parent": "Consider the girl"
                     },
                     {
-                        "name": "The gardener and the princess.",
+                        "name": "The gardener and the princess",
                         "parent": "Consider the girl"
                     },
                     {
-                        "name": "The gardener who is also a girl who dies several pages from now, because the princess needs a friend, but only until there is a prince for whom briars bloom and canaries sing, and the happy couple buries the gardener friend under wood chips and cow manure and straw.",
+                        "name": "The gardener who is also a girl who dies several pages from now, because the princess needs a friend, but only until the prince, for whom briars bloom and canaries sing, waltzes in, and the happy couple buries the gardener friend under wood chips and cow manure and straw.",
                         "parent": "Consider the girl"
                     }
                 ]
@@ -84,7 +84,7 @@
                         "parent": "Consider the mother"
                     },
                     {
-                        "name": "Those whose cervixes had once dilated and uteruses pulsed.",
+                        "name": "Remove the mirrors, they say, cervixes dilated, bodies full and heavy.",
                         "parent": "Consider the mother"
                     },
                     {
@@ -92,7 +92,7 @@
                         "parent": "Consider the mother"
                     },
                     {
-                        "name": "Can I love this? They ask as their daughters grow older, more unexceptional, faces full of freckles and blemishes for every grain of rice dropped onto the floor, those uncoordinated and flailing limbed and dumb daughters.",
+                        "name": "Can I love this? They ask as their daughters grow older, more unexceptional, faces full of freckles and blemishes for every grain of rice dropped onto the floor, those clumsy and dumb daughters.",
                         "parent": "Consider the mother"
                     },
                 ]
@@ -116,15 +116,15 @@
                         "name": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands.",
                         "parent": "Consider the monster",
                         "children": [{
-                                "name": "They marry in a field of nameless flowers, except to the gardener whose brain is full of nothing but flowers and whose face is nothing but pockets.",
+                                "name": "They marry in a field of generic flowers, nameless to all except the gardener—brain full of taxonomy, face full of pockets.",
                                 "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands.",
                             },
                             {
-                                "name": "When the princess who has become a queen gives birth, out comes a wrinkly bundle of skin and orifices.",
+                                "name": "When the princess-now-queen gives birth, out comes a wrinkly bundle of skin and screams.",
                                 "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands.",
                             },
                             {
-                                "name": "How ugly, she thinks before placing the bundle in a box and the box on the street, hoping it’ll disappear by tomorrow.",
+                                "name": "How ugly, she thinks before placing the bundle in a box and the box on the street.",
                                 "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands."
                             }
                         ],
@@ -216,8 +216,10 @@
 
         // Normalize for fixed-depth.
         nodes.forEach(function(d) {
-            if (d.parent && d.parent.parent && d.children) {
-                d.y = d.depth * 180 + 70;
+            if (d.name == "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands.") {
+                d.y = d.depth * 250;
+            } else if (d.parent && d.parent.parent && d.children) {
+                d.y = d.depth * 230;
             } else {
                 d.y = d.depth * 180;
             }
