@@ -31,7 +31,7 @@
     <!-- load the d3.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script>
-    const textWidth = 300;
+    const textWidth = 270;
     var treeData = [{
         "name": "Before Happily Ever After",
         "parent": "null",
@@ -110,13 +110,68 @@
                         "parent": "Consider the monster"
                     },
                     {
-                        "name": "Consider the wolf.rdener friend under wood chips and cow manure and straw.",
+                        "name": "Consider the wolf",
                         "parent": "Consider the monster"
                     },
                     {
                         "name": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands and unparalleled beauty.",
-                        "parent": "Consider the monster"
+                        "parent": "Consider the monster",
+                        "children": [{
+                                "name": "They marry in a field of nameless flowers, except to the gardener whose brain is full of nothing but flowers and whose face is nothing but pockets.",
+                                "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands and unparalleled beauty.",
+                            },
+                            {
+                                "name": "When the princess who has become a queen gives birth, out comes a wrinkly bundle of skin and orifices.",
+                                "parent": "The princess kisses them and they become handsome men who sing praises to her tiny feet and tiny hands and unparalleled beauty.",
+                            },
+                            {
+                                "name": "How ugly, she thinks before placing the bundle in a box and the box on the street, hoping it’ll disappear by tomorrow.",
+                                "parent": "When the princess who has become a queen gives birth, out comes a wrinkly bundle of skin and orifices."
+                            }
+                        ],
                     }
+                ]
+            },
+            {
+                "name": "Consider the gardener",
+                "parent": "Top Level",
+                "children": [{
+                        "name": "Consider the mulch that improves soil fertility and moisture",
+                        "parent": "Consider the gardener"
+                    },
+                    {
+                        "name": "consider the mother consider the child consider the boxes lining the streets",
+                        "parent": "Consider the gardener"
+                    },
+                    {
+                        "name": "Consider the 'am I pretty' never asked",
+                        "parent": "Consider the gardener"
+                    },
+                    {
+                        "name": "Consider the truth never told",
+                        "parent": "Consider the gardener"
+                    },
+                ]
+            },
+            {
+                "name": "Consider the end",
+                "parent": "Top Level",
+                "children": [{
+                        "name": "happily ever after",
+                        "parent": "Consider the end"
+                    },
+                    {
+                        "name": "printed on the last page",
+                        "parent": "Consider the end"
+                    },
+                    {
+                        "name": "the end, which is not everyone's end",
+                        "parent": "Consider the end"
+                    },
+                    {
+                        "name": "the gardener’s face forgotten pages ago beneath the earth",
+                        "parent": "Consider the end"
+                    },
                 ]
             },
         ]
