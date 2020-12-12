@@ -217,10 +217,8 @@
         // Normalize for fixed-depth.
         nodes.forEach(function(d) {
             if (d.parent && d.parent.parent && d.children) {
-                console.debug("Use 200");
                 d.y = d.depth * 180 + 70;
             } else {
-                console.debug("Use 180");
                 d.y = d.depth * 180;
             }
         });
@@ -328,14 +326,12 @@
     function wrap(text) {
         let x = 10;
         text.each(function(d) {
-            console.debug(d);
             let textWidth;
             if (d.name.length > 50 && !d.children && !d._children) {
                 textWidth = width - d.depth * (width / 4);
             } else {
                 textWidth = 270;
             }
-            console.debug("Width: " + textWidth);
             let x = (d.children || d._children) ? -13 : 13;
             var text = d3.select(this),
                 words = text.text().split(/\s+/).reverse(),
