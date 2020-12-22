@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Backspace</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <main class="scene">
+        <div class="actor">
+            <div class="actor__prefix">-</div>
+            <div id="lucy" class="actor__content"></div>
+        </div>
+        <div class="actor">
+            <div class="actor__prefix">-</div>
+            <div id="lucylater" class="actor__content"></div>
+        </div>
+    </main>
+    <script src="theater.min.js"></script>
+    <script>
+    var theater = theaterJS()
+
+    theater
+        .on('type:start, erase:start', function() {
+            theater.getCurrentActor().$element.classList.add('actor__content--typing')
+        })
+        .on('type:end, erase:end', function() {
+            theater.getCurrentActor().$element.classList.remove('actor__content--typing')
+        })
+        .on('type:start, erase:start', function() {
+            if (theater.getCurrentActor().name === 'lucy') {
+                document.body.classList.add('dark')
+            } else {
+                document.body.classList.remove('dark')
+            }
+        })
+
+    theater
+        .addActor('lucy', { speed: 1, accuracy: 0.9 })
+        .addActor('lucylater', { speed: 1, accuracy: 0.9 })
+        .addScene('lucy:trying to imagine what it\'d be like as the last person on earth', 600)
+        .addScene(-27)
+        .addScene('if everyone died', 800, '. ', 400)
+        .addScene('who\'d feed the deer in our backyard, fat off the compost mom dumps on the mulch ', 600, '(since she\'s too lazy to properly dig a hole)? ', 600)
+        .addScene('mom\'s got a garden, sprouting garlic bulbs & bok choy & tomatoes, says that\'s why she won\'t get a pet', 400)
+        .addScene(-3) 
+        .addScene('designer dog like the other near-retired Asian parents. ', 600)
+        .addScene('the dogs will probably die with the humans. ', -44, 'plants are enough, as high or low maintenance as you\'d want. ', 400)
+        .addScene('note to self—not sure where I\'m going with this,', 400)
+        .addScene(-36) 
+        .addScene('kind of depressing to think about, revisit after lunch', 1600)
+        .addScene(-105)
+        .addScene('lucylater:You know it to be true.', 1000)
+        .addScene(theater.replay.bind(theater))
+    </script>
+</body>
+
+</html>
