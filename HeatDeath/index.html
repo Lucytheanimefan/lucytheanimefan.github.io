@@ -424,16 +424,15 @@ Bounce
 <body>
     <div class="chat">
         <div class="chat-title">
-            <h1>Fabio Ottaviani</h1>
-            <h2>Supah</h2>
+            <h1>You</h1>
             <figure class="avatar">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+                <img src="cheetah.jpg" /></figure>
         </div>
         <div class="messages">
             <div class="messages-content"></div>
         </div>
         <div class="message-box">
-            <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
+            <textarea type="text" class="message-input" placeholder="Type message..." readonly></textarea>
             <button type="submit" class="message-submit">Send</button>
         </div>
     </div>
@@ -449,7 +448,7 @@ Bounce
         $messages.mCustomScrollbar();
         setTimeout(function() {
             fakeMessage();
-        }, 100);
+        }, 50);
     });
 
     function updateScrollbar() {
@@ -478,7 +477,7 @@ Bounce
         updateScrollbar();
         setTimeout(function() {
             fakeMessage();
-        }, 1000 + (Math.random() * 20) * 100);
+        }, 250 + (Math.random() * 20) * 100);
     }
 
     $('.message-submit').click(function() {
@@ -519,19 +518,23 @@ Bounce
 
         if (i >= You.length) {
             console.debug("We done");
+            $(".message-input").attr("readonly", false);
             return false;
         }
-        $('<div class="message loading new"><figure class="avatar"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure><span></span></div>').appendTo($('.mCSB_container'));
+        $('<div class="message loading new"><figure class="avatar"><img src="cheetah.jpg" /></figure><span></span></div>').appendTo($('.mCSB_container'));
         updateScrollbar();
 
         setTimeout(function() {
             $('.message.loading').remove();
-            $('<div class="message new"><figure class="avatar"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>' + You[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
+            $('<div class="message new"><figure class="avatar"><img src="cheetah.jpg" /></figure>' + You[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
             setDate();
             updateScrollbar();
             console.debug("index: " + i);
             if (i == 0 || i == 2 || i == 6 || i == 9) {
-                $('.message-input').val(Me.shift());
+                $(".message-input").hide(500, function() {
+                    $(this).val(Me.shift()).show(1000);
+                });
+                //$('.message-input').val(Me.shift());
                 updateScrollbar();
                 i++;
             } else {
@@ -539,7 +542,7 @@ Bounce
                 i++;
                 fakeMessage();
             }
-        }, 250 + (Math.random() * 20) * 100);
+        }, 1000 + (Math.random() * 20) * 100);
 
     }
     </script>
