@@ -24,8 +24,8 @@ body {
 }
 
 body {
-  background: linear-gradient(135deg, #044f48, #2a7561);
-  background-size: cover;
+/*  background: linear-gradient(135deg, #044f48, #2a7561);
+  background-size: cover;*/
   font-family: "Open Sans", sans-serif;
   font-size: 12px;
   line-height: 1.3;
@@ -38,7 +38,6 @@ body {
   top: 0;
   left: 0;
   z-index: 1;
-  background: url("https://images.unsplash.com/photo-1451186859696-371d9477be93?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1925") no-repeat 0 0;
   filter: blur(80px);
   transform: scale(1.2);
 }
@@ -135,13 +134,14 @@ Messages
   line-height: 1.4;
   margin-left: 35px;
   position: relative;
+  color: #fff;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 .messages .message .timestamp {
   position: absolute;
   bottom: -15px;
   font-size: 9px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
 }
 .messages .message::before {
   content: "";
@@ -170,9 +170,8 @@ Messages
 }
 .messages .message.message-personal {
   float: right;
-  color: #fff;
   text-align: right;
-  background: linear-gradient(120deg, #248A52, #257287);
+  background: linear-gradient(120deg, #087FFE, #0078FF);
   border-radius: 10px 10px 0 10px;
 }
 .messages .message.message-personal::before {
@@ -287,7 +286,7 @@ Message Box
   right: 10px;
   color: #fff;
   border: none;
-  background: #248A52;
+  background: #087FFE;
   font-size: 10px;
   text-transform: uppercase;
   line-height: 1;
@@ -297,7 +296,7 @@ Message Box
   transition: background 0.2s ease;
 }
 .message-box .message-submit:hover {
-  background: #1D7745;
+  background: #00C6FF;
 }
 
 /*--------------------
@@ -432,7 +431,7 @@ Bounce
             <div class="messages-content"></div>
         </div>
         <div class="message-box">
-            <textarea type="text" class="message-input" placeholder="Type message..." readonly></textarea>
+            <textarea type="text" class="message-input" placeholder="Type message..." readonly autofocus></textarea>
             <button type="submit" class="message-submit">Send</button>
         </div>
     </div>
@@ -542,7 +541,7 @@ Bounce
                 i++;
                 fakeMessage();
             }
-        }, 1000 + (Math.random() * 20) * 100);
+        }, 500 + (Math.random() * 20) * 100);
 
     }
     </script>
