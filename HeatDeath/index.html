@@ -518,6 +518,11 @@ Bounce
         if (i >= You.length) {
             console.debug("We done");
             $(".message-input").attr("readonly", false);
+            if ($("#lastread").length) {
+                console.debug("Last read already exists");
+                return false;
+            }
+            $('<div id = "lastread" class="timestamp"><b>Read</b> ' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
             return false;
         }
         $('<div class="message loading new"><figure class="avatar"><img src="cheetah.jpg" /></figure><span></span></div>').appendTo($('.mCSB_container'));
