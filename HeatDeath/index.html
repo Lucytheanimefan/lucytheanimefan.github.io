@@ -476,7 +476,7 @@ Bounce
             return false;
         }
         $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
-        if ($("#lastread").length) { console.debug("Don't set date") } else {
+        if ($("#lastread").length) {  } else {
             setDate();
         }
         $('.message-input').val(null);
@@ -533,10 +533,8 @@ Bounce
         }
 
         if (i >= You.length) {
-            console.debug("We done");
             $(".message-input").attr("readonly", false);
             if ($("#lastread").length) {
-                console.debug("Last read already exists");
                 setActiveStatus();
                 return false;
             }
@@ -552,7 +550,6 @@ Bounce
             $('.message.loading').remove();
             $('<div class="message new"><figure class="avatar"><img src="cheetah.jpg" /></figure>' + You[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
             updateScrollbar();
-            console.debug("index: " + i);
             if (i == 0 || i == 2 || i == 6 || i == 9) {
                 setDate();
                 $(".message-input").hide(250, function() {
