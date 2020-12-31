@@ -562,16 +562,8 @@
 
             this.title = createElement('h1');
 
-            var right = createElement('div', 'right');
-            right.addEventListener('click', function() { self.nextMonth(); });
-
-            var left = createElement('div', 'left');
-            left.addEventListener('click', function() { self.prevMonth(); });
-
             //Append the Elements
             this.header.appendChild(this.title);
-            this.header.appendChild(right);
-            this.header.appendChild(left);
             this.el.appendChild(this.header);
         }
 
