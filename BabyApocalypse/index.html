@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Andika+New+Basic&display=swap" rel="stylesheet">
     <style type="text/css">
     *,
     *:before,
@@ -13,7 +15,7 @@
 
     body {
         overflow: hidden;
-        font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-family: 'Andika New Basic', sans-serif;
         font-weight: 100;
         color: rgba(255, 255, 255, 1);
         margin: 0;
@@ -196,7 +198,7 @@
     .details {
         position: relative;
         width: 420px;
-/*        height: 75px;*/
+        /*        height: 75px;*/
         background: rgba(100, 100, 100, 1);
         margin-top: 5px;
         border-radius: 4px;
@@ -228,7 +230,7 @@
     }
 
     .events {
-/*        height: 75px;*/
+        /*        height: 75px;*/
         padding: 7px 0;
         overflow-y: auto;
         overflow-x: hidden;
@@ -770,7 +772,7 @@
 
         events.forEach(function(ev) {
             var div = createElement('div', 'event');
-            var span = createElement('span', '', '<div class="event-category '+ev.color+'"></div>' + ev.eventName);
+            var span = createElement('span', '', '<div class="event-category ' + ev.color + '"></div>' + ev.eventName);
 
             div.appendChild(span);
             wrapper.appendChild(div);
