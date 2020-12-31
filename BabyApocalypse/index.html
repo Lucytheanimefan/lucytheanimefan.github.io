@@ -27,6 +27,10 @@
         user-select: none;
     }
 
+    p {
+        font-size: 14px;
+    }
+
     #calendar {
         -webkit-transform: translate3d(0, 0, 0);
         -moz-transform: translate3d(0, 0, 0);
@@ -256,7 +260,7 @@
 
     .event {
         font-size: 16px;
-        line-height: 22px;
+        line-height: 17px;
         letter-spacing: .5px;
         padding: 2px 16px;
         vertical-align: top;
@@ -534,13 +538,13 @@
         this.events = events;
         this.current = moment().date(1);
         this.draw();
-        var current = document.querySelector('.today');
-        if (current) {
-            var self = this;
-            window.setTimeout(function() {
-                self.openDay(current);
-            }, 500);
-        }
+        // var current = document.querySelector('.today');
+        // if (current) {
+        //     var self = this;
+        //     window.setTimeout(function() {
+        //         self.openDay(current);
+        //     }, 500);
+        // }
     }
 
     Calendar.prototype.draw = function() {
@@ -852,14 +856,14 @@
 ! function() {
     var data = [
         { eventName: 'Call with Bill. <p>In this universe, we pull weapons out from each other&apos;s bodies. I&apos;d yank a gun from Bill&apos;s throat, Bill&apos;d force me to vomit out a paring knife.</p>', calendar: 'Other', color: 'green', date: 1 },
-        { eventName: 'Primary doctor appt: I&apos;m convinced most East Asian women get C-sections, their pelvises condemning their bodies to split open one life for another, a Matryoshka doll unsure whether things are ending or beginning.', calendar: 'Appointment', color: 'blue', date: 3 },
-        { eventName: 'Beef noodle soup dinner: Don&apos;t think a chef&apos;s knife would fit down an esophagus. Better a chef&apos;s knife than a paring knife, though, when donning the predator look', calendar: 'Other', color: 'green', date: 5 },
-        { eventName: 'Watch Princess Kaguya: She didn&apos;t even have a child and yet she loved too much. ', calendar: 'Other', color: 'green', date: 12 },
-        { eventName: 'Teeth cleaning: I cut the corners of my mouth with floss, tiny symmetrical slits bleeding for a brief moment, camouflaged by B2 deficiency, makes chewing duck muscle too painful, I can only swallow duck skin, like lard sliding in, a last supper.', calendar: 'Appointment', color: 'blue', date: 14 },
-        { eventName: 'Pay day: Is it enough to buy back fetuses and their pin-sized blades still developing in their ribcage? Mothers gamble on their children&apos;s chance to wield knives as flamboyant noodle chefs do, flipping woks over blue flame, dicing flank and tripe. These aren&apos;t normal hand-forged steel knives; they grow, accumulating iron and carbon and chromium atoms over time as lungs form, alveoli septate, skull fuses, but there isn&apos;t enough time.', calendar: 'Other', color: 'green', date: 18 },
-        { eventName: 'Pick up new computer: We joke we&apos;d pull keyboards, mice, monitors, motherboards from our stomachs, intestines, livers, pancreas. Mythbusters says the battery is bulletproof. You can defend me better with a MacBook than a gun.', calendar: 'Other', color: 'green', date: 19 },
-        { eventName: 'Visit the gynecologist: See if the baby is forming the right switch blades and cleavers. ', calendar: 'Appointment', color: 'blue', date: 21 },
-        { eventName: 'Lunch with Bill: I&apos;d cough up shurikens if needed. Parents defend their young to the death, you know. Keep it all in, you say. Wait until after. If there&apos;s an after, like it&apos;s ok for my stomach to become a sepulcher. I tear off the meat from a rib. ', calendar: 'Other', color: 'green', date: 30 },
+        { eventName: 'Primary doctor appt. <p>I&apos;m convinced most East Asian women get C-sections, their pelvises condemning their bodies to split open one life for another, a Matryoshka doll unsure whether things are ending or beginning.</p>', calendar: 'Appointment', color: 'blue', date: 3 },
+        { eventName: 'Beef noodle soup dinner. <p>Don&apos;t think a chef&apos;s knife would fit down an esophagus. Better a chef&apos;s knife than a paring knife, though, when donning the predator look</p>', calendar: 'Other', color: 'green', date: 5 },
+        { eventName: 'Watch Princess Kaguya. <p>She didn&apos;t even have a child and yet she loved too much.</p>', calendar: 'Other', color: 'green', date: 12 },
+        { eventName: 'Teeth cleaning. <p>I cut the corners of my mouth with floss, tiny symmetrical slits bleeding for a brief moment, camouflaged by B2 deficiency, makes chewing duck muscle too painful, I can only swallow duck skin, like lard sliding in, a last supper.</p>', calendar: 'Appointment', color: 'blue', date: 14 },
+        { eventName: 'Pay day. <p>Is it enough to buy back fetuses and their pin-sized blades still developing in their ribcage? Mothers gamble on their children&apos;s chance to wield knives as flamboyant noodle chefs do, flipping woks over blue flame, dicing flank and tripe. These aren&apos;t normal hand-forged steel knives; they grow, accumulating iron and carbon and chromium atoms over time as lungs form, alveoli septate, skull fuses, but there isn&apos;t enough time.</p>', calendar: 'Other', color: 'green', date: 18 },
+        { eventName: 'Pick up new computer. <p>We joke we&apos;d pull keyboards, mice, monitors, motherboards from our stomachs, intestines, livers, pancreas. Mythbusters says the battery is bulletproof. You can defend me better with a MacBook than a gun.</p>', calendar: 'Other', color: 'green', date: 19 },
+        { eventName: 'Visit the gynecologist. <p>See if the baby is forming the right switch blades and cleavers.</p>', calendar: 'Appointment', color: 'blue', date: 21 },
+        { eventName: 'Lunch with Bill. <p>I&apos;d cough up shurikens if needed. Parents defend their young to the death, you know. Keep it all in, you say. Wait until after. If there&apos;s an after, like it&apos;s ok for my stomach to become a sepulcher. I tear off the meat from a rib.</p>', calendar: 'Other', color: 'green', date: 30 },
 
     ];
 
