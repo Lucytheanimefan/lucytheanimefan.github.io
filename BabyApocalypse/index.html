@@ -588,10 +588,7 @@
         var self = this;
 
         this.events.forEach(function(ev, index) {
-            console.debug(ev);
-            console.debug(ev.date);
             ev.date = self.current.clone().date(ev.date);
-            //ev.date = this.events[index].date;
         });
 
 
@@ -773,10 +770,8 @@
 
         events.forEach(function(ev) {
             var div = createElement('div', 'event');
-            //var square = createElement('div', 'event-category ' + ev.color);
             var span = createElement('span', '', '<div class="event-category '+ev.color+'"></div>' + ev.eventName);
 
-            //div.appendChild(square);
             div.appendChild(span);
             wrapper.appendChild(div);
         });
