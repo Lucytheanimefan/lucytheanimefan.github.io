@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Words I think of while drinking fish head soup and learning how 爷爷 died</title>
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+        background: #00a5f7;
+        display: -ms-flexbox;
+        display: box;
+        display: flex;
+        -o-box-orient: vertical;
+        flex-direction: column;
+        -o-box-pack: center;
+        justify-content: center;
+        -o-box-align: center;
+        align-items: center;
+    }
+
+    .container {
+        width: 300px;
+        height: 200px;
+        position: relative;
+        -ms-perspective: 800px;
+        perspective: 800px;
+        border-radius: 4px;
+    }
+
+    .card {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform-style: preserve-3d;
+        transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-radius: 6px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+    }
+
+    .card div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 6px;
+        background: #fff;
+        display: -ms-flexbox;
+        display: box;
+        display: flex;
+        -o-box-pack: center;
+        justify-content: center;
+        -o-box-align: center;
+        align-items: center;
+        font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        color: #47525d;
+    }
+
+    .card .back {
+        transform: rotateY(180deg);
+    }
+
+    .card.flipped {
+        transform: rotateY(180deg);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="front">Click to flip</div>
+            <div class="back">Back</div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+    var text = ["<h1>Grief. Noun.</h1><p>Deep sorrow, especially that caused by someone's death. When you get older, you stop crying about death</p>", 
+    "<h1>Hydrocephalus. Noun.</h1><p>fluid accumulating in the cranium, something has to give, as something always must</p>",
+    "<h1>Hydrocephalus. Noun.</h1><p>enlarged ventricles pressing on the brain, the neighbors said that tree would grow like a monster but grandpa still planted it, and dad never hacked it down like he did our Earth Day trees poking into the sides of the house</p>",
+    "<h1>Apathy. Noun.</h1><p>lack of feeling or emotion. The goddamn moon wants to fill this world with nostalgia, but you know better, spinning on the office chair under a Philips Hue light bulb, responding to friends who've turned bolognese recipes into poetry with 🤣, responding </p>",
+    "<h1>Apathy. Noun.</h1><p>lack of interest or concern. When you're young, you think jumping off the second floor will reveal your ability to fly, not die. Death is so far away, you don't even know that indifferent does not mean undifferent yet</p>",
+    "<h1>Abate. Verb.</h1><p>To reduce, to lessen. You're supposed to insert tubes to unblock paths for freeflow, redirect cerebrospinal fluid elsewhere like a heart chamber, more easily absorbed.</p>",
+    "<h1>Callous. Adjective.</h1><p>Being hardened and thickened. We don't give dad a hug, because dad doesn't give hugs or receive hugs or any of that excess stuff. The best thing we can do is say his black grouper and tofu soup tastes delicious, accept his help when twisting open jars of kimchi, ask him to unscrew the sink to recover a fallen contact lens.</p>",
+    "<h1>Tenacious. Noun.</h1><p>Not easily pulled apart. Dad goes to work tomorrow, handling test tubes and pipettes and quinoline‐based ligands. Grandpa will rest tomorrow, as he will later this evening, as he was this afternoon, as he was just a few moments ago this morning, in a bed, in a hospital, in Shanghai, like a corpse, because he is one. </p>",
+    "<h1>Irony. Noun.</h1><p>Incongruity between the actual result of a sequence of events and the normal or expected result. Yesterday, I said I needed one day's notice for any phone calls, better yet a calendar event, especially if grandparents wanted to WeChat.</p>",
+    "<h1>Metaphor. Noun.</h1><p>A figure of speech in which a word or phrase is applied to an object or action to which it is not literally applicable. Why do you need to compare things to knives or rain or papaya or bullets or hemoglobin or bones or oceans or roast duck or winter or mirrors that always reflect something repulsive or a canyon’s circumambient walls that always trap you somewhere you don't want to be or death which somehow is universally understood yet never personally understood, as though they'd make things more digestable or more convoluted or worse, more beautiful?</p>"
+    ]
+    $('.container').on('click', function() {
+        $('.card').toggleClass('flipped');
+    });
+    </script>
+</body>
+
+</html>
