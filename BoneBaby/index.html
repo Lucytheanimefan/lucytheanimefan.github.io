@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bone Baby</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        margin: 0;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="main"></canvas>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/delaunay.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
+    <script>
+    window.hbData = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAADXUAAA11AFeZeUIAAABAElEQVR4nO3RQQ0AIBDAsAP/nuGNAvZoFSzZmpkzZOzfAbwMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEk5gLcywHHnWLL6AAAAABJRU5ErkJggg==';
+    (function() {
+        'use strict';
+
+        const ACCELERATION = 0.25;
+
+        class Particle {
+            constructor({ target, radius, color, ctx, }) {
+                this.ctx = ctx;
+                this.pos = target.clone();
+                this.prevPos = this.pos.clone();
+
+                this.target = target;
+
+                this.maxSpeed = radius;
+                this.velocity = new Point(0, 0);
+
+                this.radius = radius;
+                this.currentSize = radius;
+
+                this.color = color;
+
+                this.distracted = false;
+            }
+
+            update(distractor, distractorRadius) {
+                if (
+                    distractor &&
+                    this.pos.distance(distractor) < distractorRadius + Rnd.between(-distractorRadius / 20, distractorRadius / 20)
+                ) {
+                    const angle = distractor.angle(this.pos);
+                    this.velocity = Point.setToPolar(angle, this.maxSpeed * (Math.random() + 1));
+                    this.prevPos = this.pos.clone();
+                    this.pos.add(this.velocity);
+                    this.distracted = true;
+                } else {
+                    if (this.distracted) {
+                        const tempPoint = new Point(0, 0);
+                        const angle = tempPoint.angle(Point.reverse(this.velocity));
+                        const acceleration = Point.setToPolar(angle, ACCELERATION);
+                        if (Math.abs(this.velocity.x) < Math.abs(acceleration.x)) {
+                            acceleration.x = -this.velocity.x;
+                        }
+                        if (Math.abs(this.velocity.y) < Math.abs(acceleration.y)) {
+                            acceleration.y = -this.velocity.y;
+                        }
+                        this.velocity.add(acceleration);
+
+                        if (Point.fuzzyEquals(this.velocity, tempPoint, 0.01)) {
+                            this.distracted = false;
+                        }
+                    } else {
+                        const angle = this.pos.angle(this.target);
+                        const acceleration = Point.setToPolar(angle, ACCELERATION);
+                        this.velocity.add(acceleration);
+                    }
+                }
+
+                const distanceToTarget = this.pos.distance(this.target);
+                this.currentSize = Math.max(0, this.radius / (1 + distanceToTarget / distractorRadius));
+
+                this.prevPos = this.pos.clone();
+                this.pos.add(this.velocity);
+
+                if (
+                    distanceToTarget < this.currentSize ||
+                    this.target.isBetween(this.prevPos, this.pos)
+                ) {
+                    this.velocity.set(0, 0);
+                    this.pos.set(this.target.x, this.target.y);
+                }
+            }
+
+            render() {
+                this.ctx.fillStyle = this.color;
+                this.ctx.fillRect(
+                    this.pos.x - this.currentSize,
+                    this.pos.y - this.currentSize,
+                    this.currentSize * 2,
+                    this.currentSize * 2
+                );
+            }
+        }
+
+        class Field {
+            constructor({ ctx, data, width, height, }) {
+                this.ctx = ctx;
+                this.width = width;
+                this.height = height;
+
+                this.butterflies = [];
+                this.distractor = new Point(width / 2, height / 2);
+
+                const rows = data.length;
+                const cols = data[0].length;
+                const gridSize = Math.min(
+                    width / rows,
+                    height / cols,
+                );
+                this.distractorRadius = gridSize * rows;
+                const offsetLeft = (width - cols * gridSize) / 2;
+                const offsetTop = (height - rows * gridSize) / 2;
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        if (data[i][j] === '255,255,255') {
+                            continue;
+                        }
+                        this.butterflies.push(new Particle({
+                            target: new Point(
+                                offsetLeft + j * gridSize,
+                                offsetTop + i * gridSize,
+                            ),
+                            radius: Rnd.between(gridSize, gridSize * 1.4) / 2,
+                            color: `rgb(${data[i][j]})`,
+                            ctx: this.ctx,
+                        }));
+                    }
+                }
+            }
+
+            update() {
+                for (let i = 0; i < this.butterflies.length; i++) {
+                    this.butterflies[i].update(this.distractor, this.distractorRadius);
+                }
+                if (this.distractor) {
+                    this.distractor = null;
+                }
+            }
+
+            render() {
+                this.ctx.clearRect(0, 0, this.width, this.height);
+                for (let i = 0; i < this.butterflies.length; i++) {
+                    this.butterflies[i].render();
+                }
+            }
+
+            setDistractor(x, y) {
+                this.distractor = new Point(x, y);
+            }
+        }
+
+        class Point {
+            constructor(x, y) {
+                this.set(x, y);
+            }
+
+            add(point) {
+                this.x += point.x;
+                this.y += point.y;
+            }
+
+            set(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+
+            angle(point) {
+                return Math.atan2(point.y - this.y, point.x - this.x);
+            }
+
+            distance(point) {
+                return Math.sqrt((this.x - point.x) ** 2 + (this.y - point.y) ** 2)
+            }
+
+            isBetween(point1, point2) {
+                const sameX = this.x === point1.x && this.x === point2.x;
+                const sameY = this.y === point1.y && this.y === point2.y;
+                return (
+                    sameX ||
+                    Math.sign(this.x - point1.x) !== Math.sign(this.x - point2.x)
+                ) && (
+                    sameY ||
+                    Math.sign(this.y - point1.y) !== Math.sign(this.y - point2.y)
+                );
+            }
+
+            clone() {
+                return new Point(this.x, this.y);
+            }
+
+            static add(point1, point2) {
+                return new Point(point1.x + point2.x, point1.y + point2.y);
+            }
+
+            static setToPolar(angle, value) {
+                return new Point(Math.cos(angle) * value, Math.sin(angle) * value);
+            }
+
+            static reverse(point) {
+                return new Point(-point.x, -point.y);
+            }
+
+            static fuzzyEquals(point1, point2, epsilon) {
+                return Point.fuzzyEqualsFloat(point1.x, point2.x, epsilon) &&
+                    Point.fuzzyEqualsFloat(point1.y, point2.y, epsilon);
+            }
+
+            static fuzzyEqualsFloat(float1, float2, epsilon = 1) {
+                return Math.abs(float1 - float2) <= epsilon;
+            }
+        }
+
+        class Rnd {
+            static between(min, max) {
+                return Math.round(min + (max - min) * Math.random());
+            }
+
+            static point(x1, y1, x2, y2) {
+                return new Point(Rnd.between(x1, x2), Rnd.between(y1, y2));
+            }
+        }
+
+        // main
+        let field;
+
+        getDataFromImage(window.hbData).then(data => {
+            const canvasNode = document.querySelector('#main');
+            canvasNode.width = window.innerWidth;
+            canvasNode.height = window.innerHeight;
+
+            const ctx = canvasNode.getContext('2d');
+
+            field = new Field({
+                ctx,
+                data,
+                width: canvasNode.width,
+                height: canvasNode.height,
+            });
+
+            document.addEventListener('mousemove', event => {
+                field.setDistractor(event.clientX, event.clientY);
+            });
+
+            document.addEventListener('touchstart', event => {
+                field.setDistractor(event.touches[0].clientX, event.touches[0].clientY);
+            });
+
+            loop();
+        });
+
+        function loop() {
+            field.update();
+            field.render();
+
+            requestAnimationFrame(loop);
+        }
+
+        function getDataFromImage(dataUrl) {
+            return new Promise(resolve => {
+                const imgNode = new Image();
+                imgNode.onload = () => {
+                    const width = imgNode.width;
+                    const height = imgNode.height;
+
+                    const tempCanvasNode = document.createElement('canvas');
+                    tempCanvasNode.width = width;
+                    tempCanvasNode.height = height;
+
+                    const tempCtx = tempCanvasNode.getContext('2d');
+                    tempCtx.drawImage(imgNode, 0, 0);
+
+                    const sourceImageData = tempCtx.getImageData(0, 0, width, height).data;
+
+                    const result = [];
+                    let row = [];
+                    for (let i = 0; i <= sourceImageData.length; i += 4) {
+                        if (i / 4 % width === 0) {
+                            if (i > 0) {
+                                result.push(row);
+                            }
+                            row = [];
+                        }
+                        if (i === sourceImageData.length) {
+                            break;
+                        }
+                        row.push([sourceImageData[i], sourceImageData[i + 1], sourceImageData[i + 2]].join());
+                    }
+                    resolve(result);
+                };
+                imgNode.src = dataUrl;
+            });
+        }
+    })();
+    </script>
+</body>
+
+</html>
