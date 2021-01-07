@@ -26,10 +26,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
     <script>
     window.hbData = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAADXUAAA11AFeZeUIAAABAElEQVR4nO3RQQ0AIBDAsAP/nuGNAvZoFSzZmpkzZOzfAbwMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEkxpAYQ2IMiTEk5gLcywHHnWLL6AAAAABJRU5ErkJggg==';
+    var text = ["Our ends and edges start as cartilage: you fold, we bend, nothing clatters when we fall, collagen like rubber erasers scored with graphite tips, speared by paperclips bent and unwound as limbs sway from broken bodies on mountaintops, picked clean by turkey vultures.", "We sell our softness for mineral deposits, ossifying from the center outward; it sneaks in, spongy bone we thought could absorb our calculated falls—from the sky down, caught in the opening between springs of trampoline, thinking maybe it could twist through the blanket of skin, stretch and warp and pretzel ourselves, because you said we shaped our future.", "We only hardened, bound as calcium hydroxyapatite, matrix mineralization impenetrable to your grip, length predetermined, creeping toward their ends until even those slivers of cartilage stiffened, petrified, as though we’d rather freeze than reach further in the same direction."];
     (function() {
         'use strict';
 
         const ACCELERATION = 0.25;
+
+        var tempCanvasNode;
+        var tempCtx;
 
         class Particle {
             constructor({ target, radius, color, ctx, }) {
@@ -272,6 +276,27 @@
             requestAnimationFrame(loop);
         }
 
+        function fitTextOnCanvas(canvas, context, text, fontface) {
+            var size = measureTextBinaryMethod(context, text, fontface, 0, 600, canvas.width);
+            return size;
+        }
+
+        function measureTextBinaryMethod(context, text, fontface, min, max, desiredWidth) {
+            if (max - min < 1) {
+                return min;
+            }
+            var test = min + ((max - min) / 2); //Find half interval
+            context.font = test + "px " + fontface;
+            console.debug("text: " + text);
+            measureTest = context.measureText(text).width;
+            if (measureTest > desiredWidth) {
+                var found = measureTextBinaryMethod(context, text, fontface, min, test, desiredWidth)
+            } else {
+                var found = measureTextBinaryMethod(context, text, fontface, test, max, desiredWidth)
+            }
+            return found;
+        }
+
         function getDataFromImage(dataUrl) {
             return new Promise(resolve => {
                 const imgNode = new Image();
@@ -279,12 +304,16 @@
                     const width = imgNode.width;
                     const height = imgNode.height;
 
-                    const tempCanvasNode = document.createElement('canvas');
+                    tempCanvasNode = document.createElement('canvas');
                     tempCanvasNode.width = width;
                     tempCanvasNode.height = height;
 
-                    const tempCtx = tempCanvasNode.getContext('2d');
+                    tempCtx = tempCanvasNode.getContext('2d');
                     tempCtx.drawImage(imgNode, 0, 0);
+                    tempCtx.fillStyle = "white";
+                    tempCtx.font = "30px Arial";
+                    let line = text[0];
+                    fitTextOnCanvas(tempCtx, tempCanvasNode, line, "verdana");
 
                     const sourceImageData = tempCtx.getImageData(0, 0, width, height).data;
 
