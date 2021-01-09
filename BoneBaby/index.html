@@ -7,12 +7,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <style>
     body {
-        background: darkblue;
+        background: #162B32;
     }
 
     .process {
         width: 100%;
-        margin: 1em auto;
+        margin: 2em auto;
         cursor: default;
     }
 
@@ -38,15 +38,115 @@
 
     .process-items li.active {
         transform: scale(1) translateY(0);
+        font-weight: bold;
     }
 
-    .process-items em {
+    .process-items p {
         display: block;
         margin-top: 0.5em;
+        font-size: 16px;
     }
 
     #nextButton {
         text-align: center;
+    }
+
+
+    .center-con {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+    .round {
+        position: absolute;
+        border: 2px solid #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+
+    }
+
+    #cta {
+        width: 100%;
+        cursor: pointer;
+        position: absolute;
+    }
+
+    #cta .arrow {
+        left: 30%;
+    }
+
+    .arrow {
+        position: absolute;
+        bottom: 0;
+        margin-left: 0px;
+        width: 12px;
+        height: 12px;
+        background-size: contain;
+        top: 15px;
+    }
+
+    .segunda {
+        margin-left: 8px;
+    }
+
+    .next {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHN0eWxlPi5zdDB7ZmlsbDojZmZmfTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTMxOS4xIDIxN2MyMC4yIDIwLjIgMTkuOSA1My4yLS42IDczLjdzLTUzLjUgMjAuOC03My43LjZsLTE5MC0xOTBjLTIwLjEtMjAuMi0xOS44LTUzLjIuNy03My43UzEwOSA2LjggMTI5LjEgMjdsMTkwIDE5MHoiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzE5LjEgMjkwLjVjMjAuMi0yMC4yIDE5LjktNTMuMi0uNi03My43cy01My41LTIwLjgtNzMuNy0uNmwtMTkwIDE5MGMtMjAuMiAyMC4yLTE5LjkgNTMuMi42IDczLjdzNTMuNSAyMC44IDczLjcuNmwxOTAtMTkweiIvPjwvc3ZnPg==);
+    }
+
+    @keyframes bounceAlpha {
+        0% {
+            opacity: 1;
+            transform: translateX(0px) scale(1);
+        }
+
+        25% {
+            opacity: 0;
+            transform: translateX(10px) scale(0.9);
+        }
+
+        26% {
+            opacity: 0;
+            transform: translateX(-10px) scale(0.9);
+        }
+
+        55% {
+            opacity: 1;
+            transform: translateX(0px) scale(1);
+        }
+    }
+
+    .bounceAlpha {
+        animation-name: bounceAlpha;
+        animation-duration: 1.4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .arrow.primera.bounceAlpha {
+        animation-name: bounceAlpha;
+        animation-duration: 1.4s;
+        animation-delay: 0.2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .round:hover .arrow {
+        animation-name: bounceAlpha;
+        animation-duration: 1.4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .round:hover .arrow.primera {
+        animation-name: bounceAlpha;
+        animation-duration: 1.4s;
+        animation-delay: 0.2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
     }
     </style>
 </head>
@@ -55,17 +155,28 @@
     <div class="process">
         <ol class="process-items">
             <li class="active">Our ends and edges start as cartilage
-                <em>you fold, we bend, nothing clatters when we fall, collagen like rubber erasers scored with graphite tips, speared by paperclips bent and unwound as limbs sway from broken bodies on mountaintops, picked clean by turkey vultures</em></li>
+                <p>you fold, we bend, nothing clatters when we fall, collagen like rubber erasers scored with graphite tips, speared by paperclips bent and unwound as limbs sway from broken bodies on mountaintops, picked clean by turkey vultures</p>
+            </li>
             <li>We sell our softness for mineral deposits
-                <em>ossifying from the center outward; it sneaks in, spongy bone we thought could absorb our calculated falls</em></li>
+                <p>ossifying from the center outward; it sneaks in, spongy bone we thought could absorb our calculated falls</p>
+            </li>
             <li>Because you said we shaped our future
-                <em>we fell from the sky down, caught in the opening between trampoline springs, thinking maybe it could twist through blankets of skin, stretch and warp and pretzel ourselves</em></li>
+                <p>we fell from the sky down, caught in the opening between trampoline springs, thinking maybe it could twist through blankets of skin, stretch and warp and pretzel ourselves</p>
+            </li>
             <li>We only hardened
-                <em>bound as calcium hydroxyapatite, matrix mineralization impenetrable to your grip, length predetermined, creeping toward their ends until even those slivers of cartilage stiffened, petrified, as though we’d rather freeze than reach further in the same direction</em></li>
+                <p>bound as calcium hydroxyapatite, matrix mineralization impenetrable to your grip, length predetermined, creeping toward their ends until even those slivers of cartilage stiffened, petrified, as though we’d rather freeze than reach further in the same direction</p>
+            </li>
         </ol>
         <canvas id="canvas" width="800" height="55"></canvas>
     </div>
-    <button id="nextButton">Next</button>
+    <div class="center-con">
+        <div id="nextButton" class="round">
+            <div id="cta">
+                <span class="arrow primera next "></span>
+                <span class="arrow segunda next "></span>
+            </div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
     var process = $('.process');
@@ -172,7 +283,10 @@
         }
     }
 
-    $("#nextButton").click(function() {
+    $("#nextButton").click(function(e) {
+        $('.arrow').toggleClass('bounceAlpha');
+        e.preventDefault();
+        e.stopPropagation();
         let nextSection;
         if (currentSection == 3) {
             nextSection = 0;
