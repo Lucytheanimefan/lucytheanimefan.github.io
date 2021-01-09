@@ -283,10 +283,6 @@
         process.find('.active').removeClass('active');
         var foundProcess = process.find('li').eq(section);
         foundProcess.addClass('active');
-        if (section == 3) {
-            console.debug("Last section hovered");
-            // Rotate everything
-        }
     }
 
     $("#nextButton").click(function(e) {
@@ -305,7 +301,6 @@
         onMouseMove(nextSection);
     });
 
-    // let width = $(document).width()/4;
     create(0);
     create(SECTION_WIDTH);
     create(2 * SECTION_WIDTH);
