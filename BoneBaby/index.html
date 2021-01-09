@@ -56,7 +56,6 @@
     <div class="process">
         <ol class="process-items">
             <li class="active">Our ends and edges start as cartilage
-                <em>you fold, we bend, nothing clatters when we fall, collagen like rubber erasers scored with graphite tips, speared by paperclips bent and unwound as limbs sway from broken bodies on mountaintops, picked clean by turkey vultures</em></li>
             <li>We sell our softness for mineral deposits
                 <em>ossifying from the center outward; it sneaks in, spongy bone we thought could absorb our calculated falls</em></li>
             <li>Because you said we shaped our future
@@ -206,6 +205,16 @@
 
         window.requestAnimationFrame(loop);
     };
+
+    window.onresize = function() {
+        canvas.width = document.body.clientWidth;
+        SECTION_WIDTH = canvas.width / 4;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        sections = [];
+        for (let i = 0; i < 4; i++) {
+            create(i * SECTION_WIDTH);
+        }
+    }
     loop();
     </script>
 </body>
