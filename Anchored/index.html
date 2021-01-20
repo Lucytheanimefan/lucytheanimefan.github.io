@@ -901,7 +901,7 @@ $(".cross").each((i) => {
 
 $(".star").each((i) => {
     $(".star:nth-child(" + i + ")").css({
-        top: Math.random() * $(document).height() - $(document).height() / 4,
+        top: Math.random() * $(window).height(),
         left: Math.random() * $(document).width()
     })
 })
