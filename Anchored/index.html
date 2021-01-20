@@ -314,7 +314,7 @@
     }
 
     #grave {
-/*        position: relative;*/
+        /*        position: relative;*/
     }
 
     .patch {
@@ -370,7 +370,7 @@
     .gravestones .cross:nth-child(3) {
         left: 90%;
     }
-    
+
     .crypt {
         position: absolute;
         bottom: 0;
@@ -420,6 +420,7 @@
         animation-name: fog;
         animation-iteration-count: infinite;
         animation-duration: 80s;
+        color: white;
     }
 
     .moon {
@@ -752,6 +753,14 @@
                 <div class='patch'></div>
                 <div class='patch'></div>
             </div>
+            <div class='crypt'>
+                <div class='roof'></div>
+                <div class='body'>
+                    <div class='door'></div>
+                </div>
+            </div>
+            <div class='ghost'></div>
+            <div class='moon'></div>
         </div>
         <a href="#section03"><span></span>Scroll</a>
     </section>
@@ -903,8 +912,7 @@ init = () => {
     })
     $(".title").animate({
         top: "45%"
-    }, 5000, () => {
-    })
+    }, 5000, () => {})
 }
 init()
 </script>
