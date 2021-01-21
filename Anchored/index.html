@@ -67,31 +67,11 @@
         text-align: center;
     }
 
-    #section01 a {
+    section a {
         padding-top: 60px;
     }
 
-    #section01 a span {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 24px;
-        height: 24px;
-        margin-left: -12px;
-        border-left: 1px solid #fff;
-        border-bottom: 1px solid #fff;
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-        box-sizing: border-box;
-    }
-
-
-
-    #section02 a {
-        padding-top: 60px;
-    }
-
-    #section02 a span {
+    section a span {
         position: absolute;
         top: 0;
         left: 50%;
@@ -103,7 +83,7 @@
         box-sizing: border-box;
     }
 
-    #section02 a span::after {
+    section a span::after {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -116,195 +96,6 @@
         -webkit-transform: rotate(-45deg);
         transform: rotate(-45deg);
         box-sizing: border-box;
-    }
-
-
-
-    #section03 a {
-        padding-top: 60px;
-    }
-
-    #section03 a span {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 46px;
-        height: 46px;
-        margin-left: -23px;
-        border: 1px solid #fff;
-        border-radius: 100%;
-        box-sizing: border-box;
-    }
-
-    #section03 a span::after {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        content: '';
-        width: 16px;
-        height: 16px;
-        margin: -12px 0 0 -8px;
-        border-left: 1px solid #fff;
-        border-bottom: 1px solid #fff;
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-        box-sizing: border-box;
-    }
-
-    #section03 a span::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        content: '';
-        width: 44px;
-        height: 44px;
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, .1);
-        border-radius: 100%;
-        opacity: 0;
-        -webkit-animation: sdb03 3s infinite;
-        animation: sdb03 3s infinite;
-        box-sizing: border-box;
-    }
-
-    @-webkit-keyframes sdb03 {
-        0% {
-            opacity: 0;
-        }
-
-        30% {
-            opacity: 1;
-        }
-
-        60% {
-            box-shadow: 0 0 0 60px rgba(255, 255, 255, .1);
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 0;
-        }
-    }
-
-    @keyframes sdb03 {
-        0% {
-            opacity: 0;
-        }
-
-        30% {
-            opacity: 1;
-        }
-
-        60% {
-            box-shadow: 0 0 0 60px rgba(255, 255, 255, .1);
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 0;
-        }
-    }
-
-
-
-    #section04 a {
-        padding-top: 60px;
-    }
-
-    #section04 a span {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 24px;
-        height: 24px;
-        margin-left: -12px;
-        border-left: 1px solid #fff;
-        border-bottom: 1px solid #fff;
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-        -webkit-animation: sdb04 2s infinite;
-        animation: sdb04 2s infinite;
-        box-sizing: border-box;
-    }
-
-    @-webkit-keyframes sdb04 {
-        0% {
-            -webkit-transform: rotate(-45deg) translate(0, 0);
-        }
-
-        20% {
-            -webkit-transform: rotate(-45deg) translate(-10px, 10px);
-        }
-
-        40% {
-            -webkit-transform: rotate(-45deg) translate(0, 0);
-        }
-    }
-
-    @keyframes sdb04 {
-        0% {
-            transform: rotate(-45deg) translate(0, 0);
-        }
-
-        20% {
-            transform: rotate(-45deg) translate(-10px, 10px);
-        }
-
-        40% {
-            transform: rotate(-45deg) translate(0, 0);
-        }
-    }
-
-    #section05 a {
-        padding-top: 70px;
-    }
-
-    #section05 a span {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 24px;
-        height: 24px;
-        margin-left: -12px;
-        border-left: 1px solid #fff;
-        border-bottom: 1px solid #fff;
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-        -webkit-animation: sdb05 1.5s infinite;
-        animation: sdb05 1.5s infinite;
-        box-sizing: border-box;
-    }
-
-    @-webkit-keyframes sdb05 {
-        0% {
-            -webkit-transform: rotate(-45deg) translate(0, 0);
-            opacity: 0;
-        }
-
-        50% {
-            opacity: 1;
-        }
-
-        100% {
-            -webkit-transform: rotate(-45deg) translate(-20px, 20px);
-            opacity: 0;
-        }
-    }
-
-    @keyframes sdb05 {
-        0% {
-            transform: rotate(-45deg) translate(0, 0);
-            opacity: 0;
-        }
-
-        50% {
-            opacity: 1;
-        }
-
-        100% {
-            transform: rotate(-45deg) translate(-20px, 20px);
-            opacity: 0;
-        }
     }
 
     /* Graveyard */
@@ -493,11 +284,13 @@
     .wing {
         position: absolute;
         top: 70%;
-        left: 50%;/*calc(50% - 20px);*/
+        left: 50%;
+        /*calc(50% - 20px);*/
         width: 40px;
         height: 100px;
         transform: translate(-50%, -50%);
         cursor: pointer;
+        z-index: 2;
     }
 
     .wing:nth-child(2) {
@@ -1187,52 +980,54 @@
         <a href="#section04"><span></span>Scroll</a>
     </section>
     <section id="section04" class="demo">
+        <div id="wings">
+            <div class='wing'>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+            </div>
+            <div class='wing'>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+                <div class='feather'></div>
+            </div>
+        </div>
         <div class="paragraph">
             <i>You were once this light, like a feather stiffening against the air on downstroke, yielding on upstroke, crossed fibers aligned towards tips, like the sky was yours, emptiness an optimization rather than a condemnation.</i>
-        </div>
-        <div class='wing'>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-        </div>
-        <div class='wing'>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
         </div>
         <a href="#section05"><span></span>Scroll</a>
     </section>
@@ -2328,11 +2123,42 @@ function shadeColor(color, shade) {
     return newColorStr;
 }
 
-// Wings
-$(".wing").hover(function(){
-    console.debug("Wing hovered");
-});
+function isScrolledIntoView(elem) {
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
 
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+// Wings
+var animating = false;
+var opacity = 1;
+$(".wing").hover(function() {
+    console.debug("Wing hovered");
+    if (!animating) {
+        animating = true;
+
+        if (!isScrolledIntoView(this)) {
+            console.debug("No longer visible!");
+            opacity = 0;
+        }
+        if (opacity > 0) {
+            opacity = opacity/1.5;
+        }
+        $(".feather").css("opacity", opacity);
+
+        console.debug("Wing animatin");
+        $(".wing").animate({ 'top': '-=50px' }, {
+            duration: 1000,
+            complete: function() {
+                animating = false;
+            }
+        });
+    }
+});
 </script>
 
 </html>
