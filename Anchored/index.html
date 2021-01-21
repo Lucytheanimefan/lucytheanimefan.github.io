@@ -492,11 +492,12 @@
 
     .wing {
         position: absolute;
-        top: 30a%;
-        left: calc(50% - 20px);
+        top: 70%;
+        left: 50%;/*calc(50% - 20px);*/
         width: 40px;
         height: 100px;
         transform: translate(-50%, -50%);
+        cursor: pointer;
     }
 
     .wing:nth-child(2) {
@@ -1186,52 +1187,52 @@
         <a href="#section04"><span></span>Scroll</a>
     </section>
     <section id="section04" class="demo">
-        <div class='wing'>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-        </div>
-        <div class='wing'>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-            <div class='feather'></div>
-        </div>
         <div class="paragraph">
             <i>You were once this light, like a feather stiffening against the air on downstroke, yielding on upstroke, crossed fibers aligned towards tips, like the sky was yours, emptiness an optimization rather than a condemnation.</i>
+        </div>
+        <div class='wing'>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+        </div>
+        <div class='wing'>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
+            <div class='feather'></div>
         </div>
         <a href="#section05"><span></span>Scroll</a>
     </section>
@@ -2326,6 +2327,12 @@ function shadeColor(color, shade) {
 
     return newColorStr;
 }
+
+// Wings
+$(".wing").hover(function(){
+    console.debug("Wing hovered");
+});
+
 </script>
 
 </html>
