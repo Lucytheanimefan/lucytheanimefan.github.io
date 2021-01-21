@@ -686,6 +686,101 @@
             transform: rotate(95deg) translateY(40px);
         }
     }
+
+    /* Ripple */
+
+    #ripple1 {
+        top: 30%;
+        left: 30%
+    }
+
+
+    #ripple2 {
+        top: 70%;
+        left: 70%
+    }
+
+    .ripple,
+    .ripple:before,
+    .ripple:after {
+        display: block;
+        border-radius: 2px;
+        width: 2px;
+        height: 2px;
+        -webkit-animation: rip 6s infinite ease-out;
+        -moz-animation: rip 6s infinite ease-out;
+    }
+
+    .ripple {
+        position: absolute;
+        z-index: -1;
+    }
+
+    .ripple:before,
+    .ripple:after {
+        content: '';
+        position: absolute;
+    }
+
+    .ripple:before {
+        -webkit-animation-delay: .2s;
+        -moz-animation-delay: .2s;
+        top: 5px;
+        left: 25px;
+    }
+
+    .ripple:after {
+        -webkit-animation-delay: .8s;
+        -moz-animation-delay: .8s;
+        top: 25px;
+        left: 0;
+    }
+
+    @-webkit-keyframes rip {
+        0% {
+            box-shadow: 0 0 0 0 transparent,
+                0 0 0 0 transparent,
+                0 0 0 0 transparent,
+                0 0 0 0 transparent;
+        }
+
+        15% {
+            box-shadow: 0 0 0 0 #000000,
+                0 0 0 0 rgba(255, 255, 255, 0.4),
+                0 0 0 0 #000000,
+                0 0 0 0 rgba(0, 0, 0, 0.08);
+        }
+
+        100% {
+            box-shadow: 0 0 40px 200px #000000,
+                0 0 10px 210px transparent,
+                0 0 30px 220px #000000,
+                0 0 5px 230px transparent;
+        }
+    }
+
+    @-moz-keyframes rip {
+        0% {
+            box-shadow: 0 0 0 0 transparent,
+                0 0 0 0 transparent,
+                0 0 0 0 transparent,
+                0 0 0 0 transparent;
+        }
+
+        15% {
+            box-shadow: 0 0 0 0 #000000,
+                0 0 0 0 rgba(255, 255, 255, 0.4),
+                0 0 0 0 #000000,
+                0 0 0 0 rgba(0, 0, 0, 0.08);
+        }
+
+        100% {
+            box-shadow: 0 0 40px 200px #000000,
+                0 0 10px 210px transparent,
+                0 0 30px 220px #000000,
+                0 0 5px 230px transparent;
+        }
+    }
     </style>
     <title>Anchored</title>
 </head>
@@ -1035,6 +1130,8 @@
         <div class="paragraph">
             The gravekeeper pries the container open, her fingers remarkably strong. She lifts the body&apos;s arm and bites through the decaying skin and chews at the limbs and sinewy muscle, the tough flesh of a bicep, the soft tissue of a rounded, fat-cushioned face. Crouched in a self-excavated hole, feasting like a crow. She leaves nothing&mdash;not a bone or a toenail or the long striped socks whose colors have faded but seams remain intact, a pair favored but not exhausted. She wipes her mouth on her sleeve, shuts the casket, knocks on the bamboo wicker lid, listens to the hollow echoes.
         </div>
+        <span id="ripple1" class="ripple"></span>
+        <span id="ripple2" class="ripple"></span>
     </section>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -2146,7 +2243,7 @@ $(".wing").hover(function() {
             opacity = 0;
         }
         if (opacity > 0) {
-            opacity = opacity/1.5;
+            opacity = opacity / 1.5;
         }
         $(".feather").css("opacity", opacity);
 
