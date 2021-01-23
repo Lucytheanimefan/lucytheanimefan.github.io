@@ -15,8 +15,6 @@
     body {
         height: 100%;
         background: black;
-        /*        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .8) 80%, rgba(0, 0, 0, .8) 100%);
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .8) 80%, rgba(0, 0, 0, .8) 100%);*/
     }
 
     .demo a {
@@ -782,13 +780,13 @@
         }
     }
     </style>
-    <title>Anchored</title>
+    <title>Anchored by Lucy Zhang</title>
 </head>
 
 <body>
     <section id="section01" class="demo">
         <div class="paragraph">
-            When someone is about to die, the flies are first to know. They gather at the person&apos;s orifices&mdash;eyes, mouth, ears, anus, nose&mdash;waiting for the last breath, the last heartbeat. Next come the rats, maggots, vultures. But if the body is buried deep enough, the creatures can&apos;t pick up on the scent of decay. Instead, the gravekeeper finds the body first, cares for it like her own child, raised and then stuffed down her throat in bite-sized pieces. The gravekeeper is always hungry. It is part of her job, she supposes. Part of some biological instinct to seek the dead to drag her down into the earth, tethered and unmovable, despite her hollow bones, like a bird, pneumatized and porous, more air sac than marrow.
+            When someone is about to die, the flies are first to know. They gather at the person&apos;s orifices&mdash;eyes, mouth, ears, anus, nose&mdash;waiting for the last breath, the last heartbeat. Next come the rats, maggots, vultures. But if the body is buried deep enough, the creatures can&apos;t pick up on the scent of decay. Instead, the gravekeeper finds the body first, cares for it like her own child, raised and then stuffed down her throat in bite-sized pieces. The gravekeeper is always hungry. It is part of her job, she supposes. Part of some biological instinct to seek the dead to drag her down into the earth, tethered and unmovable, despite these hollow bones, like a bird, pneumatized and porous, more air sac than marrow.
         </div>
         <canvas id="heartbeatcanvas"></canvas>
         <a href="#section02"><span></span>Scroll</a>
@@ -2175,32 +2173,6 @@ var tc = [
 function getColor(part) {
     var col = "#661111";
     return col;
-
-    // if (ti >= 999) {
-    //     ti = 0;
-    // }
-
-    // var ts = Math.floor(ti / 100);
-    // var ta = 200 - ((ti % 100) * 2);
-
-    // switch (part) {
-    //     case 1:
-    //         col = shadeColor(tc[ts][0], ta);
-    //         break;
-    //     case 2:
-    //         col = shadeColor(tc[ts][1], ta);
-    //         break;
-    //     case 3:
-    //         col = shadeColor(tc[ts][2], ta);
-    //         break;
-    //     case 4:
-    //         col = shadeColor(tc[ts][3], ta);
-    //         break;
-    //     case 5:
-    //         col = shadeColor(tc[ts][4], ta);
-    //         break;
-    // }
-    // return col;
 }
 
 function shadeColor(color, shade) {
