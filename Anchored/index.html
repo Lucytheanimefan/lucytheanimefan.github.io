@@ -2256,6 +2256,26 @@ $(".wing").hover(function() {
         });
     }
 });
+
+// Ripple
+$("#section05").hover(function() {
+    $("#section05").css("cursor", "pointer");
+});
+
+$("#section05").click(function(e) {
+    console.debug("Clicked");
+    $("#ripple1")
+        .css({
+            left: e.clientX,
+            top: e.clientY,
+        });
+
+    $("#ripple2")
+        .css({
+            left: $("#section05").width() - e.clientX,
+            top: $("#section05").height() - e.clientY,
+        })
+});
 </script>
 
 </html>
