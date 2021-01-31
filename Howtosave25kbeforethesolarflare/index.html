@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>How to save 25k before the solar flare</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Barcode+128|VT323" rel="stylesheet">
+    <style>
+    * {
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "VT323", monospace;
+        color: #1f1f1f;
+    }
+
+    .container {
+        background: #f1f1f1;
+        padding: 20px 10px;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .receipt {
+        width: 300px;
+        min-height: 100vh;
+        height: 100%;
+        background: #fff;
+        margin: 0 auto;
+        box-shadow: 5px 5px 19px #ccc;
+        padding: 10px;
+    }
+
+    .logo {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .barcode {
+        font-family: "Libre Barcode 128", cursive;
+        font-size: 42px;
+        text-align: center;
+    }
+
+    .address {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .transactionDetails {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 10px 10px;
+    }
+
+    .transactionDetails .detail {
+        text-transform: uppercase;
+    }
+
+    .centerItem {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 8px;
+    }
+
+    .survey {
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    .survey .surveyID {
+        font-size: 20px;
+    }
+
+    .paymentDetails {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 150px;
+    }
+
+    .creditDetails {
+        margin: 10px auto;
+        width: 230px;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    .receiptBarcode {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .returnPolicy {
+        margin: 10px 20px;
+        width: 220px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .coupons {
+        margin-top: 20px;
+    }
+
+    .tripSummary {
+        margin: auto;
+        width: 255px;
+    }
+
+    .tripSummary .item {
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        width: 220px;
+    }
+
+    .feedback {
+        margin: 20px auto;
+    }
+
+    .feedback h3.clickBait {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .feedback h4.web {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .feedback .break {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .couponContainer {
+        border-top: 1px dashed #1f1f1f;
+        margin-bottom: 20px;
+    }
+
+    .couponContainer .discount {
+        font-size: 35px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .couponContainer .discountDetails {
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .couponContainer .barcode {
+        margin: 10px 0 0;
+    }
+
+    .couponContainer .legal {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .couponContainer .barcodeID {
+        margin-bottom: 8px;
+    }
+
+    .couponContainer .expiration {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px;
+    }
+
+    .couponContainer .couponBottom {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    /* tool tip */
+
+    .tooltip--right {
+        cursor: pointer;
+        text-transform: none !important;
+    }
+
+    span {
+        display: inline;
+    }
+
+    [class^=tooltip] {
+        position: relative;
+    }
+
+    [class^=tooltip]:after {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        content: attr(data-tooltip);
+        padding: 6px 10px;
+        top: 1.4em;
+        left: 50%;
+        transform: translateX(-50%) translateY(-2px);
+        background: grey;
+        color: white;
+        white-space: wrap;
+        z-index: 2;
+        border-radius: 2px;
+        min-width: 250px;
+        font-weight: normal !important;
+        transition: opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+    }
+
+    [class^=tooltip]:hover:after {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .tooltip--left:after {
+        top: -4px;
+        left: 0;
+        transform: translateX(-112%) translateY(0);
+    }
+
+    .tooltip--left:hover:after {
+        transform: translateX(-110%) translateY(0);
+    }
+
+    .tooltip--right:after {
+        top: -4px;
+        /*        left: 100%;*/
+        transform: translateX(12%) translateY(0);
+    }
+
+    .tooltip--right:hover:after {
+        transform: translateX(10%) translateY(0);
+    }
+
+    .tooltip--triangle:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: solid 5px transparent;
+        border-right: solid 5px transparent;
+        border-bottom: solid 5px grey;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        transform: translateX(-50%) translateY(-2px);
+        top: 1.1em;
+        left: 50%;
+        transition: opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+        z-index: 3;
+    }
+
+    .tooltip--triangle:hover:before {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+    </style>
+</head>
+
+<body>
+    <!--     My heart feels kind of heavy, but it’s not because of the coronal mass ejection projected to happen next month. I can take the sun’s overstressed corona—it’s not good to keep everything pent up, sometimes you’ve just got to explode plasma away. I know the magnetic field lines won’t actually be visible, but I imagine them rising from the sun’s surface, a cage growing and bursting like the mushroom cloud of a nuclear detonation. It might even be kind of nice if a solar flare took out all electricity, GPS signals, telecommunications. We wouldn’t have to worry about scrambling together cash for a downpayment or recalling wired money that never made it to the right beneficiary—several thousand vanished before magnetic storms even had a chance to take out online banking. I think this is why most relationships fail: if we can’t align our financial expectations, no amount of twisted flux ropes and collapsed filaments will stop us from demanding the transfer traced through a Federal Reference Number. I’ve started buying ugly fruits and vegetables: dented and distorted pomelos that feel half hollow, bell peppers that look like they’re growing warts, carrots twisted with each other in a tentacle spread of uneven limbs. I can get these for only a few cents each; once the amount saved equals the amount lost, I’ll call it even. What does it matter, you say. And you’re right, what downpayment would we pay when auroras cover the sky and people scramble to populate their Instagram accounts if they haven’t already been blinded by the brightness. Why is it always money with you, you say. So it’s just sunspots with you? If a penny saved is a penny earned, I’ll buy Rave apples over Honeycrisps any day. A month from now, I’d like to watch the lights go out from our balcony, overlooking dead street lights, under a spread of stars, thinking at least we won’t need to pay our mortgage anymore.   -->
+    <div id="showScroll" class="container">
+        <div class="receipt">
+            <h1 class="logo">Oakmont Produce & General Market</h1>
+            <div class="address">
+                19944 E Homestead Rd Cupertino, CA
+            </div>
+            <div class="transactionDetails">
+                <div class="detail">Reg#17</div>
+                <div class="detail">TRN#1313</div>
+                <div class="detail">CSHR#00097655</div>
+                <div class="detail">str#9852</div>
+            </div>
+            <div class="transactionDetails">
+                DATE: Before the solar flare TIME: 15:58:58
+            </div>
+            <div class="transactionDetails">
+                <span>Helped by: your lover <span class="tooltip--right" data-tooltip="My heart feels kind of heavy, but it’s not because of the coronal mass ejection projected to happen next month.">❤️</span></span>
+            </div>
+            <div class="transactionDetails">
+                I can take the sun’s overstressed corona—it’s not good to keep everything pent up, sometimes you’ve just got to explode plasma away.
+            </div>
+            <div class="centerItem bold">
+                <div class="item">ExtraCare Card #: <span><span class="tooltip--right" data-tooltip="I know the magnetic field lines won’t actually be visible, but I imagine them rising from the sun’s surface, a cage growing and bursting like the mushroom cloud of a nuclear detonation.">*********</span>1990</span></div>
+            </div>
+            <div class="transactionDetails">
+                <div class="detail"><span class="tooltip--right" data-tooltip="It might even be kind of nice if a solar flare took out all electricity, GPS signals, telecommunications.">1</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="It might even be kind of nice if a solar flare took out all electricity, GPS signals, telecommunications.">Battery 20 Pack AA</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="It might even be kind of nice if a solar flare took out all electricity, GPS signals, telecommunications.">9.03</span></div>
+            </div>
+            <div class="transactionDetails">
+                <div class="detail"><span class="tooltip--right" data-tooltip="I’ve started buying ugly fruits and vegetables: dented and distorted pomelos that feel half hollow, bell peppers that look like they’re growing warts, carrots twisted with each other in a tentacle spread of uneven limbs. I can get these for only a few cents each; once the amount saved equals the amount lost, I’ll call it even. ">7 lb</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="I’ve started buying ugly fruits and vegetables: dented and distorted pomelos that feel half hollow, bell peppers that look like they’re growing warts, carrots twisted with each other in a tentacle spread of uneven limbs. I can get these for only a few cents each; once the amount saved equals the amount lost, I’ll call it even. ">Carrot</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="I’ve started buying ugly fruits and vegetables: dented and distorted pomelos that feel half hollow, bell peppers that look like they’re growing warts, carrots twisted with each other in a tentacle spread of uneven limbs. I can get these for only a few cents each; once the amount saved equals the amount lost, I’ll call it even. ">$0.29/lb</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="I’ve started buying ugly fruits and vegetables: dented and distorted pomelos that feel half hollow, bell peppers that look like they’re growing warts, carrots twisted with each other in a tentacle spread of uneven limbs. I can get these for only a few cents each; once the amount saved equals the amount lost, I’ll call it even. ">4.83</span></div>
+            </div>
+            <div class="transactionDetails">What does it matter, you say. And you’re right, what downpayment would we pay when auroras cover the sky and people scramble to populate their Instagram accounts if they haven’t already been blinded by the brightness.</div>
+            <div class="transactionDetails">
+                <div class="detail"><span class="tooltip--right" data-tooltip="Why is it always money with you, you say. So it’s just sunspots with you? If a penny saved is a penny earned, I’ll buy Rave apples over Honeycrisps any day.">5 lb</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="Why is it always money with you, you say. So it’s just sunspots with you? If a penny saved is a penny earned, I’ll buy Rave apples over Honeycrisps any day.">Rave Apple</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="Why is it always money with you, you say. So it’s just sunspots with you? If a penny saved is a penny earned, I’ll buy Rave apples over Honeycrisps any day.">$0.49/lb</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="Why is it always money with you, you say. So it’s just sunspots with you? If a penny saved is a penny earned, I’ll buy Rave apples over Honeycrisps any day.">1.45</span></div>
+            </div>
+            <div class="survey bold">
+                <p>Survey ID #</p>
+                <p class="surveyID">6588 4755 3256 544 21</p>
+            </div>
+            <div class="paymentDetails bold">
+                <div class="detail"><span class="tooltip--right" data-tooltip="We wouldn’t have to worry about scrambling together cash for a downpayment or recalling wired money that never made it to the right beneficiary—several thousand vanished before magnetic storms even had a chance to take out online banking.">TOTAL</span></div>
+                <div class="detail"><span class="tooltip--right" data-tooltip="We wouldn’t have to worry about scrambling together cash for a downpayment or recalling wired money that never made it to the right beneficiary—several thousand vanished before magnetic storms even had a chance to take out online banking.">15.31</span></div>
+            </div>
+            <div class="paymentDetails">
+                <div class="detail">CHARGE</div>
+                <div class="detail">15.31</div>
+            </div>
+            <div class="paymentDetails">
+                <div class="detail">************4023</div>
+                <div class="detail">CH</div>
+            </div>
+            <div class="creditDetails">
+                <p>VISA CREDIT &nbsp;&nbsp;&nbsp;&nbsp; ****************</p>
+                <p>approved# 09773B</p>
+                <p>ref# 013589</p>
+                <p>tran type: SALE</p>
+                <p>AID: 30000000090755</p>
+                <p>TC: B7A2A4044AEE380A4</p>
+                <p>terminal: 69010003</p>
+                <p>no signature required</p>
+                <p>CVM: 1e0300</p>
+                <p>TMR(95): 0080081111</p>
+                <p>TS(9B): E900</p>
+            </div>
+            <div class="paymentDetails">
+                <div class="detail">CHANGE</div>
+                <div class="detail">.00</div>
+            </div>
+            <div class="receiptBarcode">
+                <div class="barcode">
+                    HelloCVSScript
+                </div>
+                2003 0998 9000 8730 21
+            </div>
+            <div class="returnPolicy bold">
+                >Returns with receipt, subject to Oakmont Return Policy, thru <span class="oneMonthLater"></span>
+            </div>
+            <div class="returnPolicy">
+                <div class="detail"><span class="oneMonthLaterFull">February 30, 2021</span></div>
+                <div class="detail">10:16 AM</div>
+            </div>
+            <div class="returnPolicy">A month from now, I’d like to watch the lights go out from our balcony, overlooking dead street lights, under a spread of stars, thinking at least we won’t need to pay our mortgage anymore.</div>
+            <div class="tripSummary">
+                <div class="bold">Trip Summary:</div>
+                <div class="item">
+                    <div>Today You Saved:</div>
+                    <div>Much less than $25,000</div>
+                </div>
+                <div class="item">
+                    <div>Savings Value</div>
+                    <div>0%</div>
+                </div>
+            </div>
+            <div class="feedback">
+                <div class="break">
+                    ***********************************
+                </div>
+                <p class="center">
+                    We would love to hear your feedback on your recent experience with us. This survey will only take 1 minute to complete.
+                </p>
+                <h3 class="clickBait">Share Your Feedback</h3>
+                <h4 class="web">www.ProductMarkeySurvey.com</h4>
+                <p class="center">
+                    Hablamos español
+                </p>
+                <div class="break">
+                    ***********************************
+                </div>
+            </div>
+            <div id="coupons" class="coupons">
+                <!--       start coupon -->
+                <div class="couponContainer">
+                    <h1 class="logo">CVS/pharmacy</h1>
+                    <div class="discount">$2.00 off</div>
+                    <div class="discountDetails">$2.00 off COLEGATE Toothbrush, Toothpaste, or Mouthwash</div>
+                    <div class="expiration">
+                        <div class="item bold">
+                            Expires 12/12/2018
+                        </div>
+                        <div class="item">
+                            Up to $2 Value
+                        </div>
+                    </div>
+                    <div class="barcode">
+                        HelloCVSMate1
+                    </div>
+                    <div class="barcodeID center">
+                        9007 9876 9087 7665 62
+                    </div>
+                    <div class="legal center">
+                        ExtraCare card required. Excludes lottery, money orders, postage stamps, milk, prescriptions, pre-paid cards, gift cards, pseudoephedrine products, other fees, deposits, taxes, alcohol and local exclusions. No cash back. Tax charged on pre-coupon price
+                        where required. Limit of one purchase-based coupon, i.e., $4 off $20 purchase, per transaction. Not valid in specialty centers within CVS.
+                    </div>
+                    <div class="couponBottom">
+                        <p>ExtraCare Card #: *7140 00130030598777</p>
+                        <p>CPN#: 85887</p>
+                    </div>
+                </div>
+                <!--       end coupon -->
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    var now = new Date();
+    var current;
+    if (now.getMonth() == 11) {
+        current = new Date(now.getFullYear() + 1, 0, now.getDate());
+    } else {
+        console.debug(now.getDate())
+        current = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
+    }
+    console.debug(current.getDate());
+    var date = (current.getMonth() + 1) + "/" + current.getDate() + "/" + current.getFullYear();
+    $(".oneMonthLater").html(date);
+    var monthName = monthNames[current.getMonth()];
+    console.debug(current.getDate());
+    $(".oneMonthLaterFull").html(monthName + " " + current.getDate() + ", " + current.getFullYear());
+
+    const rawProductData = [
+        [{
+                productTitle: "CVS Health Non-Drowsy Allergy Relief Tablets, 70 CT",
+                price: "24.99"
+            },
+            {
+                productTitle: "CVS Health 100% Pure Omega-3 Krill Oil Softgels, 350mg",
+                price: "37.99"
+            },
+            {
+                productTitle: "CVS Health Multi-Symptom Nasal Allergy Spray 0.37 OZ",
+                price: "12.99"
+            },
+            {
+                productTitle: "CVS Health Original Prescription Strength Allergy Relief, 70 CT",
+                price: "29.99"
+            },
+            {
+                productTitle: "M&M's Peanut Milk Chocolate Sharing Size, 10.7 OZ",
+                price: "4.19"
+            },
+            {
+                productTitle: "M&M's Milk Chocolate Sharing Size, 10.7 OZ",
+                price: "4.19"
+            },
+        ],
+        [{
+                productTitle: "M&M'S Peanut Dark Chocolate Candy Sharing Size, 10.1 OZ",
+                price: "4.19"
+            },
+            {
+                productTitle: "O.B. Pro Comfort Tampons, Regular Absorbency",
+                price: "8.29"
+            },
+            {
+                productTitle: "M&M'S Coffee Nut Peanut Chocolate Candy Sharing Size, 9.6 OZ",
+                price: "4.19"
+            },
+            {
+                productTitle: "Schwarzkopf Got 2Bb Phenomenal Thickening Styling Cream, 6 OZ",
+                price: "7.99"
+            },
+            {
+                productTitle: "Depend Night Defense Incontinence Overnight Underwear for Women, M",
+                price: "13.49"
+            },
+            {
+                productTitle: "Lindt Lindor Fudge Swirl Milk Chocolate Truffles",
+                price: "5.79"
+            },
+        ],
+        [{
+                productTitle: "CVS Health Butenafine Hydrochloride Antifungal Cream 1%",
+                price: "10.49"
+            },
+            {
+                productTitle: "DOVE Cashews With Sea Salt and Milk Chocolate Candy, 5 OZ",
+                price: "4.89"
+            },
+            { productTitle: "Tresemme Fresh Dry Shampoo, 4.3 OZ", price: "6.29" },
+            { productTitle: "Wipe New Headlight Restore", price: "9.99" },
+            {
+                productTitle: "Beauty 360 Charcoal Cleansing Bath Pouf",
+                price: "3.99"
+            },
+            {
+                productTitle: "Style Essentials by Hanes Ladies' Trouser Socks, 3 Pairs",
+                price: "6.79"
+            },
+            {
+                productTitle: "Atomic Beam Tough Grade Military Light",
+                price: "19.99"
+            },
+            {
+                productTitle: "AXE Styling Urban Messy Look Matte Wax, 2.64 OZ",
+                price: "10.79"
+            },
+            {
+                productTitle: "Depend Incontinence Shields for Men, Light Absorbency",
+                price: "13.49"
+            },
+        ],
+    ];
+
+    let couponID = 0;
+
+    function randomMinMax(min, max) {
+        return Math.floor(Math.random() * max) + min;
+    }
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    function populate() {
+        while (true) {
+            let coupons = document.getElementById("coupons");
+            let windowRelativeBottom = document.documentElement.getBoundingClientRect()
+                .bottom;
+            if (windowRelativeBottom > document.documentElement.clientHeight + 100) break;
+            getCoupon();
+        }
+    }
+
+    // THINGS NEEDED FOR COUPON
+    // Current Date to set EXPIRATION DATE
+    // Product Name
+    // Product Price -- used to determine coupon value
+    // 20 Digit Barcode
+    // 5 Digit Coupon #
+    // Price Off / Discount
+    // Discount Description
+
+    function newCoupon(discount, description, value) {
+        //couponID & barcode will be done here automatically
+        this.discount = discount;
+        this.description = description;
+        this.value = value;
+        this.barcode = randomBarcode();
+        this.couponCode = randomMinMax(10000, 90000);
+    }
+
+    function formatCoupon(coupon) {
+        let coupons = document.getElementById("coupons");
+        coupons.insertAdjacentHTML(
+            "beforeend",
+            `
+        <div class="couponContainer">
+          <h1 class="logo">CVS/pharmacy</h1>
+          <div class="discount">${coupon.discount}</div>
+          <div class="discountDetails">${coupon.discount} ${
+            coupon.description
+        }</div>
+          <div class="expiration">
+            <div class="item bold">
+              Expires 12/12/2018
+            </div>
+            <div class="item">
+             ${coupon.value}
+            </div>
+          </div>
+          <div class="barcode">
+            HelloCVSMate1
+          </div>
+          <div class="barcodeID center">
+            ${coupon.barcode}
+          </div>
+          <div class="legal center">
+            ExtraCare card required. Excludes lottery, money orders, postage stamps, milk, prescriptions, pre-paid cards, gift cards, pseudoephedrine products, other fees, deposits, taxes, alcohol and local exclusions. No cash back. Tax charged on pre-coupon price
+            where required. Limit of one purchase-based coupon, i.e., $4 off $20 purchase, per transaction. Not valid in specialty centers within CVS.
+          </div>
+          <div class="couponBottom">
+            <p>ExtraCare Card #: *7140 00130030598777</p>
+            <p>CPN#: ${coupon.couponCode}</p>
+          </div>
+        </div>
+      `
+        );
+    }
+
+    // THINGS NEEDED FOR COUPON
+    // Current Date to set EXPIRATION DATE
+    // Dollar Rewards $1-10
+    // 18 Digit Barcode
+    // 5 Digit Coupon #
+
+    randomBarcode = () => {
+        //make 18 digit barcode
+        // 4 4 4 4 2
+        return `${randomMinMax(1000, 9000)}
+  ${randomMinMax(1000, 9000)}
+  ${randomMinMax(1000, 9000)}
+  ${randomMinMax(1000, 9000)}
+  ${randomMinMax(10, 90)}`;
+    };
+
+    getProduct = () => {
+        let products = rawProductData.flat(2); // not recursive -- fixed flatten based on the data below 🤷
+        let productId = getRandomInt(products.length);
+        return products[productId];
+    };
+
+    percentCoupon = () => {
+        const percentOptions = [5, 10, 15, 20, 25, 50]; //popular discount options
+        let randomPercent = percentOptions[getRandomInt(percentOptions.length)];
+        randomPercent = `${randomPercent}% off`;
+        let product = getProduct();
+        let newCoup = new newCoupon(
+            randomPercent,
+            product.productTitle,
+            "Up to $99 value"
+        );
+        return formatCoupon(newCoup);
+    };
+
+    fixedCoupon = () => {
+        //max discount is 50% off
+        // productPrice x .5 = discountTakenOff
+        // i.e. $10 product get random number between 0.01  and 5 ...
+        // so a user will get $5 off an item which would be 50% off
+
+        let product = getProduct();
+        let couponValue = Math.round(parseFloat(product.price) * 0.5);
+        let discountPrice = `$${couponValue}.00 off`;
+        couponValue = `Up to $${couponValue} value`;
+        let newCoup = new newCoupon(discountPrice, product.productTitle, couponValue);
+        return formatCoupon(newCoup);
+    };
+
+    buckCoupon = () => {
+        console.log("BUCK", couponID);
+    };
+
+    getCoupon = () => {
+        couponID++;
+        if (couponID % 13 == 0) {
+            // every 13th coupon load a BUCKs
+            buckCoupon();
+        } else {
+            const coupons = ["percent", "fixed"];
+            let randomCoupon = getRandomInt(coupons.length);
+            switch (randomCoupon) {
+                case 0:
+                    fixedCoupon();
+                    break;
+                default:
+                    percentCoupon();
+            }
+        }
+    };
+
+    window.addEventListener("scroll", populate);
+
+    populate(); // init document
+    </script>
+</body>
+
+</html>
