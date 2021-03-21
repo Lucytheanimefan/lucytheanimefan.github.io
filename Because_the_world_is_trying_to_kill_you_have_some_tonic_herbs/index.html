@@ -116,21 +116,8 @@
         max-height: 100%;
     }
 
-    .card .front img {
-        position: absolute;
-        top: 0;
-        z-index: -1;
-    }
-
-    .subtext {
-
-    }
-
     .card .front {
         transform: rotateY(-180deg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
     }
 
     @media (max-width: 800px) {
@@ -203,7 +190,6 @@
     .modal .restart:hover {
         background: linear-gradient(#222, black);
     }
-
     </style>
     <title>Because the world is trying to kill you, have some tonic herbs</title>
 </head>
@@ -300,7 +286,7 @@
             this.$game.show("slow");
         },
 
-        // Fisher--Yates Algorithm -- https://bost.ocks.org/mike/shuffle/
+        // https://bost.ocks.org/mike/shuffle/
         shuffle: function(array) {
             var counter = array.length,
                 temp, index;
@@ -322,11 +308,11 @@
             var frag = '';
             this.$cards.each(function(k, v) {
                 frag += '<div class="card" data-id="' + v.id + '"><div class="inside">\
-                <div class="front" style="background-image:url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/css3-logo.png")"><div class="subtext">' + v.subtext + '</div>\
+                <div class="front"><div class="subtext">' + v.subtext + '</div>\
                 </div>\
-                <div class="back"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/codepen-logo.png"\
-                alt="Codepen" /></div></div>\
-                </div>';
+                <div class="back"><img src="yin_yang.png"\
+                alt="Yin Yang" /></div></div>\
+                </div></div>';
             });
             return frag;
         }
@@ -334,7 +320,7 @@
 
     var cards = [{
             name: "snow fungus",
-            subtext: "something about it being good for women, the silver, gelatinous, branching fonds, lingering on dead tree branches",
+            subtext: "something about it being good for women, the silver, gelatinous, branching fonds, lingering on dead tree branches. an anti-aging remedy, you go from prune to baby, you undie",
             id: 1,
         },
         {
@@ -359,17 +345,17 @@
         },
         {
             name: "gingko nut",
-            subtext: "gingko nut", 
+            subtext: "gingko nut",
             id: 3,
         },
         {
             name: "rock sugar",
-            subtext: "ice like crystals. moderates toxicity of accompanying foods. icicles rarely impale but they'll bruise those ghost faces. it's possible we should never step outside again. something about it being bad for women. hyperglycaemia.", 
+            subtext: "ice like crystals. moderates toxicity of accompanying foods. icicles rarely impale but they'll bruise those ghost faces. it's possible we should never step outside again. something about it being bad for women. hyperglycaemia.",
             id: 4,
         },
         {
             name: "rock sugar",
-            subtext: "rock sugar", // an anti-aging remedy, you go from prune to baby, you undie
+            subtext: "rock sugar",
             id: 4,
         },
     ];
