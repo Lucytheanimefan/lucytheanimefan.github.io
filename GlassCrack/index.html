@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Glass</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <style>
     /* ------------------------------------------- *\
     Main
@@ -16,8 +16,9 @@
     }
 
     body {
-        font: 16px sans-serif;
+        font-size: 16px;
         color: #000;
+        font-family: 'Noto Sans JP', sans-serif;
     }
 
     .wrapper {
@@ -54,7 +55,7 @@
 
     /* -- Text -- */
     #text {
-        position:  absolute;
+        position: absolute;
         color: white;
         text-align: left;
         z-index: 100;
@@ -718,6 +719,7 @@
             ///////////////////////
             // Change image on click
             var index = 0;
+            var opacity = 100;
             $('#draw-picker').click(function() {
 
                 var previous = $('.drawing').prev('.main'),
@@ -732,20 +734,21 @@
                 //   });
                 // }, 800);
 
-                if (index >= words.length) {
-                    console.debug("Done!");
+                if (index > 17 && opacity > 0) {
+                    index += 1;
+                    opacity -= 5;
+                    console.debug("Opacity: " + opacity);
+                    $("#text").css("opacity", opacity / 100);
                     return;
                 }
                 if (words[index]) {
                     $("#text").append("<div class='line'>" + words[index] + "</div>");
-                    if (index == 7)
-                    {
+                    if (index == 7) {
                         clearDrawing($canvas);
                         $("#text").css("color", "white");
                     }
 
-                    if (index == 3 || index == 12)
-                    {
+                    if (index == 3 || index == 12) {
                         $("#text").css("color", "black");
                     }
                 }
