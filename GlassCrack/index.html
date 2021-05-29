@@ -51,6 +51,13 @@
         top: 0;
         left: 0;
     }
+
+    /* -- Text -- */
+    #text 
+    {
+        color:  white;
+        text-align: left;
+    }
     </style>
 </head>
 
@@ -67,6 +74,7 @@
             <div id="draw-picker"></div>
         </div>
     </div>
+    <div id="text"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script>
@@ -687,17 +695,18 @@
 
         $(document).ready(function() {
 
-            var words = ["I wore the glass slipper because my brain shattered every fifteen minutes and I could not remember how my toes bent in narrow boxes, curling at the middle joint, hammered and warped.", 
-            "How my Achilles tendon pulled tight like Saran Wrap, my ankles fracturing—like marble, not sunflower seeds—as I glide over lotus blossoms and cloud-capped peaks.", 
-            "Crazy things happen, when you forget pain.", 
-            "A clean slate: I remembered the fish, its flesh filleted and doused in hot oil, its magic bones tossed into the rice patties for crows to scavenge.", 
-            "The crow ate a bone and the bone severed its throat and its body flaked into layers of feather, soft as dust, enough to build a dress: eyes dried into orbs as sequins, bones crushed as snow.", 
-            "I remembered the dress.", 
-            "But whether I had already run down the staircase, crushed my shoe against a rock, deposited the other shoe in the middle of the walkway, I did not know.", 
-            "I ran back up the stairs to start again."];
+            var words = ["I wore the glass slipper because my brain shattered every fifteen minutes and I could not remember how my toes bent in narrow boxes, curling at the middle joint, hammered and warped.",
+                "How my Achilles tendon pulled tight like Saran Wrap, my ankles fracturing—like marble, not sunflower seeds—as I glide over lotus blossoms and cloud-capped peaks.",
+                "Crazy things happen, when you forget pain.",
+                "A clean slate: I remembered the fish, its flesh filleted and doused in hot oil, its magic bones tossed into the rice patties for crows to scavenge.",
+                "The crow ate a bone and the bone severed its throat and its body flaked into layers of feather, soft as dust, enough to build a dress: eyes dried into orbs as sequins, bones crushed as snow.",
+                "I remembered the dress.",
+                "But whether I had already run down the staircase, crushed my shoe against a rock, deposited the other shoe in the middle of the walkway, I did not know.",
+                "I ran back up the stairs to start again."
+            ];
             ///////////////////////
             // Change image on click
-
+            var index = 0;
             $('#draw-picker').click(function() {
 
                 var previous = $('.drawing').prev('.main'),
@@ -711,6 +720,14 @@
                 //     $('.drawing').css('display','block');          
                 //   });
                 // }, 800);
+
+                if (index >= words.length) {
+                    console.debug("Done!");
+                    return;
+                }
+                $("#text").append("<div class='line'>" + words[index] + "</div>");
+                index += 1;
+
 
             });
 
