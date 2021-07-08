@@ -16,7 +16,8 @@
     }
 
     body {
-        font-size: 16px;
+        font-size: 17px;
+        font-weight: bold;
         color: #000;
         font-family: 'Noto Sans JP', sans-serif;
     }
@@ -25,7 +26,7 @@
         position: absolute;
         width: 1000px;
         height: 600px;
-        top: 150px;
+        top: 250px;
         left: 50%;
         margin-left: -408px;
     }
@@ -60,11 +61,18 @@
         text-align: left;
         z-index: 100;
     }
+
+    .instruction {
+        color: white;
+        text-align: left;
+        margin-bottom: 20px;
+    }
     </style>
 </head>
 
 <body>
     <div class="wrapper">
+        <div class="instruction">Please click in the box</div>
         <div id="text"></div>
         <img class="bg-image main animated">
         <div class="drawing ui-corner-all animated">
