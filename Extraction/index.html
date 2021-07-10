@@ -5,6 +5,7 @@
     <style type="text/css">
     body {
         background: #111111;
+        min-width: 913px;
     }
 
     #canvas_container_div {
@@ -23,9 +24,10 @@
 
     /* Rain */
     #rain-container {
-        position: fixed;
+        position: absolute;
         display: block;
         width: 100%;
+        top: 0px;
     }
 
     .drop {
@@ -586,7 +588,7 @@ function renderImages() {
 
 
 ///scaling
-window.addEventListener('resize', scaleToWindow);
+//window.addEventListener('resize', scaleToWindow);
 
 
 
@@ -595,7 +597,6 @@ window.addEventListener('resize', scaleToWindow);
 
 
 function runVerlet() {
-    scaleToWindow();
     updatePoints();
     refinePositions();
     clearCanvas();
@@ -1165,6 +1166,7 @@ function display() {
 
 createSunRays();
 display();
+scaleToWindow();
 
 // Handle rain
 function rain(event) {
@@ -1175,7 +1177,7 @@ function rain(event) {
     // Create rain
     var div = document.getElementById('rain-container');
     let widthDiff = div.offsetWidth / 2;
-    let heightDiff = canvasContainerDiv.offsetHeight;
+    let heightDiff = canvasContainerDiv.offsetHeight * 0.8;
     console.log(heightDiff);
     var clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
 
