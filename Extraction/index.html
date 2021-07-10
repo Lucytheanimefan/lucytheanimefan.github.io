@@ -23,10 +23,9 @@
 
     /* Rain */
     #rain-container {
-        position: absolute;
+        position: fixed;
         display: block;
         width: 100%;
-        height: 100%;
     }
 
     .drop {
@@ -240,7 +239,7 @@
     <div id="rain-container" class="container">
         <div class="drop"></div>
         <div class="drop"></div>
-        <div class="puddle">
+        <div id="puddle" class="puddle">
             <div class="sink"></div>
             <div class="ripple"></div>
             <div class="ripple"></div>
@@ -1172,18 +1171,20 @@ function rain(event) {
     shouldGrowPlants = true;
     let x = event.pageX;
     let y = event.pageY;
-    console.debug(x + "," + y);
 
     // Create rain
     var div = document.getElementById('rain-container');
-    let widthDiff = div.offsetWidth/2;
-    let heightDiff = div.offsetHeight/2;
+    let widthDiff = div.offsetWidth / 2;
+    let heightDiff = canvasContainerDiv.offsetHeight;
+    console.log(heightDiff);
     var clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+
+
     div.parentNode.removeChild(div);
 
     // move the container 
     clone.style.left = (x - widthDiff) + 'px';
-    clone.style.top = (y - heightDiff ) + 'px';
+    clone.style.top = (heightDiff) + 'px';
     document.body.appendChild(clone);
     setTimeout(function() {
         shouldGrowPlants = false;
