@@ -1169,6 +1169,7 @@ display();
 scaleToWindow();
 
 // Handle rain
+var timestamp = null;
 function rain(event) {
     shouldGrowPlants = true;
     let x = event.pageX;
@@ -1178,7 +1179,6 @@ function rain(event) {
     var div = document.getElementById('rain-container');
     let widthDiff = div.offsetWidth / 2;
     let heightDiff = canvasContainerDiv.offsetHeight * 0.8;
-    console.log(heightDiff);
     var clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
 
 
@@ -1191,6 +1191,35 @@ function rain(event) {
     setTimeout(function() {
         shouldGrowPlants = false;
     }, 2000);
+
+    // Detect mouse click speed
+    if (timestamp === null) {
+        timestamp = Date.now();
+        return;
+    }
+    else 
+    {
+        let timeDifference = Math.abs(timestamp - Date.now());
+        if (timeDifference < 200)
+        {
+            breeze += 0.2;
+            restrictGrowthByEnergy = false;
+            console.debug("breeze: " + breeze);
+        }
+        else if (timeDifference < 400)
+        {
+            restrictGrowthByEnergy = false;
+            breeze += 0.1;
+            console.debug("breeze: " + breeze);
+        }
+        else 
+        {
+            restrictGrowthByEnergy = true;
+            breeze = 0.4;
+        }
+
+        timestamp = Date.now();
+    }
 }
 
 document.addEventListener("click", rain);
