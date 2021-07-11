@@ -22,6 +22,13 @@
         background: #111111;
     }
 
+    #text {
+        position: absolute;
+        top: 0;
+        color:  white;
+        z-index: 10000;
+    }
+
     /* Rain */
     #rain-container {
         position: absolute;
@@ -252,9 +259,9 @@
         <div class="drop"></div>
         <div class="drop"></div>
     </div>
+    <div id="text">You're always rubbing your eyes. So red they could crack apart like puzzle pieces. These things are meant to break and fit into tiny places. Typically, there's a protocol: maintain cell homeostasis in deficit situations, modify root growth and architecture, close stomata aboveground, listen to phytohormone signals, increase efficiency. Who evolves like that, you wonder, fingers spreading upper and bottom eyelids apart, sclera licking the air. You rain globs of Systane before the wind steals your tears. Roots favor lateral emergence toward soil patched with higher water content; they coordinate their cells to divide, elongate, absorb. You pluck out your eyeballs, toss out the eye dropper. Reoptimize the stomata. Next year, they won't need water. You grope at stairways, stems, handles, hay. They shrivel off like umbilical cords. And then they'll grow back stronger than ever, surely, you say as you blindly hack at a prune-like finger.</div>
     <div id="canvas_container_div">
         <canvas id="canvas" width="1000" height="1000"></canvas>
-        <!--(large size for higher resolution)-->
     </div>
 </body>
 <script type="text/javascript">
@@ -1170,6 +1177,7 @@ scaleToWindow();
 
 // Handle rain
 var timestamp = null;
+
 function rain(event) {
     shouldGrowPlants = true;
     let x = event.pageX;
@@ -1196,24 +1204,17 @@ function rain(event) {
     if (timestamp === null) {
         timestamp = Date.now();
         return;
-    }
-    else 
-    {
+    } else {
         let timeDifference = Math.abs(timestamp - Date.now());
-        if (timeDifference < 200)
-        {
+        if (timeDifference < 200) {
             breeze += 0.2;
             restrictGrowthByEnergy = false;
             console.debug("breeze: " + breeze);
-        }
-        else if (timeDifference < 400)
-        {
+        } else if (timeDifference < 400) {
             restrictGrowthByEnergy = false;
             breeze += 0.1;
             console.debug("breeze: " + breeze);
-        }
-        else 
-        {
+        } else {
             restrictGrowthByEnergy = true;
             breeze = 0.4;
         }
