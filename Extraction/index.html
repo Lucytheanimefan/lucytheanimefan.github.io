@@ -697,7 +697,7 @@ var phr = 2; // photosynthesis rate ( rate plants store energy from sunlight )
 var geer = 0.5; // growth energy expenditure rate (rate energy is expended for growth)
 var leer = 0.03; // living energy expenditure rate (rate energy is expended for living, per segment)
 
-
+var turnYellow = false;
 
 
 ////---OBJECTS---////
@@ -779,7 +779,11 @@ function Segment(plant, parentSegment, basePoint1, basePoint2) {
     this.spLf2 = null; // leaf 2 Span
     //skins
     this.skins = [];
-    this.skins.push(addSk([this.ptE1.id, this.ptE2.id, this.ptB2.id, this.ptB1.id], "darkgreen"));
+    if (turnYellow) {
+        this.skins.push(addSk([this.ptE1.id, this.ptE2.id, this.ptB2.id, this.ptB1.id], "yellow"));
+    } else {
+        this.skins.push(addSk([this.ptE1.id, this.ptE2.id, this.ptB2.id, this.ptB1.id], "darkgreen"));
+    }
 }
 
 ///sun ray constructor
@@ -1059,8 +1063,13 @@ function renderLeaf(plant, leafSpan) {
     ctx.lineWidth = 2;
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
-    ctx.strokeStyle = "#003000";
-    ctx.fillStyle = "green";
+    if (turnYellow) {
+        ctx.fillStyle = "#E4D96F";
+        ctx.strokeStyle = "#DBC774";
+    } else {
+        ctx.fillStyle = "green";
+        ctx.strokeStyle = "#003000";
+    }
     var ah = 0.35; // arc height
     //leaf top
     var ccpx = mpx + (p2y - p1y) * ah; // curve control point x
@@ -1081,7 +1090,11 @@ function renderLeaf(plant, leafSpan) {
     //leaf center
     ctx.beginPath();
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "#007000";
+    if (turnYellow) {
+        ctx.strokeStyle = "#DBC774";
+    } else {
+        ctx.strokeStyle = "#007000";
+    }
     ctx.moveTo(p1x, p1y);
     ctx.lineTo(p2x, p2y);
     ctx.stroke();
@@ -1104,7 +1117,11 @@ function renderStalks(plant, segment) {
         ctx.beginPath();
         ctx.fillStyle = s.color;
         ctx.lineWidth = 1;
-        ctx.strokeStyle = "darkgreen";
+        if (turnYellow) {
+            ctx.strokeStyle = "#DBC774";
+        } else {
+            ctx.strokeStyle = "darkgreen";
+        }
         ctx.moveTo(s.points[0].cx, s.points[0].cy);
         for (var j = 1; j < s.points.length; j++) { ctx.lineTo(s.points[j].cx, s.points[j].cy); }
         ctx.lineTo(s.points[0].cx, s.points[0].cy);
@@ -1249,7 +1266,6 @@ function rain(event) {
                 text.innerHTML += "<div id='line" + textIndex + "' class='line'>" + textArr[textIndex] + "</div>";
                 // Move the text
                 var line = document.getElementById("line" + textIndex);
-                console.debug(line);
                 line.style.top = y + "px";
                 line.style.left = x + "px";
 
@@ -1260,6 +1276,9 @@ function rain(event) {
 
         }
     } else {
+        turnYellow = true;
+        phr = 0;
+        geer = 1;
         restrictGrowthByEnergy = true;
     }
     logStatus();
