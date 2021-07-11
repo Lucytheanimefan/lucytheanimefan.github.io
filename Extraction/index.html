@@ -29,6 +29,11 @@
         z-index: 10000;
     }
 
+    .line {
+        position: absolute;
+        min-width: 150px;
+    }
+
     /* Rain */
     #rain-container {
         position: absolute;
@@ -1199,11 +1204,16 @@ var useRandom = false;
 
 function rain(event) {
     shouldGrowPlants = true;
-    let x = event.pageX;
-    let y = event.pageY;
+    let x = event.clientX;
+    let y = event.clientY;
+
+    setTimeout(function() {
+        shouldGrowPlants = false;
+    }, 2000);
+
 
     // Create rain
-    if (textArr.length > 0) {
+    if (textArr.length > 0 && textIndex < textArr.length) {
         var div = document.getElementById('rain-container');
         let widthDiff = div.offsetWidth / 2;
         let heightDiff = canvasContainerDiv.offsetHeight * 0.8;
@@ -1214,14 +1224,9 @@ function rain(event) {
         clone.style.left = (x - widthDiff) + 'px';
         clone.style.top = (heightDiff) + 'px';
         document.body.appendChild(clone);
-    }
 
-    setTimeout(function() {
-        shouldGrowPlants = false;
-    }, 2000);
 
-    // Update text
-    if (textArr.length > 0 && textIndex < textArr.length) {
+        // Update text
         if ((skinCount > 50 && textArr.length > 12) ||
             (skinCount > 100 && textArr.length > 11) ||
             (skinCount > 140 && textArr.length > 10) ||
@@ -1238,10 +1243,16 @@ function rain(event) {
             let randIndex = Math.floor(Math.random() * textArr.length);
             let textDiv = document.getElementById("text");
             if (useRandom) {
-                text.innerHTML += "<div class='line'>" + textArr[randIndex] + "</div>";
+                text.innerHTML += "<div id='line" + randIndex + "' class='line'>" + textArr[randIndex] + "</div>";
                 textArr.splice(randIndex, 1);
             } else {
-                text.innerHTML += "<div class='line'>" + textArr[textIndex] + "</div>";
+                text.innerHTML += "<div id='line" + textIndex + "' class='line'>" + textArr[textIndex] + "</div>";
+                // Move the text
+                var line = document.getElementById("line" + textIndex);
+                console.debug(line);
+                line.style.top = y + "px";
+                line.style.left = x + "px";
+
                 textIndex += 1;
             }
 
