@@ -25,7 +25,7 @@
     #text {
         position: absolute;
         top: 0;
-        color:  white;
+        color: white;
         z-index: 10000;
     }
 
@@ -259,7 +259,8 @@
         <div class="drop"></div>
         <div class="drop"></div>
     </div>
-    <div id="text">You're always rubbing your eyes. So red they could crack apart like puzzle pieces. These things are meant to break and fit into tiny places. Typically, there's a protocol: maintain cell homeostasis in deficit situations, modify root growth and architecture, close stomata aboveground, listen to phytohormone signals, increase efficiency. Who evolves like that, you wonder, fingers spreading upper and bottom eyelids apart, sclera licking the air. You rain globs of Systane before the wind steals your tears. Roots favor lateral emergence toward soil patched with higher water content; they coordinate their cells to divide, elongate, absorb. You pluck out your eyeballs, toss out the eye dropper. Reoptimize the stomata. Next year, they won't need water. You grope at stairways, stems, handles, hay. They shrivel off like umbilical cords. And then they'll grow back stronger than ever, surely, you say as you blindly hack at a prune-like finger.</div>
+    <div id="text">
+    </div>
     <div id="canvas_container_div">
         <canvas id="canvas" width="1000" height="1000"></canvas>
     </div>
@@ -308,7 +309,9 @@ var viewSkins = true; // (skin visibility)
 var breeze = 0.4; // breeziness level (applied as brief left & right gusts)
 
 
-
+function logStatus() {
+    console.debug("worldTime: " + worldTime + ", skinCount: " + skinCount + ", spanCount: " + spanCount + ", restrictGrowthByEnergy: " + restrictGrowthByEnergy);
+}
 
 ////---OBJECTS---////
 
@@ -1177,6 +1180,22 @@ scaleToWindow();
 
 // Handle rain
 var timestamp = null;
+var textIndex = 0;
+var textArr = ["You're always rubbing your eyes.",
+    "So red they could crack apart like puzzle pieces.",
+    "These things are meant to break and fit into tiny places.",
+    "Typically, there's a protocol: maintain cell homeostasis in deficit situations, modify root growth and architecture, close stomata aboveground, listen to phytohormone signals, increase efficiency.",
+    "Who evolves like that, you wonder, fingers spreading upper and bottom eyelids apart, sclera licking the air.",
+    "You rain globs of Systane before the wind steals your tears.",
+    "Roots favor lateral emergence toward soil patched with higher water content; they coordinate their cells to divide, elongate, absorb.",
+    "You pluck out your eyeballs, toss out the eye dropper.",
+    "Reoptimize the stomata.",
+    "Next year, they won't need water.",
+    "You grope at stairways, stems, handles, hay.",
+    "They shrivel off like umbilical cords.",
+    "And then they'll grow back stronger than ever, surely, you say as you blindly hack at a prune-like finger."
+];
+var useRandom = false;
 
 function rain(event) {
     shouldGrowPlants = true;
@@ -1184,38 +1203,69 @@ function rain(event) {
     let y = event.pageY;
 
     // Create rain
-    var div = document.getElementById('rain-container');
-    let widthDiff = div.offsetWidth / 2;
-    let heightDiff = canvasContainerDiv.offsetHeight * 0.8;
-    var clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+    if (textArr.length > 0) {
+        var div = document.getElementById('rain-container');
+        let widthDiff = div.offsetWidth / 2;
+        let heightDiff = canvasContainerDiv.offsetHeight * 0.8;
+        var clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+        div.parentNode.removeChild(div);
 
+        // move the container 
+        clone.style.left = (x - widthDiff) + 'px';
+        clone.style.top = (heightDiff) + 'px';
+        document.body.appendChild(clone);
+    }
 
-    div.parentNode.removeChild(div);
-
-    // move the container 
-    clone.style.left = (x - widthDiff) + 'px';
-    clone.style.top = (heightDiff) + 'px';
-    document.body.appendChild(clone);
     setTimeout(function() {
         shouldGrowPlants = false;
     }, 2000);
+
+    // Update text
+    if (textArr.length > 0 && textIndex < textArr.length) {
+        if ((skinCount > 50 && textArr.length > 12) ||
+            (skinCount > 100 && textArr.length > 11) ||
+            (skinCount > 140 && textArr.length > 10) ||
+            (skinCount > 170 && textArr.length > 9) ||
+            (skinCount > 200 && textArr.length > 9) ||
+            (skinCount > 230 && textArr.length > 8) ||
+            (skinCount > 250 && textArr.length > 7) ||
+            (skinCount > 270 && textArr.length > 6) ||
+            (skinCount > 280 && textArr.length > 5) ||
+            (skinCount > 290 && textArr.length > 4) ||
+            (skinCount > 300 && textArr.length > 3) ||
+            (skinCount > 305 && textArr.length > 2) ||
+            (skinCount > 310 && textArr.length >= 1)) {
+            let randIndex = Math.floor(Math.random() * textArr.length);
+            let textDiv = document.getElementById("text");
+            if (useRandom) {
+                text.innerHTML += "<div class='line'>" + textArr[randIndex] + "</div>";
+                textArr.splice(randIndex, 1);
+            } else {
+                text.innerHTML += "<div class='line'>" + textArr[textIndex] + "</div>";
+                textIndex += 1;
+            }
+
+            restrictGrowthByEnergy = false;
+
+        }
+    } else {
+        restrictGrowthByEnergy = true;
+    }
+    logStatus();
+
 
     // Detect mouse click speed
     if (timestamp === null) {
         timestamp = Date.now();
         return;
-    } else {
+    } else if (textArr.length > 0) {
         let timeDifference = Math.abs(timestamp - Date.now());
         if (timeDifference < 200) {
+            restrictGrowthByEnergy = false;
             breeze += 0.2;
-            restrictGrowthByEnergy = false;
-            console.debug("breeze: " + breeze);
         } else if (timeDifference < 400) {
-            restrictGrowthByEnergy = false;
             breeze += 0.1;
-            console.debug("breeze: " + breeze);
         } else {
-            restrictGrowthByEnergy = true;
             breeze = 0.4;
         }
 
