@@ -32,6 +32,7 @@
     .line {
         position: absolute;
         min-width: 150px;
+        opacity: 1;
     }
 
     /* Rain */
@@ -1243,7 +1244,6 @@ function rain(event) {
         clone.style.top = (heightDiff) + 'px';
         document.body.appendChild(clone);
 
-
         // Update text
         if ((skinCount > 50 && textArr.length > 12) ||
             (skinCount > 100 && textArr.length > 11) ||
@@ -1270,6 +1270,13 @@ function rain(event) {
                 line.style.top = y + "px";
                 line.style.left = x + "px";
 
+                // Decrease opacity of the previous 
+                for (let i = 0; i<textIndex; i++)
+                {
+                    let prevLine = document.getElementById("line" + i);
+                    let newOpacity = (prevLine.style.opacity > 0) ? prevLine.style.opacity : 0.9;
+                    prevLine.style.opacity = newOpacity * 0.7;
+                }
                 textIndex += 1;
             }
 
