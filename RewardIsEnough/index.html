@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        background: url(https://res.cloudinary.com/beumsk/image/upload/v1524502756/Blinky.png);
+        background-size: 40px;
+        background-repeat: space;
+    }
+
+    body {
+        min-height: 100vh;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Arial;
+        background: rgba(256, 256, 256, 0.8);
+    }
+
+    header h1 {
+        font-weight: normal;
+        letter-spacing: 0.2em;
+        color: #25689D;
+        margin-top: 20px;
+        padding: 10px 20px;
+        color: #FFD54D;
+        background: #000;
+        border: double 6px #25689D;
+        outline: solid 4px white;
+    }
+
+    section {
+        width: 420px;
+ /*       height: 420px;*/
+        background: #000;
+        margin: 20px auto;
+        position: relative;
+        border: double 10px #25689D;
+        outline: solid 10px white;
+    }
+
+    #text {
+        color: white;
+        margin-top: 40px;
+        margin-left: 40px;
+        margin-right:  40px;
+        margin-bottom: 40px;
+    }
+
+    .pacman {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 25px;
+        height: 50px;
+        background: #FFD54D;
+        border-radius: 50px 0 0 50px;
+        animation: pac-move 12s infinite linear, pac-rotate 12s infinite steps(1);
+    }
+
+    @keyframes pac-move {
+        25% {
+            top: 10px;
+            left: 350px;
+        }
+
+        50% {
+            top: 340px;
+            left: 350px;
+        }
+
+        75% {
+            top: 340px;
+            left: 20px;
+        }
+
+        100% {
+            top: 10px;
+            left: 20px;
+        }
+    }
+
+    @keyframes pac-rotate {
+        25% {
+            transform: rotate(90deg);
+        }
+
+        50% {
+            transform: rotate(180deg);
+        }
+
+        75% {
+            transform: rotate(270deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* eat-up */
+    .pacman::before {
+        content: "";
+        border-radius: 0 50px 0 0;
+        background: #FFD54D;
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        left: 25px;
+        transform: rotate(-45deg);
+        transform-origin: 0 25px;
+        animation: pac-eat-up 0.5s infinite;
+    }
+
+    @keyframes pac-eat-up {
+        50% {
+            transform: rotate(0deg);
+        }
+    }
+
+    /* eat-down */
+    .pacman::after {
+        content: "";
+        border-radius: 0 0 50px 0;
+        background: #FFD54D;
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        transform: rotate(45deg);
+        transform-origin: 0 0;
+        animation: pac-eat-down 0.5s infinite;
+    }
+
+    @keyframes pac-eat-down {
+        50% {
+            transform: rotate(0deg);
+        }
+    }
+
+    .dot {
+        background: white;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        animation: dot 12s infinite steps(1);
+        /*   animation-fill-mode: forwards; */
+    }
+
+    @keyframes dot {
+        0% {
+            background: transparent;
+        }
+
+        50% {
+            background: white;
+        }
+    }
+
+    /* top */
+    .dot:nth-child(1) {
+        top: 30px;
+        left: 30px;
+        animation-delay: ;
+    }
+
+    .dot:nth-child(2) {
+        top: 30px;
+        left: 60px;
+        animation-delay: 273ms;
+    }
+
+    .dot:nth-child(3) {
+        top: 30px;
+        left: 90px;
+        animation-delay: 546ms;
+    }
+
+    .dot:nth-child(4) {
+        top: 30px;
+        left: 120px;
+        animation-delay: 819ms;
+    }
+
+    .dot:nth-child(5) {
+        top: 30px;
+        left: 150px;
+        animation-delay: 1092ms;
+    }
+
+    .dot:nth-child(6) {
+        top: 30px;
+        left: 180px;
+        animation-delay: 1365ms;
+    }
+
+    .dot:nth-child(7) {
+        top: 30px;
+        left: 210px;
+        animation-delay: 1638ms;
+    }
+
+    .dot:nth-child(8) {
+        top: 30px;
+        left: 240px;
+        animation-delay: 1911ms;
+    }
+
+    .dot:nth-child(9) {
+        top: 30px;
+        left: 270px;
+        animation-delay: 2184ms;
+    }
+
+    .dot:nth-child(10) {
+        top: 30px;
+        left: 300px;
+        animation-delay: 2457ms;
+    }
+
+    .dot:nth-child(11) {
+        top: 30px;
+        left: 330px;
+        animation-delay: 2730ms;
+    }
+
+    .dot:nth-child(12) {
+        top: 30px;
+        left: 360px;
+        animation-delay: 3003ms;
+    }
+
+    /* right */
+    .dot:nth-child(13) {
+        top: 60px;
+        left: 360px;
+        animation-delay: 3276ms;
+    }
+
+    .dot:nth-child(14) {
+        top: 90px;
+        left: 360px;
+        animation-delay: 3549ms;
+    }
+
+    .dot:nth-child(15) {
+        top: 120px;
+        left: 360px;
+        animation-delay: 3822ms;
+    }
+
+    .dot:nth-child(16) {
+        top: 150px;
+        left: 360px;
+        animation-delay: 4095ms;
+    }
+
+    .dot:nth-child(17) {
+        top: 180px;
+        left: 360px;
+        animation-delay: 4368ms;
+    }
+
+    .dot:nth-child(18) {
+        top: 210px;
+        left: 360px;
+        animation-delay: 4641ms;
+    }
+
+    .dot:nth-child(19) {
+        top: 240px;
+        left: 360px;
+        animation-delay: 4914ms;
+    }
+
+    .dot:nth-child(20) {
+        top: 270px;
+        left: 360px;
+        animation-delay: 5187ms;
+    }
+
+    .dot:nth-child(21) {
+        top: 300px;
+        left: 360px;
+        animation-delay: 5460ms;
+    }
+
+    .dot:nth-child(22) {
+        top: 330px;
+        left: 360px;
+        animation-delay: 5733ms;
+    }
+
+    .dot:nth-child(23) {
+        top: 360px;
+        left: 360px;
+        animation-delay: 6006ms;
+    }
+
+    /* bottom */
+    .dot:nth-child(24) {
+        top: 360px;
+        left: 330px;
+        animation-delay: 6279ms;
+    }
+
+    .dot:nth-child(25) {
+        top: 360px;
+        left: 300px;
+        animation-delay: 6552ms;
+    }
+
+    .dot:nth-child(26) {
+        top: 360px;
+        left: 270px;
+        animation-delay: 6825ms;
+    }
+
+    .dot:nth-child(27) {
+        top: 360px;
+        left: 240px;
+        animation-delay: 7098ms;
+    }
+
+    .dot:nth-child(28) {
+        top: 360px;
+        left: 210px;
+        animation-delay: 7371ms;
+    }
+
+    .dot:nth-child(29) {
+        top: 360px;
+        left: 180px;
+        animation-delay: 7644ms;
+    }
+
+    .dot:nth-child(30) {
+        top: 360px;
+        left: 150px;
+        animation-delay: 7917ms;
+    }
+
+    .dot:nth-child(31) {
+        top: 360px;
+        left: 120px;
+        animation-delay: 8190ms;
+    }
+
+    .dot:nth-child(32) {
+        top: 360px;
+        left: 90px;
+        animation-delay: 8463ms;
+    }
+
+    .dot:nth-child(33) {
+        top: 360px;
+        left: 60px;
+        animation-delay: 8736ms;
+    }
+
+    .dot:nth-child(34) {
+        top: 360px;
+        left: 30px;
+        animation-delay: 9009ms;
+    }
+
+    /* left */
+    .dot:nth-child(35) {
+        top: 330px;
+        left: 30px;
+        animation-delay: 9282ms;
+    }
+
+    .dot:nth-child(36) {
+        top: 300px;
+        left: 30px;
+        animation-delay: 9555ms;
+    }
+
+    .dot:nth-child(37) {
+        top: 270px;
+        left: 30px;
+        animation-delay: 9828ms;
+    }
+
+    .dot:nth-child(38) {
+        top: 240px;
+        left: 30px;
+        animation-delay: 10101ms;
+    }
+
+    .dot:nth-child(39) {
+        top: 210px;
+        left: 30px;
+        animation-delay: 10374ms;
+    }
+
+    .dot:nth-child(40) {
+        top: 180px;
+        left: 30px;
+        animation-delay: 10647ms;
+    }
+
+    .dot:nth-child(41) {
+        top: 150px;
+        left: 30px;
+        animation-delay: 10920ms;
+    }
+
+    .dot:nth-child(42) {
+        top: 120px;
+        left: 30px;
+        animation-delay: 11193ms;
+    }
+
+    .dot:nth-child(43) {
+        top: 90px;
+        left: 30px;
+        animation-delay: 11466ms;
+    }
+
+    .dot:nth-child(44) {
+        top: 60px;
+        left: 30px;
+        animation-delay: 11739ms;
+    }
+
+
+    footer {
+        font-size: 14px;
+        padding: 10px;
+        background: rgba(256, 256, 256, 0.6);
+    }
+
+    footer a {
+        text-decoration: none;
+        color: #25689D;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+        color: #000;
+    }
+    </style>
+    <title>Reward is Enough</title>
+</head>
+
+<body>
+    <section>
+        <div id="text"></div>
+        <div id="pacman-container">
+            <!-- left -->
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <!-- bottom -->
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <!-- right -->
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <!-- top -->
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <p class="dot"></p>
+            <div class="pacman"></div>
+        </div>
+    </section>
+    <button id="pause">Stop</button>
+    <button id="play">Eat</button>
+    <button id="restart">Restart</button>
+</body>
+<script type="text/javascript">
+var text = ["If they had wanted to eat the house made from gingerbread and sticky rice, they shouldn&rsquo;t have been so surprised when their arteries began to stick and their livers rolled onto the ground like pearls pried from oyster.",
+    "And they should&rsquo;ve known the crows would eat the bread crumbs and the witch would grow sick of boiled cabbage and eggs: it&rsquo;s just a decontextualization of maximizing personal utility.",
+    "What they did know was how their top teeth nestled into their skulls, how their jaws dislocated and relocated to crush shards of candy cane, and how this, of any permutation of options, seemed like the most optimal path to stave off starvation for all relevant parties.",
+    "Maximizing reward in a complex environment is a sufficient condition for intelligence to arrive implicitly, which they took to mean the crows, if hungry enough, could circumvent the witch&rsquo;s magic and pluck out her eyes, and the witch, if hungry enough, could toss them both into the oven despite her glaucoma, and they, if hungry enough, could prove themselves generally intelligent even as they snapped peanut crisps off the door handle, hiding the pieces under their tongues until they could not resist exercising their molars through crystallized syrup and nut clusters.",
+    "At worst, it is like saying “swimming is enough” to cross the ocean, discounting brains prewired with survival instincts by evolution—an unfair advantage, maybe, but still, they wiped grains of sweet rice off their cheeks and licked starch and sugar from their fingers and figured they&rsquo;d deal with the consequences later."
+];
+
+var textBlock = "If they had wanted to eat the house made from gingerbread and sticky rice, they shouldn&rsquo;t have been so surprised when their arteries began to stick and their livers rolled onto the ground like pearls pried from oysters. And they should&rsquo;ve known the crows would eat the bread crumbs and the witch would grow sick of boiled cabbage and eggs: it&rsquo;s just a decontextualization of maximizing personal utility. What they did know was how their top teeth nestled into their skulls, how their jaws dislocated and relocated to crush shards of candy cane, and how this, of any permutation of options, seemed like the most optimal path to stave off starvation for all relevant parties. Maximizing reward in a complex environment is a sufficient condition for intelligence to arrive implicitly, which they took to mean the crows, if hungry enough, could circumvent the witch&rsquo;s magic and pluck out her eyes, and the witch, if hungry enough, could toss them both into the oven despite her glaucoma, and they, if hungry enough, could prove themselves generally intelligent even as they snapped peanut crisps off the door handle, hiding the pieces under their tongues until they could not resist exercising their molars through crystallized syrup and nut clusters. At worst, it is like saying “swimming is enough” to cross the ocean, discounting brains prewired with survival instincts by evolution—an unfair advantage, maybe, but still, they wiped grains of sweet rice off their cheeks and licked starch and sugar from their fingers and figured they&rsquo;d deal with the consequences later.";
+
+var divsToAnimate = [".pacman", ".dot"];
+document.querySelector("#pause").addEventListener('click', function() {
+    for (let i = 0; i < divsToAnimate.length; i++) {
+        document.querySelectorAll(divsToAnimate[i]).forEach(function(element) {
+            element.style.animationPlayState = 'paused';
+        });
+    }
+});
+
+// play animation
+document.querySelector("#play").addEventListener('click', function() {
+    for (let i = 0; i < divsToAnimate.length; i++) {
+        document.querySelectorAll(divsToAnimate[i]).forEach(function(element) {
+            element.style.animationPlayState = 'running';
+        });
+    }
+});
+
+// restart animation
+document.querySelector("#restart").addEventListener('click', function() {
+    for (let i = 0; i < divsToAnimate.length; i++) {
+        // remove animation 
+        document.querySelectorAll(divsToAnimate[i]).forEach(function(element) { element.style.animation = 'none'; });
+        // trigger reflow
+        document.querySelectorAll(divsToAnimate[i]).forEach(function(element) { element.offsetWidth });;
+    }
+    // add animation again
+    document.querySelectorAll(".pacman").forEach(function(element) {
+        element.style.animation = 'pac-move 12s infinite linear, pac-rotate 12s infinite steps(1)'
+    });
+    document.querySelectorAll(".dot").forEach(function(element) {
+        element.style.animation = 'dot 12s infinite steps(1)'
+    });
+});
+
+var textCharIndex = 0;
+document.querySelector("#play").click();
+
+setTimeout(updateText, 2000);
+
+function updateText() {
+    var eating = (document.querySelector(".pacman").style.animationPlayState == "running");
+    if (eating) {
+        if (textCharIndex < textBlock.length) {
+            document.querySelector("#text").innerHTML += textBlock.charAt(textCharIndex);
+            textCharIndex += 1;
+        }
+    } else {
+
+    }
+    setTimeout(updateText, 100);
+}
+</script>
+
+</html>
