@@ -94,6 +94,17 @@
         font-size: 1em;
     }
 
+    #finalText {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        color: white;
+        font-size: 20px;
+    }
+
     .start-window {
         width: 960px;
         height: 530px;
@@ -532,6 +543,7 @@
         resize: none;
         color: black;
         padding: 10px;
+        white-space : pre-wrap;
     }
 
     .head-over {
@@ -677,13 +689,6 @@
         </div>
         <section class="option-box">
             <div class="color-box">
-                <h4>All about Windows 10 Design</h4>
-                <!--<video class="center-block" width="360" height="" controls>
-                        <source src="img/myExplain_2.mp4" type="video/mp4">
-                        <source src="img/myExplain_2.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                </video>-->
-                <div style="position:relative;height:0;padding-bottom:56.25%;width: 400px;"><iframe src="https://www.youtube.com/embed/VUPtvK28fhY?ecver=2" style="position:absolute;width:100%;height:100%;left:0" width="640" height="360" frameborder="0" allowfullscreen></iframe></div>
                 <a class="btn btn-primary center-block text-center" onclick="openabout()">About</a>
             </div>
             <i class="fa fa-gear fa-3x gear-check"></i>
@@ -864,117 +869,9 @@
                     </div>
                     <div class="col-xs-9 ">
                         <div class="row main-folders">
-                            <div class="col-xs-2 folders text-center" ondblclick="openimg()">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/admin-3.jpg" class="img-responsive  center-block" alt=""></p>
-                                <span>Photo</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center" ondblclick="openvid()">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/myposter.PNG" class="img-responsive  center-block" alt=""></p>
-                                <span>Video</span>
-                            </div>
                             <div class="col-xs-2 folders text-center" ondblclick="opennote()">
                                 <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_sticky-note_299111.png" class="img-responsive  center-block" alt=""></p>
                                 <span>Note</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
-                            </div>
-                            <div class="col-xs-2 folders text-center">
-                                <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
-                                <span>Folder</span>
                             </div>
                             <div class="col-xs-2 folders text-center">
                                 <p class="contain"><img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/if_folder-blue_285658.svg" class="img-responsive  center-block" style="height: 64px;" alt=""></p>
@@ -1001,39 +898,6 @@
             <div class="resizer"></div>
         </div>
         <div class="clearfix"></div>
-        <div class="image-overlay" id="image-overlay">
-            <div class="fluid-container">
-                <div class="first-row-img">
-                    <span class="center-text head-over">My Image</span>
-                    <div class="right">
-                        <i class="fa fa-times" onclick="closeimg()"></i>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="second-row-img">
-                    <img src="https://lucytheanimefan.github.io/Aspect_Ratio/img/admin-3.jpg" class="center-block img-responsive" style="height:80vh" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="video-overlay" id="video-overlay">
-            <div class="fluid-container">
-                <div class="first-row-vid">
-                    <span class="center-text head-over">My Video</span>
-                    <div class="right">
-                        <i class="fa fa-times" onclick="closevid()"></i>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="second-row-vid">
-                    <!--<video class="center-block" width="" height="" controls>
-                            <source src="img/myExplain_2.mp4" type="video/mp4">
-                            <source src="img/myExplain_2.ogg" type="video/ogg">
-                            Your browser does not support the video tag.
-                    </video>-->
-                    <div style="position:relative;height:0;padding-bottom:56.25%;"><iframe src="https://www.youtube.com/embed/VUPtvK28fhY?ecver=2" style="position:absolute;width: 50%;height: 50vh;left: 25%;" width="640" height="360" frameborder="0" allowfullscreen></iframe></div>
-                </div>
-            </div>
-        </div>
         <div class="note-overlay" id="note-overlay">
             <div class="fluid-container">
                 <div class="first-row-note">
@@ -1044,14 +908,15 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="second-row-note">
-                    <textarea></textarea>
+                    <textarea>is it a fast fix? like combining subpixels, tuning voltage until you hit that exact shade of red? you know, it's an art&mdash;restraining light, arranging transistors and capacitors until stuff looks real. it must look real enough? i did a good job, yeah?&#13;&#10;&#13;&#10;could've been further optimized had she been built with microLEDs, red and green and blue integrated in a single chip, material systems clashing. don't try to do the impossible, even though she flickers through a fabricated reality.
+                    </textarea>
                 </div>
             </div>
         </div>
         <div class="about-overlay" id="about-overlay">
             <div class="fluid-container">
                 <div class="first-row-img">
-                    <span class="center-text head-over">About</span>
+                    <span class="center-text head-over">Aspect Ratio</span>
                     <div class="right">
                         <i class="fa fa-times" onclick="closeabout()"></i>
                     </div>
@@ -1060,7 +925,7 @@
                 <div class="second-row-abo">
                     <div>
                         <p>
-                            Aspect Ratio
+                            When the device is plugged into the wall outlet, she blinks her eyes open, presses one hand against the screen, dangles the other by her side, and stands facing the glass, her legs and feet dissolving into pixels. Her voice trickles down the VGA cable, spliced into pins, recombined into a single composite signal: her words spread thin over bandwidth. The girl sits in the back, accompanying desktop wallpaper and screenshots of xkcd comics and old tax form downloads. She hears the click tap scroll, the guilty pause and play and pause again, the slap slap slap of skin against skin, the heavy pants like dogs dangling metronomes for tongues. The girl closes her eyes and hums to the tune of static. The videos finish quickly. She waits to conduct current away from the liquid crystals, dims out the bodies, the faces, the clenched fists, the furrowed eyebrows like caterpillars paralyzed under light exposure. She brightens the tiny red icon blinking one, two, three unread messages, streams polarized light through RGB filters until blue glows and warm skin tones suffocate through the substrate. She knocks one fist against the screen, but the sound transmits as white noise, a faint buzz muted by Discord pings. The text editor tab minimizes and maximizes like a genie, nearly giving her vertigo as she spins to face the document and blinking cursor. The cursor blinks for several minutes on the blank page before she types: <i>is it a fast fix? like combining subpixels, tuning voltage until you hit that exact shade of red? you know, it's an art&mdash;restraining light, arranging transistors and capacitors until stuff looks real. it must look real enough? i did a good job, yeah?</i> She quiets the fans and dims the backlight as the machine clamps shut, detached from the charger, knocking against a hip bone from within a bag, bodiless. Can real girls do that? Fold into a monitor, glide in the grave of photons?
                         </p>
                     </div>
                 </div>
@@ -1090,7 +955,7 @@
                     <div class="col-xs-3 second-column">
                         <div class="wrap-scroll">
                             <div class="head-med">
-                                <small>What I'am Used</small>
+                                <small>What I am using</small>
                             </div>
                             <div class="media">
                                 <div class="media-left">
@@ -1191,16 +1056,6 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#">
-                                        <img class="media-object" src="https://lucytheanimefan.github.io/Aspect_Ratio/img/illustrator.png" width="35" height="35" alt="...">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <small class="media-heading">illustrator cc 2017</small>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
                                         <img class="media-object" src="https://lucytheanimefan.github.io/Aspect_Ratio/img/github-desktop-icon.png" width="35" height="35" alt="...">
                                     </a>
                                 </div>
@@ -1216,16 +1071,6 @@
                                 </div>
                                 <div class="media-body">
                                     <small class="media-heading">Codepen</small>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="media-object" src="https://lucytheanimefan.github.io/Aspect_Ratio/img/photo.jpg" width="35" height="35" alt="...">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <small class="media-heading">Upwork</small>
                                 </div>
                             </div>
                         </div>
@@ -1294,7 +1139,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-4 box">
-                                <div class="box-style" style="background:url('https://lucytheanimefan.github.io/Aspect_Ratio/img/profile.png');background-size: cover;    background-repeat: no-repeat;
+                                <div class="box-style" style="background:url('');background-size: cover;    background-repeat: no-repeat;
                                 background-position: 39%;">
                                     <div class="icon-bottom text-center" style="margin: 20px;">
                                         <i class="fa fa-twitter fa-2x" style="color: rgba(0,0,0,0);"></i>
@@ -1849,6 +1694,15 @@ function returncom() {
 
 function powerOff() {
     fadeOutByMe(myWindow);
+    // show text
+
+    let finalText = document.createElement("div");
+    finalText.innerHTML = "She quiets the fans and dims the backlight as the machine clamps shut, detached from the charger, knocking against a hip bone from within a bag, bodiless. Can real girls do that? Fold into a monitor, glide in the grave of photons?";
+    finalText.id = "finalText";
+    setTimeout(function() {
+        document.body.appendChild(finalText);
+    }, 500);
+
 }
 var colorBox = document.getElementsByClassName('color-box')[0],
     btn = document.getElementsByClassName('gear-check')[0];
