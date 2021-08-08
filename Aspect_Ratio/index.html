@@ -103,6 +103,61 @@
         margin: 0;
         color: white;
         font-size: 20px;
+        animation: fadeIn linear 7s;
+        -webkit-animation: fadeIn linear 7s;
+        -moz-animation: fadeIn linear 7s;
+        -o-animation: fadeIn linear 7s;
+        -ms-animation: fadeIn linear 7s;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @-moz-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @-o-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @-ms-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
     }
 
     .start-window {
@@ -543,7 +598,7 @@
         resize: none;
         color: black;
         padding: 10px;
-        white-space : pre-wrap;
+        white-space: pre-wrap;
     }
 
     .head-over {
@@ -1699,9 +1754,7 @@ function powerOff() {
     let finalText = document.createElement("div");
     finalText.innerHTML = "She quiets the fans and dims the backlight as the machine clamps shut, detached from the charger, knocking against a hip bone from within a bag, bodiless. Can real girls do that? Fold into a monitor, glide in the grave of photons?";
     finalText.id = "finalText";
-    setTimeout(function() {
-        document.body.appendChild(finalText);
-    }, 500);
+    document.body.appendChild(finalText);
 
 }
 var colorBox = document.getElementsByClassName('color-box')[0],
