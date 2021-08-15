@@ -1,0 +1,337 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Greedy Algorithm</title>
+    <style>
+    html,
+    body {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        height: 100%;
+    }
+
+    body {
+        overflow: hidden;
+        height: inherit;
+        background-color: black;
+    }
+
+    .dashboard {
+        top: 5%;
+        left: 50%;
+        width: 100%;
+        display: inline-block;
+    }
+
+    .speed_wrap,
+    .score_wrap {
+        display: inline-block;
+        color: white;
+        margin-left: 15px;
+        width: 150px;
+    }
+
+    #text {
+        color: white;
+        margin:  20px;
+    }
+
+    h3,
+    .speed,
+    .score {
+        display: inline-block;
+    }
+
+    .speedUp {
+        font-size: 2rem;
+        background-color: transparent;
+        border: 2px solid white;
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    h1 {
+        display: inline-block;
+        text-transform: uppercase;
+        font-size: 2rem;
+        letter-spacing: -1px;
+        color: white;
+    }
+    </style>
+</head>
+
+<body translate="no">
+    <div class="dashboard">
+        <h1>Greedy Algorithm</h1>
+        <div class="score_wrap">
+            <h3>Score:</h3>
+            <div class="score">25</div>
+        </div>
+        <div class="speed_wrap">
+            <h3>Speed:</h3>
+            <div class="speed">65</div>
+        </div>
+        <div id="text"></div>
+    </div>
+    <canvas width="1436" height="483"></canvas>
+    <script>
+    var text = ["If they had wanted to eat the house made from gingerbread and sticky rice, ",
+        "they shouldn't have been so surprised when their arteries began to stick and their livers rolled onto the ground like pearls pried from oyster. ",
+        "And they should've known the crows would eat the bread crumbs ",
+        "and the witch would grow sick of boiled cabbage and eggs: ",
+        "it's just a decontextualization of maximizing personal utility. ",
+        "What they did know was how their top teeth nestled into their skulls, ",
+        "how their jaws dislocated and relocated to crush shards of candy cane, ",
+        "and how this, of any permutation of options, seemed like the most optimal path to stave off starvation for all relevant parties. ",
+        "Maximizing reward in a complex environment is a sufficient condition for intelligence to arrive implicitly, ",
+        "which they took to mean the crows, if hungry enough, could circumvent the witch's magic and pluck out her eyes, ",
+        "and the witch, if hungry enough, could toss them both into the oven despite her glaucoma, ",
+        "and they, if hungry enough, could prove themselves generally intelligent even as they snapped peanut crisps off the door handle, hiding the pieces under their tongues until they could not resist exercising their molars through crystallized syrup and nut clusters. ",
+        "At worst, it is like saying “swimming is enough” to cross the ocean, ",
+        "discounting brains prewired with survival instincts by evolution—an unfair advantage, ",
+        "maybe, ",
+        "but still, ",
+        "they wiped grains of sweet rice off their cheeks and licked starch and sugar from their fingers and figured they'd deal with the consequences later."
+    ];
+    // setup canvas
+
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    var ballAmount = 2 * text.length;
+    var evilSpeed = 15;
+    var evilScore = 0;
+    var speed = document.querySelector('.speed');
+    var score = document.querySelector('.score');
+    var textElement = document.getElementById("text");
+
+    var width = canvas.width = window.innerWidth;
+    var height = canvas.height = window.innerHeight;
+
+
+
+    // function to generate random number
+
+    function random(min, max) {
+        var num = Math.floor(Math.random() * (max - min)) + min;
+        if (num === 0) {
+            num = 2;
+        }
+        return num;
+    }
+
+    function Ball(x, y, vx, vy, color, r, exist) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.r = r;
+        this.vx = vx;
+        this.vy = vy;
+        this.exist = exist;
+    }
+
+    Ball.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        ctx.fill();
+        this.x += this.vx;
+        this.y += this.vy;
+    };
+
+    Ball.prototype.update = function() {
+        if (this.x + this.r >= width) {
+            this.vx = -this.vx;
+        }
+        if (this.x - this.r <= 0) {
+            this.vx = -this.vx;
+        }
+        if (this.y + this.r >= height) {
+            this.vy = -this.vy;
+        }
+        if (this.y - this.r <= 0) {
+            this.vy = -this.vy;
+        }
+        this.x += this.vx;
+        this.y += this.vy;
+    };
+
+    Ball.prototype.detectCollision = function() {
+        for (var j = 0; j < balls.length; j++) {
+            if (balls[j].exist) {
+                if (!(this === balls[j])) {
+                    var dx = this.x - balls[j].x;
+                    var dy = this.y - balls[j].y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < this.r + balls[j].r) {
+                        balls[j].color = `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`;
+                        balls[j].vx = -balls[j].vx;
+                        balls[j].vy = -balls[j].vy;
+                    }
+                }
+
+            }
+
+        }
+    };
+
+
+    function EvilBall() {
+        Ball.call(this);
+        this.x = width / 2;
+        this.y = height / 2;
+        this.color = "white";
+        this.vx = 0;
+        this.vy = 0;
+        this.r = 15;
+        this.exist = true;
+    }
+
+    EvilBall.prototype = Object.create(Ball.prototype);
+    EvilBall.prototype.constructor = EvilBall;
+
+
+    EvilBall.prototype.draw = function() {
+        ctx.beginPath();
+        // var img = new Image();
+        // img.src = 'Smile.png';
+        // var ptrn = ctx.createPattern(img, 'no-repeat');
+        ctx.fillStyle = this.color;
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 3;
+        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fill();
+    };
+
+    EvilBall.prototype.detectBound = function() {
+        if (this.x + this.r >= width) {
+            this.x = width - this.r;
+        }
+        if (this.x - this.r <= 0) {
+            this.x = 0 + this.r;
+        }
+        if (this.y + this.r >= height) {
+            this.y = height - this.r;
+        }
+        if (this.y - this.r <= 0) {
+            this.y = 0 + this.r;
+        }
+    };
+
+
+    EvilBall.prototype.move = function() {
+        var _this = this;
+        window.addEventListener("keydown", function(e) {
+            var action = e.which;
+            //dir_up
+            if (action === 38) {
+                e.preventDefault();
+                _this.y -= evilSpeed;
+            }
+            //dir_down
+            else if (action === 40) {
+                e.preventDefault();
+                _this.y += evilSpeed;
+            }
+            //dir_right
+            else if (action === 39) {
+                e.preventDefault();
+                _this.x += evilSpeed;
+            }
+            //dir_left
+            else if (action === 37) {
+                e.preventDefault();
+                _this.x -= evilSpeed;
+            }
+        });
+    };
+
+    EvilBall.prototype.detectCollision = function() {
+        for (var j = 0; j < balls.length; j++) {
+            if (balls[j].exist) {
+                var dx = this.x - balls[j].x;
+                var dy = this.y - balls[j].y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < this.r + balls[j].r) {
+                    balls[j].exist = false;
+                    console.debug("eat!");
+                    if (this.r <= height / 2) {
+                        this.r += 1;
+                    }
+
+
+                    if (evilSpeed <= 100) {
+                        evilSpeed += 2;
+                    }
+                    evilScore += 1;
+                    this.color = `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`;
+
+                    // collided
+                    if (text.length > 0) {
+                        let newLine = text.shift();
+                        textElement.innerHTML += newLine;
+                    }
+                    else
+                    {
+                      console.debug("reached end!");
+                    }
+
+                }
+
+            }
+        }
+    };
+
+
+
+
+
+    var balls = [];
+    var evil = new EvilBall();
+    evil.move();
+
+
+    function loop() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+        ctx.fillRect(0, 0, width, height);
+        while (balls.length < ballAmount) {
+            var ball = new Ball(random(0, width), random(0, height), random(-2, 2), random(-2, 2),
+                `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`,
+                15, true);
+
+            balls.push(ball);
+        }
+        evil.draw();
+        evil.detectBound();
+        evil.detectCollision();
+
+        speed.innerHTML = evilSpeed;
+        score.innerHTML = evilScore;
+        for (var i = 0; i < balls.length; i++) {
+            if (balls[i].exist) {
+                balls[i].draw();
+                balls[i].update();
+                balls[i].detectCollision();
+            }
+        }
+        requestAnimationFrame(loop);
+    }
+
+    function handleUpdate() {
+        ballAmount = this.value;
+    }
+
+
+    loop();
+    </script>
+</body>
+
+</html>
