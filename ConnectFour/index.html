@@ -238,7 +238,6 @@
     function dropDisc(cid, player) {
         if (player == 1) {
             // Player
-            document.getElementById("win-text");
         } else {
             // Computer
         }
@@ -263,8 +262,7 @@
             }
             var scoreDiv = document.getElementById("score");
             scoreDiv.innerHTML = currentScore.toString();
-
-            console.debug(currentPlayer + " win");
+            console.debug(ww + " win");
             board.innerHTML = "";
             newgame();
         }
