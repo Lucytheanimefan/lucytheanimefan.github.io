@@ -284,9 +284,17 @@
         var randomNumber = Math.ceil(Math.random() * 8);
         console.debug("random num: " + randomNumber);
         var arr = parsedText[key];
+        if (arr.length <= 0)
+        {
+            return;
+        }
         var stringToAppend = "";
         for (let i = 0; i < randomNumber; i++) {
-            stringToAppend += (arr.shift() + ",");
+            stringToAppend += arr.shift();
+            if (arr.length > 0)
+            {
+                stringToAppend += ",";
+            }
         }
         parsedText[key] = arr;
         return stringToAppend;
