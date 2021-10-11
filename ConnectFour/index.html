@@ -46,6 +46,9 @@
         margin: 0 auto;
         background: url("http://img.sr/images/2014/01/28/base.png") 0 0 no-repeat;
         position: relative;
+        outline-color: black;
+        outline-width: 3px;
+        outline-style: solid;
     }
 
     .disc {
@@ -75,7 +78,9 @@
     <div id="score" class="row"></div>
     <div id="game-base" class="row">
         <div class="column" id="win-text"></div>
-        <div class="column" id="game-table">
+        <div class="column">
+            <div id="game-table">
+            </div>
         </div>
         <div class="column" id="lose-text"></div>
     </div>
@@ -92,7 +97,7 @@
     var currentRow;
     var currentPlayer;
     var id = 1;
-    var currentScore = {"player": 0, "computer": 0};
+    var currentScore = { "player": 0, "computer": 0 };
     newgame();
 
     function newgame() {
