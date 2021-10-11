@@ -26,15 +26,23 @@
         margin-bottom: 20px;
     }
 
+    .row {
+        display: flex;
+    }
+
+    .column {
+        flex: 33%;
+    }
+
     #game-base {
-        width: 640px;
+        min-width: 800px;
         margin: 0 auto;
         padding-top: 60px;
     }
 
     #game-table {
-        width: 434px;
-        height: 374px;
+        min-width: 434px;
+        min-height: 374px;
         margin: 0 auto;
         background: url("http://img.sr/images/2014/01/28/base.png") 0 0 no-repeat;
         position: relative;
@@ -64,23 +72,27 @@
 <body>
     <h1>Connect Four Game</h1>
     <p class="info">Connect four is two player game. You can play with pc this js version of game. Made with native javascript on codepen. Defensive AI. Use chrome for best experience.</p>
-    <div id="game-base">
-        <div id="game-table">
+    <div id="score" class="row">
+    <div id="game-base" class="row">
+        <div class="column" id="win-text"></div>
+        <div class="column" id="game-table">
         </div>
-    </div><!-- end base -->
-<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> -->
+        <div class="column" id="lose-text"></div>
+    </div>
     <script>
-
-    const conversationPlayerWin = ["You'd be"];
-    const conversationPlayerLose = [];
+    const fullText = {
+        "winFinal": "You’d be rolling in your grave, I think, because I built you too stupid, failed to design a representation for internal state in a way that’d permit the experience of such a mental space. What’s the artificial equivalent of feelings? Homeostasis? I’m treading water here, and you’ve been distilled down to a 2D array grid representation and basic math operations. <i>Training a five AI squad to play Dota 2 helped teach a robotic hand to manipulate objects with the kind of dexterity a sushi chef wields with a knife and fresh toro</i>, you said, ever the optimist of robot potential in simultaneously defeating StarCraft II champions and simulating climate change. <i>Does it adapt?</i> You harped about learning throughout a lifetime even as the body begins programming its mass apoptosis. If I toss the binary at a chess board, it’d turn and stare—like I’m the misinformed guardian—then gather pawns in rows of four.",
+        "win": "More luck than skill, sorry to disappoint: if there is a winning move, take it; if the opponent has a winning move, take the move so they can’t take it; take the center square over edges and corners; take corner squares over edges; take edges if they are the only thing available. Beyond the nerf gun fired into my thigh and the pleading for another tangyuan, there are an infinite number of permutations that end as intended: the child outliving the parent. I look into the future as I wait for the supernova to appear the next decade, refine the Hubble constant to calculate if the universe expands faster than the uptake of surroundings—before, before, before.",
+        "lose": "Not a huge surprise. How fast do algorithms improve if you trace the history of every family of problems and rank their worst-case time complexity? Faster than hardware improves, stamping its spot over Moore’s Law at least. The body caves first as soup dumplings do under amateur chopstick skills rupturing the skin for an outpouring. But I was always more stupid than you, though you never said it. I had the hardier body, built like bundles of cellular mass wrapped in metal-organic fiber composites capable of deactivating both chemical and biological toxic agents, blunting bruises from clumsy falls. Mothers should put their kids in boxes of steel and tungsten; it’s the only way to resist corrosion and drilling and cutting, fire and weathering of time, although they learn to escape soon enough.",
+        "loseFinal": "What do I know about intelligence, though. Disembodied algorithms, robots whose physical systems don’t decay from their regular life operations, guaranteed shells encasing autonomy. I can’t be all that off though, imagining you stomping down the stairs, weight shaking the table and the Pachira tree, bumping into my waist as I spin around, reach for the last carton of Vita lemon tea, poke the straw through and say this is the last one until summer when they go on sale again, so wait patiently, don’t be like the farmer who pulled rice seedlings to make them grow taller until they lost root of the soil and died. It’s ok to lose to yourself, I imagine you saying even though I’ve labeled you “Computer”—the same way a brain that once developed gyro and sulcal folding from within my fetus is no longer “Me”. Too smart to be me who’s fallen by the wayside with a poorly built imitation and nothing to offer beyond ashes, an urn, a portrait. Something beyond embodiment I haven’t gotten quite right."
+    };
     var gameField = new Array();
     var board = document.getElementById("game-table");
     var currentCol;
     var currentRow;
     var currentPlayer;
     var id = 1;
-
+    var currentScore = {"player": 0, "computer": 0};
     newgame();
 
     function newgame() {
@@ -218,14 +230,18 @@
             if (currentPlayer == 1) {
                 if (possibleColumns().indexOf(currentCol) != -1) {
                     dropDisc($this.id, $this.player);
-
-                    // TODO: some text
                 }
             }
         }
     }
 
     function dropDisc(cid, player) {
+        if (player == 1) {
+            // Player
+            document.getElementById("win-text");
+        } else {
+            // Computer
+        }
         currentRow = firstFreeRow(currentCol, player);
         moveit(cid, (14 + currentRow * 60));
         currentPlayer = player;
@@ -238,7 +254,17 @@
         } else {
             var ww = currentPlayer == 2 ? 'Computer' : 'Player';
             placeDisc(3 - currentPlayer);
-            alert(ww + " win!");
+            if (currentPlayer == 1) {
+                document.getElementById("win-text").innerHTML = document.getElementById("win-text").innerHTML + fullText["winFinal"];
+                currentScore.player += 1;
+            } else {
+                document.getElementById("lose-text").innerHTML = document.getElementById("lose-text").innerHTML + fullText["loseFinal"];
+                currentScore.computer += 1;
+            }
+            var scoreDiv = document.getElementById("score");
+            scoreDiv.innerHTML = currentScore.toString();
+
+            console.debug(currentPlayer + " win");
             board.innerHTML = "";
             newgame();
         }
