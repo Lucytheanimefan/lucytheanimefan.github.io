@@ -72,7 +72,7 @@
 <body>
     <h1>Connect Four Game</h1>
     <p class="info">Connect four is two player game. You can play with pc this js version of game. Made with native javascript on codepen. Defensive AI. Use chrome for best experience.</p>
-    <div id="score" class="row">
+    <div id="score" class="row"></div>
     <div id="game-base" class="row">
         <div class="column" id="win-text"></div>
         <div class="column" id="game-table">
@@ -96,6 +96,7 @@
     newgame();
 
     function newgame() {
+        console.debug("Create new game");
         prepareField();
         placeDisc(Math.floor(Math.random() * 2) + 1);
     }
@@ -251,8 +252,7 @@
         if (!checkForVictory(currentRow, currentCol)) {
             placeDisc(3 - currentPlayer);
         } else {
-            var ww = currentPlayer == 2 ? 'Computer' : 'Player';
-            placeDisc(3 - currentPlayer);
+            var ww = (currentPlayer == 2) ? 'Computer' : 'Player';
             if (currentPlayer == 1) {
                 document.getElementById("win-text").innerHTML = document.getElementById("win-text").innerHTML + fullText["winFinal"];
                 currentScore.player += 1;
@@ -261,8 +261,9 @@
                 currentScore.computer += 1;
             }
             var scoreDiv = document.getElementById("score");
-            scoreDiv.innerHTML = currentScore.toString();
+            scoreDiv.innerHTML = "You: " + currentScore.player + "; Computer: " + currentScore.computer;
             console.debug(ww + " win");
+            placeDisc(3 - currentPlayer);
             board.innerHTML = "";
             newgame();
         }
