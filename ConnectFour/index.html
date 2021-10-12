@@ -322,15 +322,15 @@
     }
 
     function getStringToAppend(key) {
+        var stringToAppend = "";
         var randomNumber = Math.floor(randomNumberInRange(1, 70));
         var arr = parsedText[key];
         if (arr.length <= 0) {
-            return;
+            return stringToAppend;
         }
         if (arr.length < randomNumber) {
             randomNumber = arr.length;
         }
-        var stringToAppend = "";
         for (let i = 0; i < randomNumber; i++) {
             stringToAppend += arr.shift();
         }
