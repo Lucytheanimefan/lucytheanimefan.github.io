@@ -3,12 +3,16 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Connect Four - Assessment of Your AI Replacement</title>
+    <title>Connect Four Replacement</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Andada+Pro&display=swap" rel="stylesheet">
     <style>
     body {
         background: #eee;
+        font-size: 14px;
+        font-family: 'Andada Pro', serif;
     }
 
     h1 {
@@ -20,7 +24,6 @@
         text-align: center;
         width: 400px;
         margin: 0 auto;
-        font-size: 12px;
         font-weight: bold;
         color: #666;
         margin-bottom: 20px;
@@ -33,6 +36,10 @@
         text-decoration: none;
         font-size: 16px;
         cursor: pointer;
+    }
+
+    #score {
+        text-align: center;
     }
 
     #game-column {
@@ -87,9 +94,9 @@
 </head>
 
 <body>
-    <h1>Connect Four Game</h1>
-    <p id="info" class="info">Connect four is two player game. You can play with pc this js version of game. Made with native javascript on codepen. Defensive AI. Use chrome for best experience.</p>
-    <div id="score" class="row"></div>
+    <h1>Connect Four Replacement</h1>
+    <p id="info" class="info">How to play: <a href="https://gamezrules.com/connect-4-rules/">https://gamezrules.com/connect-4-rules/</a></p>
+    <div id="score"></div>
     <div id="game-base" class="row">
         <div class="column" id="win-text"></div>
         <div id="game-column" class="column">
@@ -101,12 +108,12 @@
     </div>
     <script>
     const fullText = {
-        "win": "You’d be rolling in your grave, I think, because I built you too stupid, failed to design a representation for internal state in a way that’d permit the experience of such a mental space. What’s the artificial equivalent of feelings? Homeostasis? I’m treading water here, and you’ve been distilled down to a 2D array grid representation and basic math operations. <i>Training a five AI squad to play Dota 2 helped teach a robotic hand to manipulate objects with the kind of dexterity a sushi chef wields with a knife and fresh toro</i>, you said, ever the optimist of robot potential in simultaneously defeating StarCraft II champions and simulating climate change. <i>Does it adapt?</i> You harped about learning throughout a lifetime even as the body begins programming its mass apoptosis. If I toss the binary at a chess board, it’d turn and stare—like I’m the misinformed guardian—then gather pawns in rows of four. <br>More luck than skill, sorry to disappoint: if there is a winning move, take it; if the opponent has a winning move, take the move so they can’t take it; take the center square over edges and corners; take corner squares over edges; take edges if they are the only thing available. Beyond the nerf gun fired into my thigh and the pleading for another tangyuan, there are an infinite number of permutations that end as intended: the child outliving the parent. I look into the future as I wait for the supernova to appear the next decade, refine the Hubble constant to calculate if the universe expands faster than the uptake of surroundings—before, before, before.",
-        "lose": "Not a huge surprise. How fast do algorithms improve if you trace the history of every family of problems and rank their worst-case time complexity? Faster than hardware improves, stamping its spot over Moore’s Law at least. The body caves first as soup dumplings do under amateur chopstick skills rupturing the skin for an outpouring. But I was always more stupid than you, though you never said it. I had the hardier body, built like bundles of cellular mass wrapped in metal-organic fiber composites capable of deactivating both chemical and biological toxic agents, blunting bruises from clumsy falls. Mothers should put their kids in boxes of steel and tungsten; it’s the only way to resist corrosion and drilling and cutting, fire and weathering of time, although they learn to escape soon enough. <br>What do I know about intelligence, though. Disembodied algorithms, robots whose physical systems don’t decay from their regular life operations, guaranteed shells encasing autonomy. I can’t be all that off though, imagining you stomping down the stairs, weight shaking the table and the Pachira tree, bumping into my waist as I spin around, reach for the last carton of Vita lemon tea, poke the straw through and say this is the last one until summer when they go on sale again, so wait patiently, don’t be like the farmer who pulled rice seedlings to make them grow taller until they lost root of the soil and died. It’s ok to lose to yourself, I imagine you saying even though I’ve labeled you “Computer”—the same way a brain that once developed gyro and sulcal folding from within my fetus is no longer “Me”. Too smart to be me who’s fallen by the wayside with a poorly built imitation and nothing to offer beyond ashes, an urn, a portrait. Something beyond embodiment I haven’t gotten quite right."
+        "win": "You’d be rolling in your grave, I think, because I built you too stupid, failed to design a representation for internal state in a way that’d permit the experience of such a mental space. What’s the artificial equivalent of feelings? Homeostasis? I’m treading water here, and you’ve been distilled down to a 2D array grid representation and basic math operations. <i>Training a five AI squad to play Dota 2 helped teach a robotic hand to manipulate objects with the kind of dexterity a sushi chef wields with a knife and fresh toro</i>, you said, ever the optimist of robot potential in simultaneously defeating StarCraft II champions and simulating climate change. <i>Does it adapt?</i> You harped about learning throughout a lifetime even as the body begins programming its mass apoptosis. If I toss the binary at a chess board, it’d turn and stare—like I’m the misinformed guardian—then gather pawns in rows of four. <br>More luck than skill, sorry to disappoint: if there is a winning move, take it; if the opponent has a winning move, take the move so they can’t take it; take the center square over edges and corners; take corner squares over edges; take edges if they are the only thing available. Beyond the nerf gun fired into my thigh and the pleading for another tangyuan, there are an infinite number of permutations that end as intended: the child outliving the parent. I look into the future as I wait for the supernova to appear the next decade, refine the Hubble constant to calculate if the universe expands faster than the uptake of surroundings—before, before, before. ",
+        "lose": "Not a huge surprise. How fast do algorithms improve if you trace the history of every family of problems and rank their worst-case time complexity? Faster than hardware improves, stamping its spot over Moore’s Law at least. The body caves first as soup dumplings do under amateur chopstick skills rupturing the skin for an outpouring. But I was always more stupid than you, though you never said it. I had the hardier body, built like bundles of cellular mass wrapped in metal-organic fiber composites capable of deactivating both chemical and biological toxic agents, blunting bruises from clumsy falls. Mothers should put their kids in boxes of steel and tungsten; it’s the only way to resist corrosion and drilling and cutting, fire and weathering of time, although they learn to escape soon enough. <br>What do I know about intelligence, though. Disembodied algorithms, robots whose physical systems don’t decay from their regular life operations, guaranteed shells encasing autonomy. I can’t be all that off though, imagining you stomping down the stairs, weight shaking the table and the Pachira tree, bumping into my waist as I spin around, reach for the last carton of Vita lemon tea, poke the straw through and say this is the last one until summer when they go on sale again, so wait patiently, don’t be like the farmer who pulled rice seedlings to make them grow taller until they lost root of the soil and died. It’s ok to lose to yourself, I imagine you saying even though I’ve labeled you “Computer”—the same way a brain that once developed gyro and sulcal folding from within my fetus is no longer “Me”. Too smart to be me who’s fallen by the wayside with a poorly built imitation and nothing to offer beyond ashes, an urn, a portrait. Something beyond embodiment I haven’t gotten quite right. "
     };
     var parsedText = {
-        "win": fullText["win"].match(/[’a-zA-Z0-9]+(\s|,\s|\.\s)/g),
-        "lose": fullText["lose"].match(/[’a-zA-Z0-9]+(\s|,\s|\.\s)/g),
+        "win": fullText["win"].match(/[’a-zA-Z0-9]+(\s|,\s|\.\s|\?\s|;\s)/g),
+        "lose": fullText["lose"].match(/[’a-zA-Z0-9]+(\s|,\s|\.\s|\?\s|;\s)/g),
     };
     var gameField = new Array();
     var board = document.getElementById("game-table");
@@ -275,7 +282,6 @@
 
     function checkForMoveVictory() {
         if (!checkForVictory(currentRow, currentCol)) {
-            console.debug("No victory, place disc");
             placeDisc(3 - currentPlayer);
         } else {
             var ww = (currentPlayer == 2) ? 'Computer' : 'Player';
@@ -299,7 +305,6 @@
             }
             var scoreDiv = document.getElementById("score");
             scoreDiv.innerHTML = "You: " + currentScore.player + "; Computer: " + currentScore.computer;
-            console.debug(ww + " win");
             placeDisc(currentPlayer);
             document.getElementById("next-game").disabled = false;
         }
@@ -331,7 +336,6 @@
     }
 
     function placeDisc(player) {
-        console.debug("placeDisc: " + player);
         currentPlayer = player;
         var disc = new Disc(player);
         disc.addToScene();
