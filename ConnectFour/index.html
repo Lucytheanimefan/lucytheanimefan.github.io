@@ -43,7 +43,8 @@
     #game-table {
         min-width: 434px;
         min-height: 374px;
-        margin: 0 auto;
+        margin-left: 10px;
+        margin-right: 10px;
         background: url("http://img.sr/images/2014/01/28/base.png") 0 0 no-repeat;
         position: relative;
         outline-color: black;
@@ -90,8 +91,8 @@
         "lose": "Not a huge surprise. How fast do algorithms improve if you trace the history of every family of problems and rank their worst-case time complexity? Faster than hardware improves, stamping its spot over Moore’s Law at least. The body caves first as soup dumplings do under amateur chopstick skills rupturing the skin for an outpouring. But I was always more stupid than you, though you never said it. I had the hardier body, built like bundles of cellular mass wrapped in metal-organic fiber composites capable of deactivating both chemical and biological toxic agents, blunting bruises from clumsy falls. Mothers should put their kids in boxes of steel and tungsten; it’s the only way to resist corrosion and drilling and cutting, fire and weathering of time, although they learn to escape soon enough. <br>What do I know about intelligence, though. Disembodied algorithms, robots whose physical systems don’t decay from their regular life operations, guaranteed shells encasing autonomy. I can’t be all that off though, imagining you stomping down the stairs, weight shaking the table and the Pachira tree, bumping into my waist as I spin around, reach for the last carton of Vita lemon tea, poke the straw through and say this is the last one until summer when they go on sale again, so wait patiently, don’t be like the farmer who pulled rice seedlings to make them grow taller until they lost root of the soil and died. It’s ok to lose to yourself, I imagine you saying even though I’ve labeled you “Computer”—the same way a brain that once developed gyro and sulcal folding from within my fetus is no longer “Me”. Too smart to be me who’s fallen by the wayside with a poorly built imitation and nothing to offer beyond ashes, an urn, a portrait. Something beyond embodiment I haven’t gotten quite right."
     };
     var parsedText = {
-        "win": fullText["win"].split(','),
-        "lose": fullText["lose"].split(','),
+        "win": fullText["win"].match(/[’a-zA-Z0-9]+(\s|,\s|\.\s)/g),
+        "lose": fullText["lose"].match(/[’a-zA-Z0-9]+(\s|,\s|\.\s)/g),
     };
     console.debug(parsedText);
     var gameField = new Array();
@@ -285,23 +286,23 @@
         }
     }
 
+    function randomNumberInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
     function getStringToAppend(key) {
-        var randomNumber = Math.ceil(Math.random() * 8);
+        var randomNumber = randomNumberInRange(1,50);
         console.debug("random num: " + randomNumber);
         var arr = parsedText[key];
-        if (arr.length <= 0)
-        {
+        if (arr.length <= 0) {
             return;
         }
         var stringToAppend = "";
         for (let i = 0; i < randomNumber; i++) {
             stringToAppend += arr.shift();
-            if (arr.length > 0)
-            {
-                stringToAppend += ",";
-            }
         }
         parsedText[key] = arr;
+        console.debug("stringToAppend: " + stringToAppend);
         return stringToAppend;
     }
 
