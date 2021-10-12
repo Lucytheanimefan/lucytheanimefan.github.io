@@ -26,6 +26,19 @@
         margin-bottom: 20px;
     }
 
+    button {
+        margin-top: 30px;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #game-column {
+        text-align: center;
+    }
+
     .row {
         display: flex;
     }
@@ -79,7 +92,7 @@
     <div id="score" class="row"></div>
     <div id="game-base" class="row">
         <div class="column" id="win-text"></div>
-        <div class="column">
+        <div id="game-column" class="column">
             <div id="game-table">
             </div>
             <button disabled=true onclick="clickedNextGame()" id="next-game">Next Game</button>
@@ -95,7 +108,6 @@
         "win": fullText["win"].match(/[’a-zA-Z0-9]+(\s|,\s|\.\s)/g),
         "lose": fullText["lose"].match(/[’a-zA-Z0-9]+(\s|,\s|\.\s)/g),
     };
-    console.debug(parsedText);
     var gameField = new Array();
     var board = document.getElementById("game-table");
     var currentCol;
@@ -106,7 +118,6 @@
     newgame();
 
     function newgame() {
-        console.debug("Create new game");
         prepareField();
         placeDisc(Math.floor(Math.random() * 2) + 1);
     }
@@ -242,9 +253,7 @@
                 if (possibleColumns().indexOf(currentCol) != -1) {
                     dropDisc($this.id, $this.player);
                 }
-            }
-            else 
-            {
+            } else {
                 document.getElementById("info").innerHTML = "Please click 'Next Game' to continue";
             }
         }
@@ -263,6 +272,7 @@
     }
 
     const maxIndent = 70;
+
     function checkForMoveVictory() {
         if (!checkForVictory(currentRow, currentCol)) {
             console.debug("No victory, place disc");
@@ -273,7 +283,7 @@
             var stringToAppend = getStringToAppend(resultString);
             let indent = 0;
             if (stringToAppend.length < 70) {
-                indent = Math.floor(randomNumberInRange(maxIndent-10, maxIndent));
+                indent = Math.floor(randomNumberInRange(maxIndent - 10, maxIndent));
             } else if (stringToAppend.length > 200) {
                 indent = Math.floor(randomNumberInRange(0, 10));
             } else {
@@ -307,8 +317,7 @@
     }
 
     function getStringToAppend(key) {
-        var randomNumber = Math.floor(randomNumberInRange(1, 50));
-        console.debug("random num: " + randomNumber);
+        var randomNumber = Math.floor(randomNumberInRange(1, 70));
         var arr = parsedText[key];
         if (arr.length <= 0) {
             return;
@@ -318,7 +327,6 @@
             stringToAppend += arr.shift();
         }
         parsedText[key] = arr;
-        console.debug("stringToAppend: " + stringToAppend);
         return stringToAppend;
     }
 
