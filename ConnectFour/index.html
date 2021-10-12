@@ -82,6 +82,7 @@
         <div class="column">
             <div id="game-table">
             </div>
+            <button disabled=true onclick="clickedNextGame()" id="next-game">Next Game</button>
         </div>
         <div class="column" id="lose-text"></div>
     </div>
@@ -236,8 +237,8 @@
             }
         }
 
-        document.onclick = function(evt) {
-            if (currentPlayer == 1) {
+        document.getElementById("game-table").onclick = function(evt) {
+            if (currentPlayer == 1 && (document.getElementById("next-game").disabled == true)) {
                 if (possibleColumns().indexOf(currentCol) != -1) {
                     dropDisc($this.id, $this.player);
                 }
@@ -259,6 +260,7 @@
 
     function checkForMoveVictory() {
         if (!checkForVictory(currentRow, currentCol)) {
+            console.debug("No victory, place disc");
             placeDisc(3 - currentPlayer);
         } else {
             var ww = (currentPlayer == 2) ? 'Computer' : 'Player';
@@ -266,24 +268,25 @@
                 currentScore.player += 1;
                 var winArr = parsedText.win;
                 var stringToAppend = getStringToAppend("win");
-                console.debug("Updated: " + parsedText.win);
-                document.getElementById("win-text").innerHTML = document.getElementById("win-text").innerHTML + stringToAppend + "<br>";
+                document.getElementById("win-text").innerHTML = document.getElementById("win-text").innerHTML + "<p>" + stringToAppend + "</p>";
             } else {
                 currentScore.computer += 1;
                 var loseArr = parsedText.lose;
                 var stringToAppend = getStringToAppend("lose");
-                console.debug("Updated: " + parsedText.lose);
                 document.getElementById("lose-text").innerHTML = document.getElementById("lose-text").innerHTML + "<p>" + stringToAppend + "</p>";
             }
             var scoreDiv = document.getElementById("score");
             scoreDiv.innerHTML = "You: " + currentScore.player + "; Computer: " + currentScore.computer;
             console.debug(ww + " win");
-            placeDisc(3 - currentPlayer);
-            setTimeout(function() {
-                board.innerHTML = "";
-                newgame();
-            }, 2000);
+            placeDisc(currentPlayer);
+            document.getElementById("next-game").disabled = false;
         }
+    }
+
+    function clickedNextGame() {
+        document.getElementById("next-game").disabled = true;
+        board.innerHTML = "";
+        newgame();
     }
 
     function randomNumberInRange(min, max) {
@@ -291,7 +294,7 @@
     }
 
     function getStringToAppend(key) {
-        var randomNumber = randomNumberInRange(1,50);
+        var randomNumber = Math.floor(randomNumberInRange(1, 50));
         console.debug("random num: " + randomNumber);
         var arr = parsedText[key];
         if (arr.length <= 0) {
@@ -307,6 +310,7 @@
     }
 
     function placeDisc(player) {
+        console.debug("placeDisc: " + player);
         currentPlayer = player;
         var disc = new Disc(player);
         disc.addToScene();
