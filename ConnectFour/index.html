@@ -75,7 +75,7 @@
 
 <body>
     <h1>Connect Four Game</h1>
-    <p class="info">Connect four is two player game. You can play with pc this js version of game. Made with native javascript on codepen. Defensive AI. Use chrome for best experience.</p>
+    <p id="info" class="info">Connect four is two player game. You can play with pc this js version of game. Made with native javascript on codepen. Defensive AI. Use chrome for best experience.</p>
     <div id="score" class="row"></div>
     <div id="game-base" class="row">
         <div class="column" id="win-text"></div>
@@ -243,6 +243,10 @@
                     dropDisc($this.id, $this.player);
                 }
             }
+            else 
+            {
+                document.getElementById("info").innerHTML = "Please click 'Next Game' to continue";
+            }
         }
     }
 
@@ -258,22 +262,30 @@
         checkForMoveVictory();
     }
 
+    const maxIndent = 70;
     function checkForMoveVictory() {
         if (!checkForVictory(currentRow, currentCol)) {
             console.debug("No victory, place disc");
             placeDisc(3 - currentPlayer);
         } else {
             var ww = (currentPlayer == 2) ? 'Computer' : 'Player';
+            let resultString = (currentPlayer == 1) ? "win" : "lose";
+            var stringToAppend = getStringToAppend(resultString);
+            let indent = 0;
+            if (stringToAppend.length < 70) {
+                indent = Math.floor(randomNumberInRange(maxIndent-10, maxIndent));
+            } else if (stringToAppend.length > 200) {
+                indent = Math.floor(randomNumberInRange(0, 10));
+            } else {
+                indent = Math.floor(randomNumberInRange(0, maxIndent));
+            }
+            let paragraphIndent = "<p style = \"margin-left: " + indent + "px\">";
             if (currentPlayer == 1) {
                 currentScore.player += 1;
-                var winArr = parsedText.win;
-                var stringToAppend = getStringToAppend("win");
-                document.getElementById("win-text").innerHTML = document.getElementById("win-text").innerHTML + "<p>" + stringToAppend + "</p>";
+                document.getElementById("win-text").innerHTML = document.getElementById("win-text").innerHTML + paragraphIndent + stringToAppend + "</p>";
             } else {
                 currentScore.computer += 1;
-                var loseArr = parsedText.lose;
-                var stringToAppend = getStringToAppend("lose");
-                document.getElementById("lose-text").innerHTML = document.getElementById("lose-text").innerHTML + "<p>" + stringToAppend + "</p>";
+                document.getElementById("lose-text").innerHTML = document.getElementById("lose-text").innerHTML + paragraphIndent + stringToAppend + "</p>";
             }
             var scoreDiv = document.getElementById("score");
             scoreDiv.innerHTML = "You: " + currentScore.player + "; Computer: " + currentScore.computer;
@@ -284,6 +296,7 @@
     }
 
     function clickedNextGame() {
+        document.getElementById("info").innerHTML = "";
         document.getElementById("next-game").disabled = true;
         board.innerHTML = "";
         newgame();
