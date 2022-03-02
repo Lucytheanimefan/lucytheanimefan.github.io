@@ -14,34 +14,47 @@
     function categories(container) {
 
         var json = {
-            "name": "What the Antihero is thinking when you try to romance them",
+            "name": "Thoughts of Someone Who Believes Themselves to Be a Hero",
             "children": [{
-                    "name": "Saving the World",
+                    "name": "Saving the world",
                     "children": [{
                             "name": "Essential morals",
                             "children": [
-                                { "name": "AgglomerativeCluster", "value": 3938 },
-                                { "name": "CommunityStructure", "value": 3812 },
-                                { "name": "HierarchicalCluster", "value": 6714 },
-                                { "name": "MergeEdge", "value": 743 }
+                                { "name": "No sacrifice.", "value": 50 },
+                                {
+                                    "name": "No nukes.",
+                                    "children": [
+                                        { "name": "uranium-235", "value": 20 },
+                                        { "name": "plutonium-239", "value": 20 },
+                                        { "name": "the thermonuclear ones", "value": 30 },
+                                        { "name": "Grave of the Fireflies (1988)", "value": 30 },
+                                    ]
+                                },
+                                {
+                                    "name": "Fairness & Equality",
+                                    "children": [
+                                        { "name": "you can't split a soup dumpling", "value": 20 },
+                                        { "name": "what if everyone got a corner of a mountain", "value": 20 },
+                                        { "name": "we are all made of mud", "value": 20 }
+                                    ]
+                                },
                             ]
                         },
                         {
-                            "name": "graph",
-                            "children": [
-                                { "name": "BetweennessCentrality", "value": 3534 },
-                                { "name": "LinkDistance", "value": 5731 },
-                                { "name": "MaxFlowMinCut", "value": 7840 },
-                                { "name": "ShortestPaths", "value": 5914 },
-                                { "name": "SpanningTree", "value": 3416 }
+                            "name": "What am I going to do when all this is over",
+                            "children": [{
+                                    "name": "Learn an instrument",
+                                    "children": [
+                                        { "name": "violin: screeches that could kill", "value": 20 },
+                                        { "name": "piano: the bandwagon", "value": 20 },
+                                        { "name": "remember why people sing", "value": 20 }
+                                    ]
+                                },
                             ]
                         },
-                        {
-                            "name": "Would be nice to make it out alive",
-                            "children": [
-                                { "name": "AspectRatioBanker", "value": 7074 }
-                            ]
-                        }
+                        { "name": "Would be nice to make it out alive", "value": 20 },
+                        { "name": "What would my high school teacher think of me", "value": 20 },
+                        { "name": "Hungry", "value": 20 },
                     ]
                 },
                 {
