@@ -9,12 +9,12 @@
 </head>
 
 <body onload="categories(document.body)">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="d3.v4.min.js"></script>
     <script type="text/javascript">
     function categories(container) {
 
         var json = {
-            "name": "Thoughts of Someone Who Believes Themselves to Be a Hero",
+            "name": "Thoughts from One Who Believes Themself A Hero",
             "children": [{
                     "name": "Saving the world",
                     "children": [{
@@ -33,58 +33,96 @@
                                 {
                                     "name": "Fairness & Equality",
                                     "children": [
-                                        { "name": "you can't split a soup dumpling", "value": 20 },
-                                        { "name": "what if everyone got a corner of a mountain", "value": 20 },
+                                        { "name": "can't split a soup dumpling", "value": 2000 },
+                                        { "name": "everyone gets a corner of a mountain", "value": 20 },
                                         { "name": "we are all made of mud", "value": 20 }
                                     ]
                                 },
                             ]
                         },
+                        { 
+                            "name": "Methods for success", 
+                            "children": [
+                                { "name": "get rich quick", "value": 20 },
+                                { "name": "replace oil pipes with apple trees", "value": 20 },
+                                { "name": "require all leaders to Wordle before war", "value": 20 },
+                                { "name": "stipulate war can only be fought by throwing erotic novels at one another", "value": 20 },
+                                { "name": "all insurance policies will cover anime subscriptions", "value": 20 },
+                                { "name": "fix the SEGFAULT in the time machine as plan B", "value": 20 },
+                            ]
+                        },
                         {
-                            "name": "What am I going to do when all this is over",
+                            "name": "What to do when all this is over",
                             "children": [{
                                     "name": "Learn an instrument",
                                     "children": [
                                         { "name": "violin: screeches that could kill", "value": 20 },
-                                        { "name": "piano: the bandwagon", "value": 20 },
-                                        { "name": "remember why people sing", "value": 20 }
+                                        { "name": "piano: everyone learned it", "value": 20 },
+                                        { "name": "remember why people sing?", "value": 20 }
                                     ]
                                 },
+                                { "name": "save the galaxy nextdoor", "value": 20 },
                             ]
                         },
-                        { "name": "Would be nice to make it out alive", "value": 20 },
-                        { "name": "What would my high school teacher think of me", "value": 20 },
-                        { "name": "Hungry", "value": 20 },
+                        { "name": "would be nice to make it out alive", "value": 20 },
+                        { "name": "what would my high school teacher think of me now", "value": 20 },
+                        { 
+                            "name": "hungry", 
+                            "children": [
+                                { "name": "Stroopwafel", "value": 20 },
+                                { "name": "lemongrass", "value": 20 },
+                                { "name": "rice", "value": 20 },
+                            ]
+                        },
                     ]
                 },
                 {
                     "name": "Destroying the world",
                     "children": [
-                        { "name": "Easing", "value": 17010 },
-                        { "name": "FunctionSequence", "value": 5842 },
-                        {
-                            "name": "interpolate",
+                        { 
+                            "name": "Healthy amount of pessimism", 
                             "children": [
-                                { "name": "ArrayInterpolator", "value": 1983 },
-                                { "name": "ColorInterpolator", "value": 2047 },
-                                { "name": "DateInterpolator", "value": 1375 },
-                                { "name": "Interpolator", "value": 8746 },
-                                { "name": "MatrixInterpolator", "value": 2202 },
-                                { "name": "NumberInterpolator", "value": 1382 },
-                                { "name": "ObjectInterpolator", "value": 1629 },
-                                { "name": "PointInterpolator", "value": 1675 },
-                                { "name": "RectangleInterpolator", "value": 2042 }
+                                { "name": "the asshole who stole my Totoro pencil case", "value": 10 },
+                                { "name": "zoos", "value": 10 },
+                                { "name": "no hot tea on battlegrounds", "value": 10 },
+                                { 
+                                    "name": "there's a word for it", 
+                                    "children": [
+                                        { "name": "a mom without a child", "value": 10 },
+                                        { "name": "strategic military intervention", "value": 10 },
+                                        { "name": "metric in a casualty report", "value": 10 }, 
+                                    ] 
+                                },
+                            ] 
+                        },
+                        { 
+                            "name": "Potential causes for failure", 
+                            "children": [
+                                { "name": "heat death", "value": 50 },
+                                { "name": "solar wind", "value": 50 },
+                                { "name": "incurable illness", "value": 50 },
+                                { "name": "food poisoning", "value": 50 },
+                                { "name": "insufficient pay for overtime", "value": 50 },
+                                { "name": "someone goes crazy with nukes", "value": 50 },
+                            ] 
+                        },
+                        {
+                            "name": "Methods for success",
+                            "children": [
+                                { "name": "conspire with emperor penguins to expand Antarctica", "value": 10 },
+                                { "name": "kick earth out of orbit", "value": 10 },
+                                { "name": "ban msg", "value": 10 },
+                                { "name": "isekai the internet", "value": 10 },
+                                { "name": "multiply more numbers by 0", "value": 10 },
+                                { "name": "sudo rm -rf *", "value": 10 },
                             ]
                         },
-                        { "name": "ISchedulable", "value": 1041 },
-                        { "name": "Parallel", "value": 5176 },
-                        { "name": "Pause", "value": 449 },
-                        { "name": "Scheduler", "value": 5593 },
-                        { "name": "Sequence", "value": 5534 },
-                        { "name": "Transition", "value": 9201 },
-                        { "name": "Transitioner", "value": 19975 },
-                        { "name": "TransitionEvent", "value": 1116 },
-                        { "name": "Tween", "value": 6006 }
+                        { "name": "extraterrestrial aliens should know what they're doing", "value": 50 },
+                        {
+                            "name": "what to do when all this is over",
+                            "children": [{"name": ""},{},{}
+                            ]
+                        },
                     ]
                 },
             ]
