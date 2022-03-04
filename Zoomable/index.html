@@ -12,6 +12,7 @@
     <div id="tooltip"></div>
 </body>
     <script src="d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript">
     function categories(container) {
 
@@ -204,10 +205,6 @@
             let e = d3.event
             currX += (e.x - dragX)
             currY += (e.y - dragY)
-            // let path = svg.select('.svgon')
-            // let offset = 10
-            // if ((Math.abs(e.x - dragX) < offset) && (Math.abs(e.y - dragY) < offset))
-            //   return path.on('click').call(path.node(), path.datum())
         }
 
         function dragged() {
