@@ -9,12 +9,14 @@
 </head>
 
 <body onload="categories(document.body)">
+    <div id="tooltip"></div>
+</body>
     <script src="d3.v4.min.js"></script>
     <script type="text/javascript">
     function categories(container) {
 
         var json = {
-            "name": "Thoughts from One Who Believes Themself A Hero",
+            "name": "Thoughts from a self-perceived hero",
             "children": [{
                     "name": "Saving the world",
                     "children": [{
@@ -25,9 +27,9 @@
                                     "name": "No nukes.",
                                     "children": [
                                         { "name": "uranium-235", "value": 20 },
-                                        { "name": "plutonium-239", "value": 20 },
                                         { "name": "the thermonuclear ones", "value": 30 },
-                                        { "name": "Grave of the Fireflies (1988)", "value": 30 },
+                                        { "name": "plutonium-239", "value": 20 },
+                                        { "name": "fission reactions to trigger fusion reactions to trigger fission reactions like rabbits gnawing rabbits", "value": 30 },
                                     ]
                                 },
                                 {
@@ -72,6 +74,7 @@
                                 { "name": "Stroopwafel", "value": 20 },
                                 { "name": "lemongrass", "value": 20 },
                                 { "name": "rice", "value": 20 },
+                                { "name": "cores of bok choy left on the cutting board", "value": 20 },
                             ]
                         },
                     ]
@@ -120,7 +123,7 @@
                         { "name": "extraterrestrial aliens should know what they're doing", "value": 50 },
                         {
                             "name": "what to do when all this is over",
-                            "children": [{"name": ""},{},{}
+                            "children": [{"name": "sleep"},{"name": "don't wake up"},{"name": "sleep"}
                             ]
                         },
                     ]
@@ -165,7 +168,7 @@
             formatNumber = d3.format(',d'),
             tooltipShowTime = 200,
             tooltipHideTime = 500,
-            tooltip = d3.select(container).append("div")
+            tooltip = d3.select("#tooltip")
             .attr("class", "tooltip")
             .style("opacity", 0),
             show_tooltips = true,
@@ -222,7 +225,7 @@
                 tooltip.transition()
                     .duration(tooltipShowTime)
                     .style("opacity", .9)
-                tooltip.html(d.data.name + '<br/>' + formatNumber(d.value))
+                tooltip.html(d.data.name)
                     .style("left", (d3.event.clientX) + "px")
                     .style("top", (d3.event.clientY - 70) + "px")
             }
