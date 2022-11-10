@@ -31,6 +31,11 @@
       color: white;
       text-align: center;
     }
+
+    .easter p {
+      font-size: 48px;
+    }
+
     .disappear {
       max-height: 0;
       min-height: 0;
@@ -53,11 +58,7 @@
       height: 24px;
       width: 24px;
     }
-    .congrats {
-    }
-    .congrats p {
-      font-size: 27px;
-    }
+
     .venmo-qr {
       margin-top: 18px;
       margin-bottom: 12px;
@@ -408,20 +409,30 @@
         <p>or not. Whatever</p>
     </div>
     <div class="lucy easter disappear">
-      <h1 class="header__title">
-        Hey you ain't the bride
-      </h1>
-      <img class="penguin-gif" src="pengSquash2.gif" alt="penguin gif">
+        <h1 class="header__title">
+            Hey you ain't the bride
+        </h1>
+        <img class="penguin-gif" src="pengSquash2.gif" alt="penguin gif">
     </div>
     <div class="bill easter disappear">
-      <h1 class="header__title">
-        Hey you ain't the groom
-      </h1>
-      <img class="penguin-gif" src="pengSurpriseTheresAnother.gif" alt="penguin gif">
+        <h1 class="header__title">
+            Hey you ain't the groom
+        </h1>
+        <img class="penguin-gif" src="pengSurpriseTheresAnother.gif" alt="penguin gif">
+    </div>
+    <div class="tooslow easter disappear">
+        <h1 class="header__title">
+            Chop chop, we don't have all day for you to find your table.
+        </h1>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js"></script>
     <script>
+    var timeoutID = setTimeout(function() {
+        $('.tooslow').removeClass('disappear').addClass('appear');
+        $('.wrapper').addClass('disappear');
+    }, "10000");
+
     var $cell = $('.card');
 
     //open and close card when clicked on card
@@ -441,6 +452,7 @@
     $('.info').click(function() {
         $('.congrats').removeClass('disappear').addClass('appear');
         $('.wrapper').addClass('disappear');
+        clearTimeout(timeoutID);
     });
 
     function autocomplete(inp, arr) {
@@ -546,15 +558,15 @@
 
     function showTableForName(name) {
         if (name === "Lucy Zhang") {
-          $('.lucy').removeClass('disappear').addClass('appear');
-          $('.wrapper').addClass('disappear');
-        }
-        else if (name === "Bill Yu" || name === "Han Yu") {
-          $('.bill').removeClass('disappear').addClass('appear');
-          $('.wrapper').addClass('disappear');
+            $('.lucy').removeClass('disappear').addClass('appear');
+            $('.wrapper').addClass('disappear');
+        } else if (name === "Bill Yu" || name === "Han Yu") {
+            $('.bill').removeClass('disappear').addClass('appear');
+            $('.wrapper').addClass('disappear');
         }
         $('.card').each(function(i, obj) {
             if (obj.innerHTML.includes(name)) {
+                clearTimeout(timeoutID);
                 $(this).removeClass('is-collapsed').addClass('is-expanded');
                 obj.scrollIntoView();
             } else {
