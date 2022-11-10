@@ -38,7 +38,7 @@
     .congrats p {
       font-size: 27px;
     }
-    .congrats-disappear {
+    .disappear {
       max-height: 0;
       min-height: 0;
       overflow: hidden;
@@ -391,7 +391,7 @@
             </div>
         </div>
     </div>
-    <div class="congrats congrats-disappear">
+    <div class="congrats disappear">
         <h1 class="header__title">Congratulations!</h1>
         <p>You've discovered this page.</p>
         <p>...and won a chance to give us $100!</p>
@@ -419,8 +419,8 @@
 
     var $info = $('.info');
     $info.click(function() {
-        var $congratsPage = $('.congrats');
-        $congratsPage.removeClass('congrats-disappear').addClass('congrats-appear');
+        $('.congrats').removeClass('disappear').addClass('congrats-appear');
+        $('.wrapper').addClass('disappear');
     });
 
     function autocomplete(inp, arr) {
