@@ -413,6 +413,12 @@
       </h1>
       <img class="penguin-gif" src="pengSquash2.gif" alt="penguin gif">
     </div>
+    <div class="bill easter disappear">
+      <h1 class="header__title">
+        Hey you ain't the groom
+      </h1>
+      <img class="penguin-gif" src="pengSurpriseTheresAnother.gif" alt="penguin gif">
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js"></script>
     <script>
@@ -543,6 +549,10 @@
           $('.lucy').removeClass('disappear').addClass('appear');
           $('.wrapper').addClass('disappear');
         }
+        else if (name === "Bill Yu" || name === "Han Yu") {
+          $('.bill').removeClass('disappear').addClass('appear');
+          $('.wrapper').addClass('disappear');
+        }
         $('.card').each(function(i, obj) {
             if (obj.innerHTML.includes(name)) {
                 $(this).removeClass('is-collapsed').addClass('is-expanded');
@@ -553,7 +563,7 @@
         });
     }
 
-    var guests = ["Bin Pan", "Hao Zhang", "Longqin Hu", "Donna Wei", "Wei Liu", "Jia Zhang", "Kyle Lynch", "Yibin Zhang", "Xuanyu Zhou", "Chen Shen", "Silei Ren", "Yu Tang", "Xinyu Tan", "Jingxian Liu", "Sherwin Ng", "Zihe Wang", "Keren Wang", "Tiffany Lin", "Vivian Hu", "Raymond Hu", "Cindy Fan", "Nikil Pancha", "David Fan", "Kevin Gan", "Morton Mo", "Xingyu Chen", "Weiyao Wang", "Xueying Wang", "Jay Wang", "Melissa You", "Bihan Zhuang", "Mike Liu", "Jiehan Zheng", "Yoshie Mizuguchi", "Jared Jones", "Morgan Jones", "Marley Dickson", "Tim Dickson", "Erik Phillips", "Natasha Fazeli", "Alice Chen", "Jeffrey Jiang", "Naijiao Zhang", "Mason Zhang", "Gordon Huynh", "Eric Song", "Angie Wei", "Kris Elbert", "David Yan", "Sachit Menon", "Steven Cento", "Shannon Arnold", "Karen Tung", "Alvin Leung", "Matthew Lau", "Kelsey Zhu", "Zeke Runyon", "Rebecca Eiseman", "Lucy Zhang"];
+    var guests = ["Bin Pan", "Hao Zhang", "Longqin Hu", "Donna Wei", "Wei Liu", "Jia Zhang", "Kyle Lynch", "Yibin Zhang", "Xuanyu Zhou", "Chen Shen", "Silei Ren", "Yu Tang", "Xinyu Tan", "Jingxian Liu", "Sherwin Ng", "Zihe Wang", "Keren Wang", "Tiffany Lin", "Vivian Hu", "Raymond Hu", "Cindy Fan", "Nikil Pancha", "David Fan", "Kevin Gan", "Morton Mo", "Xingyu Chen", "Weiyao Wang", "Xueying Wang", "Jay Wang", "Melissa You", "Bihan Zhuang", "Mike Liu", "Jiehan Zheng", "Yoshie Mizuguchi", "Jared Jones", "Morgan Jones", "Marley Dickson", "Tim Dickson", "Erik Phillips", "Natasha Fazeli", "Alice Chen", "Jeffrey Jiang", "Naijiao Zhang", "Mason Zhang", "Gordon Huynh", "Eric Song", "Angie Wei", "Kris Elbert", "David Yan", "Sachit Menon", "Steven Cento", "Shannon Arnold", "Karen Tung", "Alvin Leung", "Matthew Lau", "Kelsey Zhu", "Zeke Runyon", "Rebecca Eiseman", "Lucy Zhang", "Bill Yu", "Han Yu"];
     autocomplete(document.getElementById("myInput"), guests);
     </script>
 </body>
