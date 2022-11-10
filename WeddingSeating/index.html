@@ -19,8 +19,6 @@
 
     .wrapper {
         margin: 5em auto;
-        max-width: 1000px;
-        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.06);
     }
 
     .header {
@@ -154,12 +152,14 @@
     .search-form {
       display: flex;
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 40px;
+      margin-bottom: 15px;
     }
     .autocomplete {
-        /*the container must be positioned relative:*/
+        display: flex;
+        align-items: center;
         position: relative;
-        display: inline-block;
+        outline-color: #985F99;
         width: 75%;
     }
     input {
@@ -168,14 +168,8 @@
       padding: 10px;
       font-size: 50px;
       border-radius: 10px;
-    }
-    input[type=text] {
-      background-color: #f1f1f1;
+      outline: none;
       width: 100%;
-    }
-    input[type=submit] {
-      background-color: DodgerBlue;
-      color: #fff;
     }
     .autocomplete-items {
       position: absolute;
@@ -185,7 +179,7 @@
       z-index: 99;
       /*position the autocomplete items to be the same width as the container:*/
       top: 100%;
-      left: 0;
+      left: 65px;
       right: 0;
       font-size: 50px;
     }
@@ -204,6 +198,11 @@
       background-color: DodgerBlue !important;
       color: #ffffff;
     }
+    .search-icon {
+      height: 50px;
+      width: 50px;
+      margin-right: 15px;
+    }
     </style>
 </head>
 
@@ -214,6 +213,9 @@
         </div>
         <form class="search-form" autocomplete="off" action="">
             <div class="autocomplete">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
                 <input id="myInput" type="text" name="myGuest" placeholder="Your Name / Kimi No Na Wa">
             </div>
         </form>
@@ -462,6 +464,9 @@
     }
 
     function showTableForName(name) {
+        if (name == "lucy" || name == "bill") {
+
+        }
         $('.card').each(function(i, obj) {
             if (obj.innerHTML.includes(name)) {
                 $(this).removeClass('is-collapsed').addClass('is-expanded');
