@@ -170,16 +170,6 @@
         transform: scale(1);
     }
 
-    .card.is-inactive .card__inner {
-        pointer-events: none;
-        opacity: 0.5;
-    }
-
-    .card.is-inactive:hover .card__inner {
-        background-color: #949fb0;
-        transform: scale(1);
-    }
-
     @media screen and (min-width: 992px) {
         .card:nth-of-type(3n+2) .card__expander {
             margin-left: calc(-100% - 30px);
@@ -367,18 +357,11 @@
         var $thisCell = $(this).closest('.card');
 
         if ($thisCell.hasClass('is-collapsed')) {
-            $cell.not($thisCell).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
+            $cell.not($thisCell).removeClass('is-expanded').addClass('is-collapsed');
             $thisCell.removeClass('is-collapsed').addClass('is-expanded');
-
-            if ($cell.not($thisCell).hasClass('is-inactive')) {
-                //do nothing
-            } else {
-                $cell.not($thisCell).addClass('is-inactive');
-            }
 
         } else {
             $thisCell.removeClass('is-expanded').addClass('is-collapsed');
-            $cell.not($thisCell).removeClass('is-inactive');
         }
     });
 
@@ -388,7 +371,6 @@
         var $thisCell = $(this).closest('.card');
 
         $thisCell.removeClass('is-expanded').addClass('is-collapsed');
-        $cell.not($thisCell).removeClass('is-inactive');
 
     });
     </script>
