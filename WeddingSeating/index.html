@@ -150,6 +150,60 @@
     .card.is-expanded:hover .card__inner {
         transform: scale(1);
     }
+
+    .search-form {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    .autocomplete {
+        /*the container must be positioned relative:*/
+        position: relative;
+        display: inline-block;
+        width: 75%;
+    }
+    input {
+      border: 1px solid transparent;
+      background-color: #f1f1f1;
+      padding: 10px;
+      font-size: 50px;
+      border-radius: 10px;
+    }
+    input[type=text] {
+      background-color: #f1f1f1;
+      width: 100%;
+    }
+    input[type=submit] {
+      background-color: DodgerBlue;
+      color: #fff;
+    }
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 100%;
+      left: 0;
+      right: 0;
+      font-size: 50px;
+    }
+    .autocomplete-items div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      border-bottom: 1px solid #d4d4d4;
+    }
+    .autocomplete-items div:hover {
+      /*when hovering an item:*/
+      background-color: #e9e9e9;
+    }
+    .autocomplete-active {
+      /*when navigating through the items using the arrow keys:*/
+      background-color: DodgerBlue !important;
+      color: #ffffff;
+    }
     </style>
 </head>
 
@@ -158,8 +212,8 @@
         <div class="header">
             <h1 class="header__title">Lucy & Bill's Wedding Seating Extravaganza</h1>
         </div>
-        <form autocomplete="off" action="">
-            <div class="autocomplete" style="width:100%;">
+        <form class="search-form" autocomplete="off" action="">
+            <div class="autocomplete">
                 <input id="myInput" type="text" name="myGuest" placeholder="Your Name / Kimi No Na Wa">
             </div>
         </form>
@@ -167,7 +221,6 @@
             <div class=" card [ is-collapsed ] ">
                 <div class="card__inner [ js-expander ]">
                     <span>Table 1</span>
-                    <i class="fa fa-folder-o"></i>
                 </div>
                 <div class="card__expander">
                     <ul>
@@ -185,7 +238,6 @@
             <div class=" card [ is-collapsed ] ">
                 <div class="card__inner [ js-expander ]">
                     <span>Table 2</span>
-                    <i class="fa fa-folder-o"></i>
                 </div>
                 <div class="card__expander">
                     <ul>
@@ -204,7 +256,6 @@
             <div class=" card [ is-collapsed ] ">
                 <div class="card__inner [ js-expander ]">
                     <span>Table 3</span>
-                    <i class="fa fa-folder-o"></i>
                 </div>
                 <div class="card__expander">
                     <ul>
@@ -221,7 +272,6 @@
             <div class=" card [ is-collapsed ] ">
                 <div class="card__inner [ js-expander ]">
                     <span>Table 4</span>
-                    <i class="fa fa-folder-o"></i>
                 </div>
                 <div class="card__expander">
                     <ul>
@@ -241,7 +291,6 @@
             <div class=" card [ is-collapsed ] ">
                 <div class="card__inner [ js-expander ]">
                     <span>Table 5</span>
-                    <i class="fa fa-folder-o"></i>
                 </div>
                 <div class="card__expander">
                     <ul>
@@ -259,7 +308,6 @@
             <div class=" card [ is-collapsed ] ">
                 <div class="card__inner [ js-expander ]">
                     <span>Table 6</span>
-                    <i class="fa fa-folder-o"></i>
                 </div>
                 <div class="card__expander">
                     <ul>
@@ -277,7 +325,6 @@
             <div class=" card [ is-collapsed ] ">
                 <div class="card__inner [ js-expander ]">
                     <span>Table 7</span>
-                    <i class="fa fa-folder-o"></i>
                 </div>
                 <div class="card__expander">
                     <ul>
@@ -417,15 +464,13 @@
 
     function showTableForName(name) {
         $('.card').each(function(i, obj) {
-            if (obj.innerHTML.includes(name)){
-              console.debug("Found name: "+ name + "," + i);
-              $(this).removeClass('is-collapsed').addClass('is-expanded');
-              return i;
+            if (obj.innerHTML.includes(name)) {
+                console.debug("Found name: " + name + "," + i);
+                $(this).removeClass('is-collapsed').addClass('is-expanded');
             } else {
-              $(this).addClass('is-collapsed').removeClass('is-expanded');
+                $(this).addClass('is-collapsed').removeClass('is-expanded');
             }
         });
-        return 0;
     }
 
     var guests = ["Bin Pan", "Hao Zhang", "Longqin Hu", "Donna Wei", "Wei Liu", "Jia Zhang", "Kyle Lynch", "Yibin Zhang", "Xuanyu Zhou", "Chen Shen", "Silei Ren", "Yu Tang", "Xinyu Tan", "Jingxian Liu", "Sherwin Ng", "Zihe Wang", "Keren Wang", "Tiffany Lin", "Vivian Hu", "Raymond Hu", "Cindy Fan", "Nikil Pancha", "David Fan", "Kevin Gan", "Morton Mo", "Xingyu Chen", "Weiyao Wang", "Xueying Wang", "Jay Wang", "Melissa You", "Bihan Zhuang", "Mike Liu", "Jiehan Zheng", "Yoshie Mizuguchi", "Jared Jones", "Morgan Jones", "Marley Dickson", "Tim Dickson", "Erik Phillips", "Natasha Fazeli", "Alice Chen", "Jeffrey Jiang", "Naijiao Zhang", "Mason Zhang", "Gordon Huynh", "Eric Song", "Angie Wei", "Kris Elbert", "David Yan", "Sachit Menon", "Steven Cento", "Shannon Arnold", "Karen Tung", "Alvin Leung", "Matthew Lau", "Kelsey Zhu", "Zeke Runyon", "Rebecca Eiseman"];
