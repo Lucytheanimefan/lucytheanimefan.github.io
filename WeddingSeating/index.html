@@ -392,7 +392,6 @@
                     b.addEventListener("click", function(e) {
                         /*insert the value for the autocomplete text field:*/
                         inp.value = this.getElementsByTagName("input")[0].value;
-                        console.log(inp.value);
                         showTableForName(inp.value);
                         /*close the list of autocompleted values,
                         (or any other open lists of autocompleted values:*/
@@ -465,8 +464,8 @@
     function showTableForName(name) {
         $('.card').each(function(i, obj) {
             if (obj.innerHTML.includes(name)) {
-                console.debug("Found name: " + name + "," + i);
                 $(this).removeClass('is-collapsed').addClass('is-expanded');
+                obj.scrollIntoView();
             } else {
                 $(this).addClass('is-collapsed').removeClass('is-expanded');
             }
