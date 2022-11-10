@@ -15,8 +15,34 @@
         box-sizing: border-box;
     }
 
+
     body {
-      margin: 0;
+        font-family: "Courier Prime 27px", monospace;
+        color: #333a45;
+        margin: 0;
+    }
+
+    .easter {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #985F99;
+      color: white;
+      text-align: center;
+    }
+    .disappear {
+      max-height: 0;
+      min-height: 0;
+      overflow: hidden;
+      margin-top: 0;
+      opacity: 0;
+    }
+    .appear {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
     }
 
 /*    Easter egg*/
@@ -28,37 +54,20 @@
       width: 24px;
     }
     .congrats {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: #985F99;
-      color: white;
     }
     .congrats p {
       font-size: 27px;
-    }
-    .disappear {
-      max-height: 0;
-      min-height: 0;
-      overflow: hidden;
-      margin-top: 0;
-      opacity: 0;
-    }
-    .congrats-appear {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
     }
     .venmo-qr {
       margin-top: 18px;
       margin-bottom: 12px;
     }
 
-    body {
-        font-family: "Courier Prime 27px", monospace;
-        color: #333a45;
+/*    Lucy easter*/
+    .lucy {
+    }
+    .penguin-gif {
+      margin-top: 48px;
     }
 
     .wrapper {
@@ -391,12 +400,18 @@
             </div>
         </div>
     </div>
-    <div class="congrats disappear">
+    <div class="congrats easter disappear">
         <h1 class="header__title">Congratulations!</h1>
         <p>You've discovered this page.</p>
         <p>...and won a chance to give us $100!</p>
         <img class="venmo-qr" src="venmo.png" alt="venmo qr code">
         <p>or not. Whatever</p>
+    </div>
+    <div class="lucy easter disappear">
+      <h1 class="header__title">
+        Hey you ain't the bride
+      </h1>
+      <img class="penguin-gif" src="pengSquash2.gif" alt="penguin gif">
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -417,9 +432,8 @@
         }
     });
 
-    var $info = $('.info');
-    $info.click(function() {
-        $('.congrats').removeClass('disappear').addClass('congrats-appear');
+    $('.info').click(function() {
+        $('.congrats').removeClass('disappear').addClass('appear');
         $('.wrapper').addClass('disappear');
     });
 
@@ -525,8 +539,9 @@
     }
 
     function showTableForName(name) {
-        if (name == "lucy" || name == "bill") {
-
+        if (name === "Lucy Zhang") {
+          $('.lucy').removeClass('disappear').addClass('appear');
+          $('.wrapper').addClass('disappear');
         }
         $('.card').each(function(i, obj) {
             if (obj.innerHTML.includes(name)) {
@@ -538,7 +553,7 @@
         });
     }
 
-    var guests = ["Bin Pan", "Hao Zhang", "Longqin Hu", "Donna Wei", "Wei Liu", "Jia Zhang", "Kyle Lynch", "Yibin Zhang", "Xuanyu Zhou", "Chen Shen", "Silei Ren", "Yu Tang", "Xinyu Tan", "Jingxian Liu", "Sherwin Ng", "Zihe Wang", "Keren Wang", "Tiffany Lin", "Vivian Hu", "Raymond Hu", "Cindy Fan", "Nikil Pancha", "David Fan", "Kevin Gan", "Morton Mo", "Xingyu Chen", "Weiyao Wang", "Xueying Wang", "Jay Wang", "Melissa You", "Bihan Zhuang", "Mike Liu", "Jiehan Zheng", "Yoshie Mizuguchi", "Jared Jones", "Morgan Jones", "Marley Dickson", "Tim Dickson", "Erik Phillips", "Natasha Fazeli", "Alice Chen", "Jeffrey Jiang", "Naijiao Zhang", "Mason Zhang", "Gordon Huynh", "Eric Song", "Angie Wei", "Kris Elbert", "David Yan", "Sachit Menon", "Steven Cento", "Shannon Arnold", "Karen Tung", "Alvin Leung", "Matthew Lau", "Kelsey Zhu", "Zeke Runyon", "Rebecca Eiseman"];
+    var guests = ["Bin Pan", "Hao Zhang", "Longqin Hu", "Donna Wei", "Wei Liu", "Jia Zhang", "Kyle Lynch", "Yibin Zhang", "Xuanyu Zhou", "Chen Shen", "Silei Ren", "Yu Tang", "Xinyu Tan", "Jingxian Liu", "Sherwin Ng", "Zihe Wang", "Keren Wang", "Tiffany Lin", "Vivian Hu", "Raymond Hu", "Cindy Fan", "Nikil Pancha", "David Fan", "Kevin Gan", "Morton Mo", "Xingyu Chen", "Weiyao Wang", "Xueying Wang", "Jay Wang", "Melissa You", "Bihan Zhuang", "Mike Liu", "Jiehan Zheng", "Yoshie Mizuguchi", "Jared Jones", "Morgan Jones", "Marley Dickson", "Tim Dickson", "Erik Phillips", "Natasha Fazeli", "Alice Chen", "Jeffrey Jiang", "Naijiao Zhang", "Mason Zhang", "Gordon Huynh", "Eric Song", "Angie Wei", "Kris Elbert", "David Yan", "Sachit Menon", "Steven Cento", "Shannon Arnold", "Karen Tung", "Alvin Leung", "Matthew Lau", "Kelsey Zhu", "Zeke Runyon", "Rebecca Eiseman", "Lucy Zhang"];
     autocomplete(document.getElementById("myInput"), guests);
     </script>
 </body>
